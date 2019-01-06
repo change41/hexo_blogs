@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Chapter 11. Manager Network | rhel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常见服务端口查看文件：/etc/servicesrhel 7开始网卡的命令开头规则为：以太网：en；无线网：wl；WWAN：ww；后面根网卡接口类型：hotplug 热插拔：s; PCI接口 :p主板集成：o；x:MAC地址使用最后的数字是：索引、ID或端口。如：eno1,ens33,enp2s0,eth0无法确认的情况下，使用ethN 传统的形式。   biosdevname 包用来定义udev">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter 11. Manager Network">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/chapter-11-manager-network/index.html">
+<meta property="og:site_name" content="rhel">
+<meta property="og:description" content="常见服务端口查看文件：/etc/servicesrhel 7开始网卡的命令开头规则为：以太网：en；无线网：wl；WWAN：ww；后面根网卡接口类型：hotplug 热插拔：s; PCI接口 :p主板集成：o；x:MAC地址使用最后的数字是：索引、ID或端口。如：eno1,ens33,enp2s0,eth0无法确认的情况下，使用ethN 传统的形式。   biosdevname 包用来定义udev">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-05T15:32:48.136Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 11. Manager Network">
+<meta name="twitter:description" content="常见服务端口查看文件：/etc/servicesrhel 7开始网卡的命令开头规则为：以太网：en；无线网：wl；WWAN：ww；后面根网卡接口类型：hotplug 热插拔：s; PCI接口 :p主板集成：o；x:MAC地址使用最后的数字是：索引、ID或端口。如：eno1,ens33,enp2s0,eth0无法确认的情况下，使用ethN 传统的形式。   biosdevname 包用来定义udev">
+  
+    <link rel="alternate" href="/atom.xml" title="rhel" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rhel</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">growing study</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-chapter-11-manager-network" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/11/chapter-11-manager-network/" class="article-date">
+  <time datetime="2018-04-11T08:05:34.000Z" itemprop="datePublished">2018-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chapter 11. Manager Network
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>常见服务端口查看文件：/etc/services<br>rhel 7开始网卡的命令开头规则为：<br>以太网：en；无线网：wl；WWAN：ww；<br>后面根网卡接口类型：<br>hotplug 热插拔：s; PCI接口 :p<br>主板集成：o；x:MAC地址使用<br>最后的数字是：索引、ID或端口。<br>如：eno1,ens33,enp2s0,eth0<br>无法确认的情况下，使用ethN 传统的形式。  </p>
+<p>biosdevname 包用来定义udev设备的名称规则，PIC(S)网卡名pYpX ，Y代表slot number ,X 代表当前板卡的第几个口</p>
+<p> ==============================================================<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ip addr show ens33      <span class="comment">#查看信息</span></span><br><span class="line">ip -s link show eth0      <span class="comment">#显示统计信息tatistics（统计）</span></span><br><span class="line">ip route                 <span class="comment">#查看路由</span></span><br><span class="line">ping -c3 192.168.1.1  -cN     <span class="comment">#指定ping的次数</span></span><br><span class="line">tracepath access.redhat.com      <span class="comment">#跟踪路由，默认使用UDP路由，然后UDP经常被封</span></span><br></pre></td></tr></table></figure></p>
+<p>traceroute 有 -I(ICMP) , -T (TCP) 选项<br>RTT  :Round trip timging; MTU:Maximum transmission unit<br>ss  -ta 显示tcp  socket 统计信息 -t=tcp ,-a=all.   ss类似netstat 命令<br>-n 以数字形式显示端口或地址<br>-t  tcp<br>-u     udp<br>-l     显示处于Listening状态的服务<br>-a  显示所有  </p>
+<p>-p   显示进程使用的socket</p>
+<p> ==============================================================</p>
+<p>配置文件位置/etc/sysconfig/network-scripts/<br>网络管理服务：NetworkManager,命令是nmcli  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmcli con show                 <span class="comment">#显示所有连接的网卡</span></span><br><span class="line">nmcli con show --active         <span class="comment">#显示处于激活状态的网卡</span></span><br><span class="line">nmcli con show <span class="string">"ens33"</span>            <span class="comment">#显示网卡的详细信息,对应的详细说明查看man nm-settings </span></span><br><span class="line">nmcli dev status</span><br><span class="line">nmcli dev show ens33               <span class="comment">#显示指定网卡</span></span><br><span class="line">nmcli dev show                    <span class="comment">#显示网卡</span></span><br><span class="line">nmcli con show                    <span class="comment">#显示连接</span></span><br><span class="line">nmcli con up  &lt;<span class="string">"ID"</span>&gt;              <span class="comment">#启用网卡</span></span><br><span class="line">nmcli con down  &lt;<span class="string">"ID"</span>&gt;             <span class="comment">#关闭网卡</span></span><br><span class="line">nmcli dev dis  &lt;<span class="string">"ID"</span>&gt;             <span class="comment">#断开连接</span></span><br><span class="line">nmcli net off                     <span class="comment">#停用网卡</span></span><br><span class="line">nmcli net on                      <span class="comment">#启用网卡</span></span><br><span class="line">nmcli con add  ….               <span class="comment">#添加连接</span></span><br><span class="line">nmcli con mod  &lt;<span class="string">"ID"</span>&gt;             <span class="comment">#修改连接</span></span><br><span class="line">nmcli con del  &lt;<span class="string">"ID"</span>&gt;             <span class="comment">#删除连接</span></span><br><span class="line">man nm-connection-editor            <span class="comment">#查看详细说明</span></span><br></pre></td></tr></table></figure>
+<p>==============================================================</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmcli con add con-name <span class="string">"default"</span> <span class="built_in">type</span> ethernet ifname eth0</span><br><span class="line">nmcli con add con-name <span class="string">"static"</span> ifname eth0 autoconnect no <span class="built_in">type</span> ethernet ip4 172.25.1.10/24 gw4 172.25.1.254 </span><br><span class="line">nmcli con up <span class="string">"static"</span></span><br><span class="line">nmcli con up <span class="string">"default"</span></span><br><span class="line">nmcli con mod <span class="string">"static"</span> connection.autoconnect yes</span><br><span class="line">nmcli con mod <span class="string">"static"</span> ipv4.dns 172.24.1.254</span><br><span class="line">nmcli con mod <span class="string">"static"</span> +ipv4.dns 8.8.8.8</span><br><span class="line">nmcli con mod <span class="string">"static"</span> ipv4.address <span class="string">"172.25.2.10/24 172.25.2.254"</span></span><br><span class="line">nmcli con mod <span class="string">"static"</span> +ipv4.address 192.168.1.1/24</span><br></pre></td></tr></table></figure>
+<p> ==============================================================</p>
+<p>修改配置文件后使用  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmcli con reload  重新加载配置文件  </span><br><span class="line">nmcli con down;nmcli con up</span><br></pre></td></tr></table></figure>
+<p> ==============================================================<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hostname  查看主机名</span><br><span class="line"></span><br><span class="line">hostnamectl <span class="built_in">set</span>-hostname deskop.example.com</span><br><span class="line"></span><br><span class="line">hostnamectl status   <span class="comment">#查看主机信息，包括主机名、计算机类型、系统类型、版本、架构</span></span><br><span class="line">cat /etc/hostname  <span class="comment">#主机名保存的文件，/etc/sysconfig/network (老版本)</span></span><br></pre></td></tr></table></figure></p>
+<p>/etc/hosts 文件配置静态域名解析，本地解析</p>
+<p>getent hosts <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>  #getent 解析域名，同nslookup，对hosts文件有支持<br>host classroom.example.com  #解析域名，同nslookup</p>
+<p>/etc/resolv.conf  配置 DNS 服务器地址,支持内容如下：</p>
+<pre><code>nameserver: DNS 的IP地址，最多可以设置3个
+
+search : 一般用域名，
+
+domain :一般用域名
+</code></pre><p>PEERDNS=no 时，不会影响/etc/resolv.conf ，如果网卡配置PEERDNS=yes ,重启网卡时会覆盖resolv.conf</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/11/chapter-11-manager-network/" data-id="cjqikv01d0005zjkj7jt1hfv8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/12/chapter-12-archiving-and-copying-files/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Chapter 12. Archiving and copying Files
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/11/chapter-8-systemctl/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Chapter 8.systemctl</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL124/">RHEL124</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL134/">RHEL134</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/pxe/">pxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/">samba</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/pxe/" style="font-size: 10px;">pxe</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 change<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

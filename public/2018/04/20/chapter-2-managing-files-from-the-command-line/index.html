@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Chapter 2 . Managing Files From The Command Line | rhel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="位置 用途     /usr 安装的软件、共享的库，包括文件和静态只读程序数据。重要的子目录有： -/usr/bin:用户命令; -/usr/sbin:系统管理命令; -/usr/local:本地自定义软件   /etc 特定于此系统的配置文件   /var 特定于此系统的可变数据，在系统启动之间保持永久性。动态变化的文件（如数据库、缓存目录、日志文件、打印机后台处理文档和网站内容）可以在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter 2 . Managing Files From The Command Line">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/chapter-2-managing-files-from-the-command-line/index.html">
+<meta property="og:site_name" content="rhel">
+<meta property="og:description" content="位置 用途     /usr 安装的软件、共享的库，包括文件和静态只读程序数据。重要的子目录有： -/usr/bin:用户命令; -/usr/sbin:系统管理命令; -/usr/local:本地自定义软件   /etc 特定于此系统的配置文件   /var 特定于此系统的可变数据，在系统启动之间保持永久性。动态变化的文件（如数据库、缓存目录、日志文件、打印机后台处理文档和网站内容）可以在">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/04/20/chapter-2-managing-files-from-the-command-line/1524194156616572.png">
+<meta property="og:updated_time" content="2019-01-05T22:56:26.559Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 . Managing Files From The Command Line">
+<meta name="twitter:description" content="位置 用途     /usr 安装的软件、共享的库，包括文件和静态只读程序数据。重要的子目录有： -/usr/bin:用户命令; -/usr/sbin:系统管理命令; -/usr/local:本地自定义软件   /etc 特定于此系统的配置文件   /var 特定于此系统的可变数据，在系统启动之间保持永久性。动态变化的文件（如数据库、缓存目录、日志文件、打印机后台处理文档和网站内容）可以在">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/20/chapter-2-managing-files-from-the-command-line/1524194156616572.png">
+  
+    <link rel="alternate" href="/atom.xml" title="rhel" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rhel</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">growing study</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-chapter-2-managing-files-from-the-command-line" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/chapter-2-managing-files-from-the-command-line/" class="article-date">
+  <time datetime="2018-04-20T06:25:46.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chapter 2 . Managing Files From The Command Line
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2018/04/20/chapter-2-managing-files-from-the-command-line/1524194156616572.png" alt="图片.png"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">位置</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/usr</td>
+<td style="text-align:left">安装的软件、共享的库，包括文件和静态只读程序数据。重要的子目录有：<br> -/usr/bin:用户命令;<br> -/usr/sbin:系统管理命令;<br> -/usr/local:本地自定义软件</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc</td>
+<td style="text-align:left">特定于此系统的配置文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/var</td>
+<td style="text-align:left">特定于此系统的可变数据，在系统启动之间保持永久性。动态变化的文件（如数据库、缓存目录、日志文件、打印机后台处理文档和网站内容）可以在/var下找到</td>
+</tr>
+<tr>
+<td style="text-align:left">/run</td>
+<td style="text-align:left">自上次系统启动以来启动的进程的运行数据。这包括进程ID文件和锁定文件等等。此目录中的内容在重启时重新创建。（此目录整合了旧版RHEL中的/var/run 和/var/lock)</td>
+</tr>
+<tr>
+<td style="text-align:left">/home</td>
+<td style="text-align:left">普通用户存储其个人数据和配置文件的主目录</td>
+</tr>
+<tr>
+<td style="text-align:left">/root</td>
+<td style="text-align:left">管理员超级用户root的主目录。</td>
+</tr>
+<tr>
+<td style="text-align:left">/tmp</td>
+<td style="text-align:left">供临时文件使用的全局可写空间。10天内未访问、未更改或未修改的文件将自动从该目录中删除。还有一个临时目录/var/tmp，该目录中的文件如果在30天内未曾访问、更改或修改过，将被自动删除</td>
+</tr>
+<tr>
+<td style="text-align:left">/boot</td>
+<td style="text-align:left">开始启动过程所需的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/dev</td>
+<td style="text-align:left">包含特殊的设备文件，供系统用于访问硬件。</td>
+</tr>
+</tbody>
+</table>
+<p>在RHEL7中，/ 目录下四个较旧的目录现在与它们在/usr 中对应的目录拥有完成相同的内容：|</p>
+<ul>
+<li><p>/bin 和 /usr/bin</p>
+</li>
+<li><p>/sbin 和 /usr/sbin</p>
+</li>
+<li><p>/lib 和/usr/lib</p>
+</li>
+<li><p>/lib64 和/usr/lib64</p>
+</li>
+</ul>
+<p>在RHEL 的较早版本中，这些是不同的目录，包含几组不同的文件。在RHEL7中 / 中的目录是/usr 中对应目录的符号连接。</p>
+<p><a href="http://www.pathname.com/fhs/" target="_blank" rel="noopener">http://www.pathname.com/fhs/</a> Filesystem Hierarchy Standard</p>
+<p>创建文件夹时应尽量避免出现空格</p>
+<p>绝对路径是完全限定名称，自根目录（/）开始，指定到达且唯一代表单个文件所遍历的每个子目录。文件系统中的每个文件都有一个绝对路径。第一个字符是正斜杠（/）的路径名是绝对路径名。例/var/log/message</p>
+<p>相对路径与绝对路径一样，相对路径也标识唯一文件，仅指定从工作目录到达该文件所需的路径。第一人字符是正斜杠（/）之外的其它字符路径名的是相对路径。例在/var目录下访问log/message  </p>
+<p>对于标准的linux文件系统，文件名路径总长度（包括/）不可超过4095字节。路径中通过/隔开的第一部分不可超过255字节。文件名中不允许出现‘/’和’NUL字符’。</p>
+<p>Linux 文件系统，包含但不限于ext4,XFS,BIRFS,GFS2和GlusterFS都是区分大小写的。VFAT和NTFS及Apple的HFS+虽然不区分大小写，但它们具体大小写保留行为，他们使用创建时的大小写显示文件名。</p>
+<p>pwd 命令显示当前位置的完成路径名。</p>
+<p>ls 命令列出指定目录的目录内容，如未指定则显示当前目录的内容（.表示当前目录。 ..表示父目录）</p>
+<p>-l 长列表格式，-a 包含隐藏文件（.开头的文件）的所有文件，-R 递归方式，包含所有子目录。  </p>
+<p>cd 命令可更改目录，未指定目录则回到家目录。（~）表示家目录。  </p>
+<p> - 回到上次的目录，cd ..回到上级目录  </p>
+<p>touch 命令通常将文件的时间戳更新为当前日期和时间，而不做其它修改，如果文件名不存在则创建一个空文件。  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">活动</th>
+<th style="text-align:left">单一来源</th>
+<th style="text-align:left">多来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">复制文件</td>
+<td style="text-align:left">cp file1 file2</td>
+<td style="text-align:left">cp file1 file2 file3 dir(4)  </td>
+</tr>
+<tr>
+<td style="text-align:left">移动文件</td>
+<td style="text-align:left">mv file1 file2(1)</td>
+<td style="text-align:left">mv file1 file2 file3 dir(4)  </td>
+</tr>
+<tr>
+<td style="text-align:left">删除文件</td>
+<td style="text-align:left">rm file1</td>
+<td style="text-align:left">rm -rf file1 file2 file3(5)  </td>
+</tr>
+<tr>
+<td style="text-align:left">创建目录</td>
+<td style="text-align:left">mkdir dir</td>
+<td style="text-align:left">mkdir -p par1/par2/dir(6)  </td>
+</tr>
+<tr>
+<td style="text-align:left">移动目录</td>
+<td style="text-align:left">mv dir1 dir2(3)</td>
+<td style="text-align:left">mv dir1 dir2 dir3 dir4(4)  </td>
+</tr>
+<tr>
+<td style="text-align:left">删除目录</td>
+<td style="text-align:left">rm -r dir1(2)</td>
+<td style="text-align:left">rm -rf dir1 dir2 dir3(4)  </td>
+</tr>
+<tr>
+<td style="text-align:left">复制目录</td>
+<td style="text-align:left">cp -r dir1 dir2(2)</td>
+<td style="text-align:left">cp -rf dir1 dir2 dir3(5)  </td>
+</tr>
+<tr>
+<td style="text-align:left">注</td>
+<td style="text-align:left">(1)结果为重命名 <br>(2)需要使用“递归”选项处理来源目录<br>(3)如果dir2存在，则结果为移动。如果dir2不存在则为重命名<br>(4)最后一个参数必须是目录<br>(5)请谨慎使用“force”选项，系统将不会提示您操作<br>(6)使用“创建父级”选项时应小心，无法捕获键入错误。  </td>
+</tr>
+</tbody>
+</table>
+<p>模式匹配，通配符  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模式</th>
+<th style="text-align:left">匹配项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">*</td>
+<td style="text-align:left">由0个或以上字符组成的任何字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">?</td>
+<td style="text-align:left">任何一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">~</td>
+<td style="text-align:left">当前用户的主目录</td>
+</tr>
+<tr>
+<td style="text-align:left">~username</td>
+<td style="text-align:left">username用户的主目录</td>
+</tr>
+<tr>
+<td style="text-align:left">~+</td>
+<td style="text-align:left">当前工作目录</td>
+</tr>
+<tr>
+<td style="text-align:left">~-</td>
+<td style="text-align:left">上一工作目录</td>
+</tr>
+<tr>
+<td style="text-align:left">[abc…]</td>
+<td style="text-align:left">括起的类中的任何一个字符。</td>
+</tr>
+<tr>
+<td style="text-align:left">[!abc…]</td>
+<td style="text-align:left">不在括起的类中的任何一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">[^abc…]</td>
+<td style="text-align:left">不在括起的类中的任何一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:alpha:]]</td>
+<td style="text-align:left">任何字母字符（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:lower:]]</td>
+<td style="text-align:left">任何小写字符（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:upper:]]</td>
+<td style="text-align:left">任何大写字符 （1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:alnum:]]</td>
+<td style="text-align:left">任何字母字符或数字（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:punct:]]</td>
+<td style="text-align:left">除空格和字母数字以外的任何可打印的字符。（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:digit:]]</td>
+<td style="text-align:left">任何数字，即0-9（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:space:]]</td>
+<td style="text-align:left">任何一个空白字符；可能包括制表符、换行符或回车符，以及换页符和空格（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">注释</td>
+<td style="text-align:left">（1）预设的POSIX字符类；针对当前区域而调整</td>
+</tr>
+</tbody>
+</table>
+<p>{}大括号扩展用于生成任意字符串。大括号包含字符串的逗号分隔列表或顺序表达式。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># echo &#123;sunday,Monday,Tuesday,Wednesday&#125;.log</span></span><br><span class="line">sunday.log Monday.log Tuesday.log Wednesday.log</span><br><span class="line">[root@client ~]<span class="comment"># echo &#123;1..5&#125;.log</span></span><br><span class="line">1.log 2.log 3.log 4.log 5.log</span><br><span class="line">[root@client ~]<span class="comment"># echo file&#123;a..d&#125;.txt</span></span><br><span class="line">filea.txt fileb.txt filec.txt filed.txt</span><br><span class="line">[root@client ~]<span class="comment"># echo file&#123;a,b&#125;&#123;1,2&#125;.txt</span></span><br><span class="line">filea1.txt filea2.txt fileb1.txt fileb2.txt</span><br><span class="line">[root@client ~]<span class="comment"># echo file&#123;a&#123;1,2&#125;,b,c&#125;.txt</span></span><br><span class="line">filea1.txt filea2.txt fileb.txt filec.txt</span><br></pre></td></tr></table></figure></p>
+<p>命令替换`` 反引号或$()<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># echo Today is \`date +%A\`</span></span><br><span class="line">Today is 星期五</span><br><span class="line">[root@client ~]<span class="comment"># echo The time is $(date +%M) minutes past $(date +%l%p)</span></span><br><span class="line">The time is 16 minutes past 4下午</span><br></pre></td></tr></table></figure></p>
+<p>防止参数被扩展，为了忽略元字符的特殊含义，使用引用和转义来防止它们被shell 扩展。反斜杠（\）是bash的一个转义字符，防止其后的一个字符被特殊解释。如果要保护较长的字符串需要使用单引号和双引号括起来。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># echo Your username varialbe is \\$USER</span></span><br><span class="line">Your username varialbe is <span class="variable">$USER</span></span><br><span class="line">[root@client ~]<span class="comment"># echo Your username varialbe is $USER </span></span><br><span class="line">Your username varialbe is root</span><br><span class="line">[root@client ~]<span class="comment"># host=desktop0</span></span><br><span class="line">[root@client ~]<span class="comment"># echo "Will variable $host evaluate to $(hostname)?"</span></span><br><span class="line">Will variable desktop0 evaluate to client?</span><br><span class="line">[root@client ~]<span class="comment"># echo 'Will variable $host evaluate to $(hostname)?' </span></span><br><span class="line">Will variable <span class="variable">$host</span> evaluate to $(hostname)?</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/20/chapter-2-managing-files-from-the-command-line/" data-id="cjqikv01m000azjkju2ty5ef1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/24/iptables-e7-ab-af-e5-8f-a3-e8-bd-ac-e5-8f-91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          iptables 端口转发
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/20/rh124-recored/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Recored  零散记忆</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL124/">RHEL124</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL134/">RHEL134</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/pxe/">pxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/">samba</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/pxe/" style="font-size: 10px;">pxe</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 change<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

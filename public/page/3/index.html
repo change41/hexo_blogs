@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>rhel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="rhel">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="rhel">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rhel">
+  
+    <link rel="alternate" href="/atom.xml" title="rhel" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rhel</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">growing study</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-iptables-e7-ab-af-e5-8f-a3-e8-bd-ac-e5-8f-91" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/24/iptables-e7-ab-af-e5-8f-a3-e8-bd-ac-e5-8f-91/" class="article-date">
+  <time datetime="2018-04-24T03:26:46.000Z" itemprop="datePublished">2018-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/iptables-e7-ab-af-e5-8f-a3-e8-bd-ac-e5-8f-91/">iptables 端口转发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="将firewalld切换到-iptables"><a href="#将firewalld切换到-iptables" class="headerlink" title="将firewalld切换到 iptables"></a>将firewalld切换到 iptables</h5><p>1. 停止并禁用 firewalld<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop firewald.service &amp;&amp; sudo systemctl <span class="built_in">disable</span> firewald.service</span><br></pre></td></tr></table></figure></p>
+<p>2.安装iptables-services、iptables-devel<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install iptables-services iptables-devel</span><br></pre></td></tr></table></figure></p>
+<p>3.启用并启动iptables<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> iptables.service &amp;&amp; sudo systemctl start iptables.service</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>a.同一端口转发</strong>(192.168.0.132上开通1521端口访问<br>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 1521 -j ACCEPT)</span><br><span class="line">iptables -t nat -I PREROUTING -p tcp --dport 1521 -j DNAT --to 192.168.0.211  </span><br><span class="line">iptables -t nat -I POSTROUTING -p tcp --dport 1521 -j MASQUERADE  </span><br><span class="line">```  </span><br><span class="line">**b.不同端口转发**(192.168.0.132上开通21521端口访问 </span><br><span class="line">  ```sh</span><br><span class="line">iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 21521 -j ACCEPT)</span><br><span class="line"></span><br><span class="line">iptables -t nat -A PREROUTING -p tcp -m tcp --dport**21521** -j DNAT --to-destination**192.168.0.211:1521**  </span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -d 192.168.0.211 -p tcp -m tcp --dport 1521 -j SNAT --to-source 192.168.0.132  </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">**以上两条等价配置(更简单\[指定网卡\]):**  </span><br><span class="line">```sh</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 31521 -j DNAT --to 192.168.0.211:1521  </span><br><span class="line">iptables -t nat -A POSTROUTING -j MASQUERADE</span><br></pre></td></tr></table></figure></p>
+<h6 id="保存iptables"><a href="#保存iptables" class="headerlink" title="保存iptables"></a>保存iptables</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service iptables save  </span><br><span class="line"></span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure>
+<h5 id="二、-用iptables做本机端口转发"><a href="#二、-用iptables做本机端口转发" class="headerlink" title="二、 用iptables做本机端口转发"></a>二、 用iptables做本机端口转发</h5><p>  代码如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080</span><br></pre></td></tr></table></figure></p>
+<p>  估计适当增加其它的参数也可以做不同IP的端口转发。<br>  如果需要本机也可以访问，则需要配置OUTPUT链(<strong><em>**</em></strong>特别注意:本机访问外网的端口会转发到本地,导致访不到外网,如访问yown.com,实际上是访问到本地,建议不做80端口的转发或者指定目的 -d localhost)：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">  iptables -t nat -A OUTPUT -d localhost -p tcp --dport 80 -j REDIRECT --to-ports 8080</span><br></pre></td></tr></table></figure></p>
+<p>原因：<br>外网访问需要经过PREROUTING链，但是localhost不经过该链，因此需要用OUTPUT。  </p>
+<p>#######################################################################################  </p>
+<p>概述：公司有一些核心MySQL服务器位于核心机房的内网段，作为运维人员，经常需要去连接这些服务器，因无法直接通过外网访问，给管理造成了不便。  </p>
+<p>思路：虽然解决此问题的方法及思路有很多，但当下想使用IPTABLES的端口重定向功能解决此问题，比较简单易用，而且扩展性也比较好，依次类推，可以运用到其他的端口转发方面的应用。  </p>
+<h5 id="网络环境："><a href="#网络环境：" class="headerlink" title="网络环境："></a>网络环境：</h5><p>公网服务器      ：eth0:公网IP    eth1:内网IP - 192.168.1.1<br>mysql服务器：eth1:内网IP - 192.168.1.2<br>实现方法：通过访问公网IP的63306端口来实现到内网MYSQL服务器的3306端口的访问  </p>
+<h5 id="在公网服务器上："><a href="#在公网服务器上：" class="headerlink" title="在公网服务器上："></a>在公网服务器上：</h5><h6 id="配置脚本："><a href="#配置脚本：" class="headerlink" title="配置脚本："></a>配置脚本：</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 63306 -j DNAT --to-destination 192.168.1.2:3306  </span><br><span class="line">iptables -t nat -A POSTROUTING -d 192.168.1.2 -p tcp --dport 3306 -j SNAT --to 192.168.1.1</span><br></pre></td></tr></table></figure>
+<h6 id="允许服务器的IP转发功能："><a href="#允许服务器的IP转发功能：" class="headerlink" title="允许服务器的IP转发功能："></a>允许服务器的IP转发功能：</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br></pre></td></tr></table></figure>
+<h6 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 公网IP -p 63306 -uroot -p</span><br></pre></td></tr></table></figure>
+<p> ###############################################################################################  </p>
+<p>由于业务需要，服务器越来越多，内网服务器无外网环境管理甚是不便，所以折腾了一下外网到内网的端口转发以达到轻松管理的目的，贴一下心得。  </p>
+<h6 id="S1"><a href="#S1" class="headerlink" title="S1:"></a>S1:</h6><p>eth0 10.0.0.1<br>eth1 x.x.x.x  </p>
+<h6 id="S2"><a href="#S2" class="headerlink" title="S2:"></a>S2:</h6><p>eth0 10.0.0.2  </p>
+<p>S1 8082端口转发到内网机器22端口<br>iptables规则配置如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d x.x.x.x -p tcp --dport 8082 -j DNAT --to-destination 10.0.0.2:22  </span><br><span class="line">iptables -t nat -A POSTROUTING -d 10.0.0.2 -p tcp --dport 22 -j SNAT --to-source x.x.x.x  </span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
+<p>说明：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d <span class="string">"对外公网ip"</span> -p tcp --dport <span class="string">"对外端口"</span> -j DNAT --to <span class="string">"内部实际提供服务的ip"</span>:<span class="string">"实际提供服务的端口"</span>  </span><br><span class="line">iptables -t nat -A POSTROUTING -d <span class="string">"内部实际提供服务的ip"</span>-p tcp --dport <span class="string">"实际提供服务的端口"</span> -j SNAT --to-source <span class="string">"运行iptables机器的内网ip"</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/24/iptables-e7-ab-af-e5-8f-a3-e8-bd-ac-e5-8f-91/" data-id="cjqikv026000zzjkj3qxymvyu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-chapter-2-managing-files-from-the-command-line" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/chapter-2-managing-files-from-the-command-line/" class="article-date">
+  <time datetime="2018-04-20T06:25:46.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/20/chapter-2-managing-files-from-the-command-line/">Chapter 2 . Managing Files From The Command Line</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2018/04/20/chapter-2-managing-files-from-the-command-line/1524194156616572.png" alt="图片.png"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">位置</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/usr</td>
+<td style="text-align:left">安装的软件、共享的库，包括文件和静态只读程序数据。重要的子目录有：<br> -/usr/bin:用户命令;<br> -/usr/sbin:系统管理命令;<br> -/usr/local:本地自定义软件</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc</td>
+<td style="text-align:left">特定于此系统的配置文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/var</td>
+<td style="text-align:left">特定于此系统的可变数据，在系统启动之间保持永久性。动态变化的文件（如数据库、缓存目录、日志文件、打印机后台处理文档和网站内容）可以在/var下找到</td>
+</tr>
+<tr>
+<td style="text-align:left">/run</td>
+<td style="text-align:left">自上次系统启动以来启动的进程的运行数据。这包括进程ID文件和锁定文件等等。此目录中的内容在重启时重新创建。（此目录整合了旧版RHEL中的/var/run 和/var/lock)</td>
+</tr>
+<tr>
+<td style="text-align:left">/home</td>
+<td style="text-align:left">普通用户存储其个人数据和配置文件的主目录</td>
+</tr>
+<tr>
+<td style="text-align:left">/root</td>
+<td style="text-align:left">管理员超级用户root的主目录。</td>
+</tr>
+<tr>
+<td style="text-align:left">/tmp</td>
+<td style="text-align:left">供临时文件使用的全局可写空间。10天内未访问、未更改或未修改的文件将自动从该目录中删除。还有一个临时目录/var/tmp，该目录中的文件如果在30天内未曾访问、更改或修改过，将被自动删除</td>
+</tr>
+<tr>
+<td style="text-align:left">/boot</td>
+<td style="text-align:left">开始启动过程所需的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/dev</td>
+<td style="text-align:left">包含特殊的设备文件，供系统用于访问硬件。</td>
+</tr>
+</tbody>
+</table>
+<p>在RHEL7中，/ 目录下四个较旧的目录现在与它们在/usr 中对应的目录拥有完成相同的内容：|</p>
+<ul>
+<li><p>/bin 和 /usr/bin</p>
+</li>
+<li><p>/sbin 和 /usr/sbin</p>
+</li>
+<li><p>/lib 和/usr/lib</p>
+</li>
+<li><p>/lib64 和/usr/lib64</p>
+</li>
+</ul>
+<p>在RHEL 的较早版本中，这些是不同的目录，包含几组不同的文件。在RHEL7中 / 中的目录是/usr 中对应目录的符号连接。</p>
+<p><a href="http://www.pathname.com/fhs/" target="_blank" rel="noopener">http://www.pathname.com/fhs/</a> Filesystem Hierarchy Standard</p>
+<p>创建文件夹时应尽量避免出现空格</p>
+<p>绝对路径是完全限定名称，自根目录（/）开始，指定到达且唯一代表单个文件所遍历的每个子目录。文件系统中的每个文件都有一个绝对路径。第一个字符是正斜杠（/）的路径名是绝对路径名。例/var/log/message</p>
+<p>相对路径与绝对路径一样，相对路径也标识唯一文件，仅指定从工作目录到达该文件所需的路径。第一人字符是正斜杠（/）之外的其它字符路径名的是相对路径。例在/var目录下访问log/message  </p>
+<p>对于标准的linux文件系统，文件名路径总长度（包括/）不可超过4095字节。路径中通过/隔开的第一部分不可超过255字节。文件名中不允许出现‘/’和’NUL字符’。</p>
+<p>Linux 文件系统，包含但不限于ext4,XFS,BIRFS,GFS2和GlusterFS都是区分大小写的。VFAT和NTFS及Apple的HFS+虽然不区分大小写，但它们具体大小写保留行为，他们使用创建时的大小写显示文件名。</p>
+<p>pwd 命令显示当前位置的完成路径名。</p>
+<p>ls 命令列出指定目录的目录内容，如未指定则显示当前目录的内容（.表示当前目录。 ..表示父目录）</p>
+<p>-l 长列表格式，-a 包含隐藏文件（.开头的文件）的所有文件，-R 递归方式，包含所有子目录。  </p>
+<p>cd 命令可更改目录，未指定目录则回到家目录。（~）表示家目录。  </p>
+<p> - 回到上次的目录，cd ..回到上级目录  </p>
+<p>touch 命令通常将文件的时间戳更新为当前日期和时间，而不做其它修改，如果文件名不存在则创建一个空文件。  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">活动</th>
+<th style="text-align:left">单一来源</th>
+<th style="text-align:left">多来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">复制文件</td>
+<td style="text-align:left">cp file1 file2</td>
+<td style="text-align:left">cp file1 file2 file3 dir(4)  </td>
+</tr>
+<tr>
+<td style="text-align:left">移动文件</td>
+<td style="text-align:left">mv file1 file2(1)</td>
+<td style="text-align:left">mv file1 file2 file3 dir(4)  </td>
+</tr>
+<tr>
+<td style="text-align:left">删除文件</td>
+<td style="text-align:left">rm file1</td>
+<td style="text-align:left">rm -rf file1 file2 file3(5)  </td>
+</tr>
+<tr>
+<td style="text-align:left">创建目录</td>
+<td style="text-align:left">mkdir dir</td>
+<td style="text-align:left">mkdir -p par1/par2/dir(6)  </td>
+</tr>
+<tr>
+<td style="text-align:left">移动目录</td>
+<td style="text-align:left">mv dir1 dir2(3)</td>
+<td style="text-align:left">mv dir1 dir2 dir3 dir4(4)  </td>
+</tr>
+<tr>
+<td style="text-align:left">删除目录</td>
+<td style="text-align:left">rm -r dir1(2)</td>
+<td style="text-align:left">rm -rf dir1 dir2 dir3(4)  </td>
+</tr>
+<tr>
+<td style="text-align:left">复制目录</td>
+<td style="text-align:left">cp -r dir1 dir2(2)</td>
+<td style="text-align:left">cp -rf dir1 dir2 dir3(5)  </td>
+</tr>
+<tr>
+<td style="text-align:left">注</td>
+<td style="text-align:left">(1)结果为重命名 <br>(2)需要使用“递归”选项处理来源目录<br>(3)如果dir2存在，则结果为移动。如果dir2不存在则为重命名<br>(4)最后一个参数必须是目录<br>(5)请谨慎使用“force”选项，系统将不会提示您操作<br>(6)使用“创建父级”选项时应小心，无法捕获键入错误。  </td>
+</tr>
+</tbody>
+</table>
+<p>模式匹配，通配符  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模式</th>
+<th style="text-align:left">匹配项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">*</td>
+<td style="text-align:left">由0个或以上字符组成的任何字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">?</td>
+<td style="text-align:left">任何一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">~</td>
+<td style="text-align:left">当前用户的主目录</td>
+</tr>
+<tr>
+<td style="text-align:left">~username</td>
+<td style="text-align:left">username用户的主目录</td>
+</tr>
+<tr>
+<td style="text-align:left">~+</td>
+<td style="text-align:left">当前工作目录</td>
+</tr>
+<tr>
+<td style="text-align:left">~-</td>
+<td style="text-align:left">上一工作目录</td>
+</tr>
+<tr>
+<td style="text-align:left">[abc…]</td>
+<td style="text-align:left">括起的类中的任何一个字符。</td>
+</tr>
+<tr>
+<td style="text-align:left">[!abc…]</td>
+<td style="text-align:left">不在括起的类中的任何一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">[^abc…]</td>
+<td style="text-align:left">不在括起的类中的任何一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:alpha:]]</td>
+<td style="text-align:left">任何字母字符（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:lower:]]</td>
+<td style="text-align:left">任何小写字符（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:upper:]]</td>
+<td style="text-align:left">任何大写字符 （1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:alnum:]]</td>
+<td style="text-align:left">任何字母字符或数字（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:punct:]]</td>
+<td style="text-align:left">除空格和字母数字以外的任何可打印的字符。（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:digit:]]</td>
+<td style="text-align:left">任何数字，即0-9（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">[[:space:]]</td>
+<td style="text-align:left">任何一个空白字符；可能包括制表符、换行符或回车符，以及换页符和空格（1）</td>
+</tr>
+<tr>
+<td style="text-align:left">注释</td>
+<td style="text-align:left">（1）预设的POSIX字符类；针对当前区域而调整</td>
+</tr>
+</tbody>
+</table>
+<p>{}大括号扩展用于生成任意字符串。大括号包含字符串的逗号分隔列表或顺序表达式。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># echo &#123;sunday,Monday,Tuesday,Wednesday&#125;.log</span></span><br><span class="line">sunday.log Monday.log Tuesday.log Wednesday.log</span><br><span class="line">[root@client ~]<span class="comment"># echo &#123;1..5&#125;.log</span></span><br><span class="line">1.log 2.log 3.log 4.log 5.log</span><br><span class="line">[root@client ~]<span class="comment"># echo file&#123;a..d&#125;.txt</span></span><br><span class="line">filea.txt fileb.txt filec.txt filed.txt</span><br><span class="line">[root@client ~]<span class="comment"># echo file&#123;a,b&#125;&#123;1,2&#125;.txt</span></span><br><span class="line">filea1.txt filea2.txt fileb1.txt fileb2.txt</span><br><span class="line">[root@client ~]<span class="comment"># echo file&#123;a&#123;1,2&#125;,b,c&#125;.txt</span></span><br><span class="line">filea1.txt filea2.txt fileb.txt filec.txt</span><br></pre></td></tr></table></figure></p>
+<p>命令替换`` 反引号或$()<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># echo Today is \`date +%A\`</span></span><br><span class="line">Today is 星期五</span><br><span class="line">[root@client ~]<span class="comment"># echo The time is $(date +%M) minutes past $(date +%l%p)</span></span><br><span class="line">The time is 16 minutes past 4下午</span><br></pre></td></tr></table></figure></p>
+<p>防止参数被扩展，为了忽略元字符的特殊含义，使用引用和转义来防止它们被shell 扩展。反斜杠（\）是bash的一个转义字符，防止其后的一个字符被特殊解释。如果要保护较长的字符串需要使用单引号和双引号括起来。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># echo Your username varialbe is \\$USER</span></span><br><span class="line">Your username varialbe is <span class="variable">$USER</span></span><br><span class="line">[root@client ~]<span class="comment"># echo Your username varialbe is $USER </span></span><br><span class="line">Your username varialbe is root</span><br><span class="line">[root@client ~]<span class="comment"># host=desktop0</span></span><br><span class="line">[root@client ~]<span class="comment"># echo "Will variable $host evaluate to $(hostname)?"</span></span><br><span class="line">Will variable desktop0 evaluate to client?</span><br><span class="line">[root@client ~]<span class="comment"># echo 'Will variable $host evaluate to $(hostname)?' </span></span><br><span class="line">Will variable <span class="variable">$host</span> evaluate to $(hostname)?</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/20/chapter-2-managing-files-from-the-command-line/" data-id="cjqikv01m000azjkju2ty5ef1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh124-recored" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/rh124-recored/" class="article-date">
+  <time datetime="2018-04-20T02:11:27.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/20/rh124-recored/">Recored  零散记忆</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LANG=zh_CN.utf8    <span class="comment">#设置语言，临时</span></span><br><span class="line"></span><br><span class="line">locale    <span class="comment">#检查语言</span></span><br><span class="line"></span><br><span class="line">localectl <span class="built_in">set</span>-locale LANG=zh_CN.utf8    <span class="comment">#设备系统默认语言</span></span><br><span class="line"></span><br><span class="line">vi /etc/locale.conf    <span class="comment">#语言的配置文件</span></span><br></pre></td></tr></table></figure>
+<p>tty2等本地文件控制台可显示的字体比gnome-terminal和ssh会话受到的局限多。例如，本地文件控制台中的日语、韩语和中文字符显示可能会不正常。因此最好将英语或其它包含拉丁语字符的语言用于系统的文本控制台。类似的，受到的输入法也受到限制比较多。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install yum-langpacks <span class="comment">#先安装才能使用。  </span></span><br><span class="line"></span><br><span class="line">yum langavaliable     <span class="comment">#查看系统可用语言包  </span></span><br><span class="line"></span><br><span class="line">yum langlist</span><br><span class="line"></span><br><span class="line">yum langinstall code</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://fedoraproject.org/wiki/QA:Langpack_Yum_Application" target="_blank" rel="noopener">http://fedoraproject.org/wiki/QA:Langpack_Yum_Application</a>  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NCORE=$( grep -c <span class="string">'^processor'</span> /proc/cpuinfo)    <span class="comment">#查看CPU核数</span></span><br><span class="line"><span class="keyword">for</span> I <span class="keyword">in</span> $(  seq $((NCORE\*2-1)))    <span class="comment">#设置for 循环，seq 生成序列来自NCORE\*2-1的值，$((NCORE\*2-1)) 计算 NCORE\*2-1</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$I</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">grep -c <span class="string">'^processor'</span> /proc/cpuinfo      <span class="comment">#统计匹配到以/proc/cpuinfo中processor 开头的数量</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/20/rh124-recored/" data-id="cjqikv0280011zjkj7pj4ebkh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-chapter1-accessing-the-command-line" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/chapter1-accessing-the-command-line/" class="article-date">
+  <time datetime="2018-04-20T02:10:20.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/20/chapter1-accessing-the-command-line/">Chapter 1 . Accessing The Command line</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment">#     #root管理员提示符  </span></span><br><span class="line">[client@client ~]$     <span class="comment">#普通用户提示符</span></span><br></pre></td></tr></table></figure>
+<pre><code>如果提供图形环境，它将在Red Hat Enterprise Linux 7 的第一个虚拟控制台中运行。而另外五个文件登录提示符在控制台（tty）二到六（如果图形环境关闭，则为控制台一到五）中可用。在图形环境运行时，通过按住Ctrl+Alt 并按功能键（F2到F6）,来访问虚拟控制台上的文本登录提示符。按Ctrl+Alt+F1返回第一个虚拟控制台和图形桌面。（RHEL5 及之前版本图形运行在第七个虚拟控制台Ctrl+Alt+F7 切换）
+</code></pre><p>参数提示符用法：</p>
+<ul>
+<li><p>[]    方括号[]括起来的是可选项目</p>
+</li>
+<li><p>…    前面的任何内容均表示该类型项目的任意长度列表。</p>
+</li>
+<li><p>|    以竖线分隔的多个项目表示只能指定其中一个项目  </p>
+</li>
+<li><p>&lt;&gt;    尖括号中的文本表示变量的数据 。如<finename>表示 “此处需要插入您要使用的文件名”有时会简单的写成大写字母，如FILENAME.</finename></p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">date 命令用于显示时间  </span><br><span class="line"></span><br><span class="line">[root@client ~]<span class="comment"># date</span></span><br><span class="line">2018年 04月 20日 星期五 09:23:02 CST</span><br><span class="line">[root@client ~]<span class="comment"># date +%R</span></span><br><span class="line">09:23</span><br><span class="line">[root@client ~]<span class="comment"># date +%x</span></span><br><span class="line">2018年04月20日</span><br><span class="line">[root@client ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>passwd 命令用于更改用户密码：不指定用户名即修改当前用户密码，使用root 修改密码无需知道原密码。默认情况下密码策略是有要求的，需要包含小写字母、大写字母、数字和符号，并且不以字典中的单词为基础。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># passwd client</span></span><br><span class="line">更改用户 client 的密码 。</span><br><span class="line">新的 密码：</span><br><span class="line">无效的密码： 密码少于 8 个字符</span><br><span class="line">重新输入新的 密码：</span><br><span class="line">passwd：所有的身份验证令牌已经成功更新。</span><br><span class="line">[root@client ~]<span class="comment"># </span></span><br><span class="line">[root@client ~]<span class="comment"># passwd</span></span><br><span class="line">更改用户 root 的密码 。</span><br><span class="line">新的 密码：</span><br><span class="line">[client@client ~]$ passwd</span><br><span class="line">更改用户 client 的密码 。</span><br><span class="line">为 client 更改 STRESS 密码。</span><br><span class="line">（当前）UNIX 密码：</span><br><span class="line">新的 密码：</span><br><span class="line">重新输入新的 密码：</span><br><span class="line">passwd：所有的身份验证令牌已经成功更新。</span><br><span class="line">[client@client ~]$</span><br></pre></td></tr></table></figure></p>
+<p>Linux 不需要文件扩展名做为依据分类文件，file 命令可以扫描文件内容的开头，显示 文件的类型。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[client@client ~]$ file /etc/passwd</span><br><span class="line">/etc/passwd: ASCII text</span><br><span class="line">[client@client ~]$ file /bin/passwd</span><br><span class="line">/bin/passwd: setuid ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), <span class="keyword">for</span> GNU/Linux 2.6.32, BuildID[sha1]=1e5735bf7b317e60bcb907f1989951f6abd50e8d, stripped</span><br><span class="line">[client@client ~]$ file /home</span><br><span class="line">/home: directory</span><br><span class="line"></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">head 和tail 命令分别显示文件的开头和结尾部分。默认情况下都是显示10行数据 。使用-n 选项可以指定需要显示的行数。</span><br><span class="line">```sh</span><br><span class="line">[client@client ~]$ head /etc/passwd</span><br><span class="line">[client@client ~]$ tail /etc/passwd</span><br><span class="line">[client@client ~]$ tail -n 6 /etc/passwd</span><br></pre></td></tr></table></figure>
+<p>wc 命令可以计算文件中行、字和字符的数量。它可以授受 -l、 -w 或 -c选项，分别用户显示行数（lines）、字数（words）和字符数（characters）<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[client@client ~]$ wc /etc/passwd</span><br><span class="line">  22   42 1051 /etc/passwd        <span class="comment">#行、字、字符</span></span><br><span class="line">[client@client ~]$ wc -l /etc/passwd</span><br><span class="line">22 /etc/passwd</span><br><span class="line">[client@client ~]$ wc -c /etc/passwd</span><br><span class="line">1051 /etc/passwd</span><br><span class="line">[client@client ~]$ wc -w /etc/passwd</span><br><span class="line">42 /etc/passwd</span><br><span class="line">[client@client ~]$ wc -c /etc/group /etc/hosts    <span class="comment">#指定多个文件</span></span><br><span class="line">567 /etc/group</span><br><span class="line">181 /etc/hosts</span><br><span class="line">748 总用量</span><br></pre></td></tr></table></figure></p>
+<h4 id="Tab-补全"><a href="#Tab-补全" class="headerlink" title="Tab 补全"></a>Tab 补全</h4><p>tab 补全可用于命令补全和文件名补全部分命令还可以补全参数选项<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[client@client ~]$ pas&lt;tab&gt;    <span class="comment">#自动列出以pas开头的不唯一命令</span></span><br><span class="line">passwd  paste   </span><br><span class="line">[client@client ~]$ pass&lt;tab&gt;    <span class="comment">#自动补全pass开头的唯一命令</span></span><br><span class="line">[client@client ~]$ passwd</span><br></pre></td></tr></table></figure></p>
+<p>history 命令显示之前执行的命令的列表，带有命令编号作为前缀。感叹号 ! 是元字符，用于扩展之前的命令而不必重新键入它们。!number 扩展至与指定编号匹配的命令。 !string 扩展至最近一个以指定字符串开头的命令。方向上下键可以向上或向下查找最近使用过的命令。左右键则开始进行命令行修改。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">histort</span><br><span class="line">!48</span><br><span class="line">!ls</span><br></pre></td></tr></table></figure></p>
+<p>Esc + .  组合键可使shell 将上一条命令的最后一个单词（参数）复制到当前命令行中的光标所处的位置。如果重复使用，它将继续转到更早的命令。  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">快捷方式</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Ctrl + a</td>
+<td style="text-align:left">跳到命令行的开头</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + e</td>
+<td style="text-align:left">跳到命令行的末尾</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + u</td>
+<td style="text-align:left">将光标位置到命令行开头的内容清除</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + k</td>
+<td style="text-align:left">将光标位置到命令行末尾的内容清除</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + -&gt; 方向</td>
+<td style="text-align:left">跳到命令行中后一字的开头</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + &lt;-</td>
+<td style="text-align:left">跳到命令行中前一字的开头</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + l</td>
+<td style="text-align:left">清除当前屏幕显示</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + r</td>
+<td style="text-align:left">在历史记录列表中搜索某一命令</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/20/chapter1-accessing-the-command-line/" data-id="cjqikv022000szjkjv8llfp52" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-chapter-7-monitoring-and-managing-linux-processes" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/19/chapter-7-monitoring-and-managing-linux-processes/" class="article-date">
+  <time datetime="2018-04-19T03:24:41.000Z" itemprop="datePublished">2018-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/19/chapter-7-monitoring-and-managing-linux-processes/">Chapter 7. Monitoring and Managing Linux Processes</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux 版本的ps命令支持三种选项格式，包括：</p>
+<ul>
+<li><p>UNIX（POSIX）选项，可以分组但必须以连字符（-）开头；</p>
+</li>
+<li><p>BSD 选项，可以分组但不可与连字符同用；</p>
+</li>
+<li><p>GNU长选项，以双连字符开关。</p>
+</li>
+</ul>
+<p>例如：ps -aux 不同于 ps aux<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ps   aux    <span class="comment">#显示所有进程，包含用户感兴趣的列，以及没有控制终端的进程。</span></span><br><span class="line">ps   lax    <span class="comment">#长列表，提供更多详细信息，可以避免查询用户名来加快显示。</span></span><br><span class="line">ps -ef  <span class="comment">#显示所有进程。</span></span><br><span class="line">ps <span class="comment">#默认不排序，除非指定-O 或者 --sort </span></span><br><span class="line">ps j <span class="comment">#显示后台作业信息</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#&amp;符号放在尾部，放到后台执行的效果，但是如果一行有多个命令，仅将最后一个放后台，除非使用$()括起来。</span></span><br><span class="line"><span class="built_in">jobs</span> <span class="comment">#显示后台运行的进程，同ps j 类似</span></span><br><span class="line">Ctrl + z <span class="comment">#把当前执行的命令放到后台，状态为stopped</span></span><br><span class="line"><span class="built_in">bg</span>  %id    <span class="comment">#启动后台指定进程(stopped--&gt;running)</span></span><br><span class="line"><span class="built_in">fg</span>   %id    <span class="comment">#指定后台进来显示在前台</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmstat 2 10    <span class="comment">#2秒刷新显示10次</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">top</span><br><span class="line">    M  <span class="comment">#按内存排序</span></span><br><span class="line">    K    <span class="comment">#结束进程</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br><span class="line">cat /proc/cpuinfo</span><br><span class="line">uptime</span><br><span class="line">grep <span class="string">"model name"</span> /proc/cpuinfo</span><br><span class="line">gnome-system-monitor</span><br></pre></td></tr></table></figure>
+<h4 id="top-各列含义："><a href="#top-各列含义：" class="headerlink" title="top 各列含义："></a>top 各列含义：</h4><ul>
+<li><p>用户名称(user)，是进程所有者  </p>
+</li>
+<li><p>虚拟内存(virt)，是进程正在使用的所有内存，包括常驻集合、共享库，以及任何映射或交换的内存页。（PS命令中为VSZ）  </p>
+</li>
+<li><p>常驻内存(res)，是进程所用的物理内存，包括任何驻留的共享对象。（PS命令中为rss）</p>
+</li>
+<li><p>进程状态(s)</p>
+</li>
+</ul>
+<pre><code>D=不间断的睡眠uninterruptable sleeping
+
+            R=运行或可运行running or runnable
+
+            S=睡眠sleeping
+
+            T=停止或追踪stopped or traced
+
+            Z=僵尸zombie
+</code></pre><p>Ctrl-z(暂停，转后台)，Ctrl-c（中断），Ctrl-d (终止)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span>    PID</span><br><span class="line"><span class="built_in">kill</span>    -signal PID</span><br><span class="line"><span class="built_in">kill</span>    -l</span><br><span class="line">killall   command_pattern</span><br><span class="line">killall  -signal command_pattern</span><br><span class="line">killall   -signal -u username command_pattern</span><br><span class="line">pkill    command_pattern</span><br><span class="line">pkill    -signal command_pattern</span><br><span class="line">pkill   -G GID command_pattern</span><br><span class="line">pkill    -P PPID command_pattern</span><br><span class="line">pkill -t terminal\_name -U UID <span class="built_in">command</span>\_patern</span><br><span class="line">pkill -SIGKILL -u bob <span class="comment">#向bob用户发送sigkill 指令</span></span><br><span class="line"></span><br><span class="line">w -f  <span class="comment">#显示当前登录的用户，-f显示远程登录系统名称</span></span><br><span class="line">w  -h -u username</span><br><span class="line">pgrep -l -u username</span><br><span class="line">pstree -p username</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th>标 志</th>
+<th>内核定义的状态名称和描述  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">运行中</td>
+<td>R</td>
+<td>TASK_RUNING:进程正在CPU上执行，或者正在等待运行。处于运行中（或可运行）状态时，进程可能正在执行用户作业或内核作业（系统调用），或者已排队并就绪。  </td>
+</tr>
+<tr>
+<td style="text-align:left">睡眠</td>
+<td>S</td>
+<td>TASK_INTERRUPTIBLE:进程正在等待某一条件：硬件请求、系统资源访问或信号。当事件或信号满足条件时，该进程将返回到运行中。  </td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>D</td>
+<td>TASK_INTERRUPTIBLE：此进程也在睡眠，但与S状态不同，不会响应传递的信号。仅在特定的条件下使用，其中进程中断可能会导致意外的设备状态。  </td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>K</td>
+<td>TASK_KILLABLE:与不可中断的D状态相同，但有所修改，允许等待中的任务通过响应信号而被中断（彻底退出 ）。实用程序通常将可中断的进程显示为D状态。。  </td>
+</tr>
+<tr>
+<td style="text-align:left">已停止</td>
+<td>T</td>
+<td>TASK_STOPPED：进程已被停止（暂停），通常是通过用户或其他进程发出的信号。进程可以通过另一信号返回到运行中状态，继续执行（恢复）  </td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>T</td>
+<td>TASK_TRACED:正在被调试的进程也会临时停止，并且共享同一个T状态标志。  </td>
+</tr>
+<tr>
+<td style="text-align:left">僵停</td>
+<td>Z</td>
+<td>EXIT_ZOMBIE：子进程在退出时向父进程发出信号。除进程身份（PID）之外的所有资源都已释放。  </td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>X</td>
+<td>EXIT_DEAD:当父进程清理（获取）剩余的子进程结构时，进程现在已经彻底释放。此状态从不会在进程列出实用程序中看到。  </td>
+</tr>
+</tbody>
+</table>
+<p>使用时可以通过短名称(HUP)或正确的名称（SIGHUP）指代信号  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">信号编号</th>
+<th>短名称</th>
+<th>定义</th>
+<th>用途  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td>HUP</td>
+<td>挂起</td>
+<td>用于报告终端控制进程的终止。也用于请求进程重新初始化（重新加载配置）而不终止  </td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td>INT</td>
+<td>键盘中断</td>
+<td>导致程序终止可以被拦截或处理。通过键盘INTR字符（Ctrl-c）发送  </td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td>QUIT</td>
+<td>键盘退出</td>
+<td>与SIGINT相似，但也在终止时生成进程转储。通过键入QUIT字符（Ctrl-\）发送。  </td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td>KILL</td>
+<td>中断，无法拦截</td>
+<td>导致立即终止程序，无法被拦截、忽略或处理；总是致命的。  </td>
+</tr>
+<tr>
+<td style="text-align:left">15（默认）</td>
+<td>TERM</td>
+<td>终止</td>
+<td>导致程序终止。和SIGKILL不同，可以被拦截、忽略或处理。要求程序终止的友好方式；允许自我清理。  </td>
+</tr>
+<tr>
+<td style="text-align:left">18</td>
+<td>CONT</td>
+<td>继续</td>
+<td>发送到进程使其恢复（若已停止）。无法被拦截。即使被处理，也始终恢复进程  </td>
+</tr>
+<tr>
+<td style="text-align:left">19</td>
+<td>STOP</td>
+<td>停止，无法拦截</td>
+<td>暂停进程。无法被拦截或处理  </td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td>TSTP</td>
+<td>键盘终止</td>
+<td>和SIGSTOP不同，可以被拦截、忽略或处理。通过键入SUSP字符（Ctrl-z）发送。  </td>
+</tr>
+</tbody>
+</table>
+<h4 id="top中的基本击键操作"><a href="#top中的基本击键操作" class="headerlink" title="top中的基本击键操作"></a>top中的基本击键操作</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">键</th>
+<th>用途  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">?或h</td>
+<td>交互式击键操作的帮助  </td>
+</tr>
+<tr>
+<td style="text-align:left">l、t、m</td>
+<td>切换到负载、线程、内存标题行  </td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td>标题中切换显示单独CPU信息或所有CPU的汇总。  </td>
+</tr>
+<tr>
+<td style="text-align:left">s(1)</td>
+<td>更改刷新（屏幕）率，以带小数的秒数表示（如0.5、1、5）。  </td>
+</tr>
+<tr>
+<td style="text-align:left">b</td>
+<td>切换反射突出显示运行中的进程；默认为粗体  </td>
+</tr>
+<tr>
+<td style="text-align:left">B</td>
+<td>在显示中使用粗体，用于标题以运行中的进程。  </td>
+</tr>
+<tr>
+<td style="text-align:left">H</td>
+<td>切换线程；显示进程摘要或单独线程。  </td>
+</tr>
+<tr>
+<td style="text-align:left">u,U</td>
+<td>过滤任何用户名称（有效、真实）  </td>
+</tr>
+<tr>
+<td style="text-align:left">M</td>
+<td>按内存使用率以降序方式对进程列表排序  </td>
+</tr>
+<tr>
+<td style="text-align:left">P</td>
+<td>按处理器使用率，以降序方式对进程列表排序  </td>
+</tr>
+<tr>
+<td style="text-align:left">k(1)</td>
+<td>中断进程。若有提示，输入PID，再输入signal  </td>
+</tr>
+<tr>
+<td style="text-align:left">r(1)</td>
+<td>调整进程的nice值。若有提示，输入PID，再输入nice_value  </td>
+</tr>
+<tr>
+<td style="text-align:left">W</td>
+<td>写入（保存）当前的显示配置，以便在下一次重新启动top时使用  </td>
+</tr>
+<tr>
+<td style="text-align:left">q</td>
+<td>退出  </td>
+</tr>
+<tr>
+<td style="text-align:left">注：</td>
+<td>安全模式中不可用</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/19/chapter-7-monitoring-and-managing-linux-processes/" data-id="cjqikv01x000lzjkjj1gv26tt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-chapter-15-using-virtualized-system" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/18/chapter-15-using-virtualized-system/" class="article-date">
+  <time datetime="2018-04-18T02:57:03.000Z" itemprop="datePublished">2018-04-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/18/chapter-15-using-virtualized-system/">Chapter 15. Using virtualized system</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>KVM(基于内核的虚拟机)是标准Red Hat Enterprise Linux 内核中内置的完整虚拟化解决方案。它可以运行多款未经修改的Windows 和Linux 虚拟客户操作系统。Red Hat Enterprise Linux中的KVM系统管理程序通过libvirt API 和实用程序进行管理。如virt-manager 和virsh等。由于Red Hat Enterprise Linux 是红帽企业虚拟化和红帽OpenStack 平台的基础。因此KVM是红帽云基础架构多种产品的一致组件。</p>
+<p><img src="/2018/04/18/chapter-15-using-virtualized-system/1524011869875353.png" alt="图片.png"></p>
+<ul>
+<li><p>KVM提供横跨所有红帽产品的虚拟机（VM）技术，不仅包含Red Hat Enterprise Linux 的单机物理实例，更有OpenStack 云平台。从上图的左上角起：</p>
+</li>
+<li><p>物理（传统）系统-Red Hat Enterprise Linux 安装在传统硬件上，提供KVM虚拟化，最高可达单一系统的物理极限，并且由virt-manager 等libvirt实用程序进程管理。Red Hat Enterprise Linux 实例也可通过红帽云访问。直接托管在红帽认证云提供商处。</p>
+</li>
+<li><p>红帽企业Linux 通常配置为胖主机，即在支持VM的同时，也提供其他本地和网络服务、应用和管理功能。</p>
+</li>
+<li><p>红帽企业虚拟化（RHEV）–支持跨越多个红帽企业虚拟化系统管理程序 （RHEV-H）系统的KVM实例。提供由RHEV管理（RHEV-H）管理的KVM迁移、冗余和高可用性。</p>
+</li>
+<li><p>红帽企业虚拟化系统管理程序 是瘦主机，是专门精简和调优过的Red Hat Enterprise Linux 版本，专用于满足和支持虚拟客户机VM的唯一目的。</p>
+</li>
+<li><p>RHEL OpenStack平台——在带有KVM的Red Hat Enterprise Linux 基础上使用集成和调优的OpenStack 的红帽私有云架构，通过红帽OpenStack 仪表板（Horizon 组件）或红帽 CloudForms 进程管理。</p>
+</li>
+<li><p>公共云中的OpenStack——在红帽认证云提供商处实施的OpenStack 公共云架构，由OpenStack Horizon 组件或红帽 CloudForms进行管理。</p>
+</li>
+<li><p>混合云——红帽CloudForms 云管理实用程序管理和迁移红帽RHEV和OpenStack 架构之间的KVM实例，以及通过第三方OpenStack和VMware平台转换KVM实例。</p>
+</li>
+<li><p>KVM实例配置在红帽产品之间兼容。安装要求、参数和步骤在受支持的平台上相当的。</p>
+</li>
+</ul>
+<p>KVM系统管理程序需要Intel 处理器（Intel VT-x 和基于X86 的系统的Intel 64扩展），或者AMD处理器（AMD-V 及AMD64扩展）。验证是否支持可能通过：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep --color -E <span class="string">"vmx|svm"</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure></p>
+<p>在Red Hat Enterprise Linux 上构建主机时并不需要No eXecute (NX)功能（Intel 称之为eXecute Disable(XD),AMD则称之为Enhanced Virus Protection）,但是红帽企业虚拟化系统管理程序（RHEV-H）需要此功能。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep --color -E <span class="string">"nx"</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure></p>
+<p>构建RHEL虚拟化主机至少需要qemu-kvm和qemu-img软件包，以提供用户级KVM模拟器和磁盘映像管理器<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install qemu-kvm qemu-img</span><br></pre></td></tr></table></figure></p>
+<p>建议安装的其它虚拟化管理软件包有：</p>
+<ul>
+<li><p>python-virtinst —— 提供virt-install命令，供创建虚拟机使用</p>
+</li>
+<li><p>libvirt —— 提供主机和服务库，以便与系统管理程序和主机系统交互  </p>
+</li>
+<li><p>libvirt-python —— 包含允许Python应用使用libvirt API的模块  </p>
+</li>
+<li><p>virt-manager —— 为管理VM提供虚拟机管理器图形工具，将libvirt-client库用作管理  </p>
+</li>
+<li><p>libvirt-client —— 为访问libvirt服务器提供客户端API和库，以及用于管理和控制VM的virsh命令行工具。  </p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install python-virtinst libvirt libvirt-python virt-manager libvirt-client</span><br></pre></td></tr></table></figure>
+<p>RHEL7 更新版anaconda图形安装程序 ，安装程序时不再提供选择个别RPM软件的功能，而只能选择基地环境和适合于所选基础的附加程。因而消除了猜测、使用配置更加精简。在安装完成后依然可能通过rmp 、yum或GNOME PackageKit 安装其他所需的RPM软件包。  </p>
+<p>Red Hat Enterprise Linux 使用基于libvirt的工具，作为虚拟化管理的默认方式。其支持RHEL 5 Xen 系统管理程序，以及RHEL 5、6和7上的KVM。下列管理工具使用libvirt:</p>
+<ul>
+<li><p>virsh —— virsh 命令行管理工具是图形版 virt-manager 应用程序的代替工具。无特权用户能以只读模式使用模式virsh，或者通过root 访问权限使用完整的管理功能。virsh命令是编写虚拟化管理脚本的理想选择。</p>
+</li>
+<li><p>virt-manager —— virt-manager 是一款图形化桌面工具，可以访问虚拟客户机控制台，用于执行虚拟机创建、迁移、配置和管理任务。可以通过单一界面管理本地和远程系统。</p>
+</li>
+<li><p>RHEV-M —— 红帽企业虚拟化管理器为物理和虚拟资源提供一个中央化管理平台，允许在主机之间启用、停止、构建和迁移虚拟机。RHEV-M 也可以管理数据中心的存储和网络组件，提供安全的远程图形化虚拟客户机控制台访问方式。</p>
+</li>
+</ul>
+<p>virsh 作为交互式shell使用:</p>
+<p>list —— 查看，–all 可查看全部  </p>
+<p>destroy —— 强制关闭，后面跟虚机名，与将其拔出相似  </p>
+<p>stop —— 暂时运行，后面跟虚机名</p>
+<p>start —— 启动虚机，后面跟虚机名</p>
+<p>edit —— 编辑域的配置文件，这会在虚拟客户机下一次启动时产生作用</p>
+<p>connect —— 使用qemu://host 语法连接本地或远程KVM主机。  </p>
+<p>nodeinfo —— 返回主机的基地信息，如CPU和内存等。  </p>
+<p>autostart —— 将KVM域配置为在主机系统启动时启动。  </p>
+<p>console —— 连接到虚拟客户机的虚拟串行控制台。  </p>
+<p>create —— 从XML 配置文件创建域，并将它启动。  </p>
+<p>define —— 从XML 配置谁的创建域，但不启动它。  </p>
+<p>undefine —— 取消定义域。如果域为不活动，则域配置将被删除。  </p>
+<p>reboot —— 重新启动域，就如从客户机内部运行reboot 命令一样  </p>
+<p>shutdown —— 正常地关闭域，就如从虚拟客户机内部运行shutdown 一样。  </p>
+<p>screenshot —— 为当前域控制台抓取屏幕截图，并存储在文件中。  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">配置说明</th>
+<th style="text-align:left">红帽产品</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">提供KVM支持的单系统硬件</td>
+<td style="text-align:left">红帽企业Linux</td>
+</tr>
+<tr>
+<td style="text-align:left">提供虚拟化冗余的多系统硬件</td>
+<td style="text-align:left">红帽企业虚拟化</td>
+</tr>
+<tr>
+<td style="text-align:left">提供私有云的多系统硬件</td>
+<td style="text-align:left">RHEL OpenStack平台</td>
+</tr>
+<tr>
+<td style="text-align:left">提供公共云的云提供商</td>
+<td style="text-align:left">公共云中的OpenStack</td>
+</tr>
+<tr>
+<td style="text-align:left">用于独立KVM主机的管理实用程序</td>
+<td style="text-align:left">virt-manager</td>
+</tr>
+<tr>
+<td style="text-align:left">用于多主机虚拟化平台的管理实用程序</td>
+<td style="text-align:left">RHEV-M</td>
+</tr>
+<tr>
+<td style="text-align:left">用于所有虚拟化和云平台组合的管理实用程序</td>
+<td style="text-align:left">CloudForms</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/18/chapter-15-using-virtualized-system/" data-id="cjqikv01i0009zjkj3ibxo0b0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-chapter-14-accessing-linux-file-system" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/17/chapter-14-accessing-linux-file-system/" class="article-date">
+  <time datetime="2018-04-17T08:43:24.000Z" itemprop="datePublished">2018-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/17/chapter-14-accessing-linux-file-system/">Chapter 14. Accessing Linux File System</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Red Hat Enterprise Linux 中检测到的第一个SCSI、PATA/SATA或USB硬盘驱动器是/dev/sda,第二个/dev/sdb，以此类推。</p>
+<p>/dev/sda 的第一个分区为/dev/sda1,第二个分区为/dev/sda2 ，以此类推。</p>
+<p>虚拟机中的硬盘驱动器是例外，一般显示了/dev/vd<letter>或/dev/xvd<letter></letter></letter></p>
+<p>LVM(逻辑卷管理)，通过LVM一个或多个块设备可以汇集成一个存储池，称为卷组（VG），对于卷组/dev/目录中有一个名称与该卷组相同的目录。在该目录下，已经创建名称与逻辑卷相同的符号链接。例如：代表myvg卷组的myvg逻辑卷的设备文件是/dev/myvg/mylv。</p>
+<p>LVM依赖于设备映射程序(DM)内核驱动程序。以上符号链接/dev/myvg/mylv 指向/dev/dm-number 块设备节点。number 的分配是连续的。从零（0）开始  </p>
+<p>。每个逻辑卷在/dev/mapper 目录中有另外一个符号链接，名称为/dev/mapper/myvg-mylv。通常可能使用任一可靠且一致的符号链接名称来访问逻辑卷。因为/dev/dm-number名称在每次启动会有所不同。</p>
+<p>df #显示已经挂载的磁盘空间、已用和剩余，所占比。包括本地和远程</p>
+<p>tmpfs 和devtmpfs 设备是系统内存中的文件系统，在系统重启后，写入tmpfs或devtmpfs的文件都会消失。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df -h    <span class="comment">#报告单位是KiB(210),MiB(220),GiB(230)</span></span><br><span class="line">df -H    <span class="comment">#报告单位是KB(103),MB(106),GB(109)硬盘驱动器制造商在广告其产品时通常使用SI单位。</span></span><br><span class="line">du -h dir    <span class="comment">#以递归方式查看特定目录空间详细信息，-h 同df</span></span><br><span class="line">du -H dir    <span class="comment">#以递归方式查看特定目录空间详细信息，-H 同df</span></span><br></pre></td></tr></table></figure></p>
+<p>mount 挂载的两种方式:一、驻留在/dev中的设备文件。二、文件系统的通用唯一标识符：UUID。</p>
+<p>blkid 命令用来列出其上具体文件系统的现有分区和文件系统的UUID，以后用于格式化该分区的文件系统。  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@server0 Desktop]<span class="comment"># blkid</span></span><br><span class="line">/dev/sda1: UUID=<span class="string">"9bf6b9f7-92ad-441b-848e-0257cbb883d1"</span> TYPE=<span class="string">"xfs"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#根据分区的设备文件</span></span><br><span class="line">mount /dev/vdb1 /mnt/mydata</span><br><span class="line"><span class="comment">#根据通用唯一标识符UUID</span></span><br><span class="line">mount UUID=<span class="string">"9bf6b9f7-92ad-441b-848e-0257cbb883d1"</span> /mnt/mydata</span><br></pre></td></tr></table></figure>
+<p>如果将文件挂载到现有的目录且这个目录不为空，则这个目录下的文件在挂载后不可访问</p>
+<p>umount 挂载点    #卸载文件系统。</p>
+<p>1.当前处理挂载系统下无法卸载，解决办法：退出当前挂载点  </p>
+<p>2.有进程在使用当前挂载点，无法卸载。解决办法：结束进程</p>
+<p>lsof /mnt/mydata    #命令列出拨给目录中所有打开的文件以及访问他们的进程。识别哪些进程在阻止文件系统被成功卸载非常有用。</p>
+<p>图形桌面环境针对USB闪存设备和驱动器等可移动设备会自动挂载，可移动介质的挂载点是/run/media/<user>/<label></label></user></p>
+<hr>
+<h4 id="软链接和硬链接"><a href="#软链接和硬链接" class="headerlink" title="软链接和硬链接"></a>软链接和硬链接</h4><p>硬链接：硬链接是新的目录条目，其引用文件系统中的现有文件。指向同一文件内容的硬链接需要在相同的文件系统中。硬链接具有相同的权限 、链接数、用户/组权限、时间戳、以及文件内容。在文件权限后面，所有者前面的数字为硬链接数。  </p>
+<p>ln 命令为现在文件创建新的硬链接。该命令需要一个现在文件作为第一参数，后面可以跟一个或多个额外的硬连接。新硬链接创建后无法区别哪一个是现有硬连接的原始链接。使用ls -l 查看时文件类型都是文件。  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@server0 newspace]<span class="comment"># echo "Hello" &gt;file1.txt</span></span><br><span class="line">[root@server0 newspace]<span class="comment"># ln file1.txt file2.txt</span></span><br><span class="line">[root@server0 newspace]<span class="comment"># ll</span></span><br><span class="line">total 8</span><br><span class="line">-rw-r--r--. 2 root root  6 Apr 17 15:00 file1.txt</span><br><span class="line">-rw-r--r--. 2 root root  6 Apr 17 15:00 file2.txt</span><br><span class="line">drwxr-xr-x. 2 root root 20 Apr 17 14:46 newdir</span><br><span class="line">[root@server0 newspace]<span class="comment"># cat file2.txt </span></span><br><span class="line">Hello</span><br><span class="line">[root@server0 newspace]<span class="comment"># echo 'World' &gt;&gt; file1.txt </span></span><br><span class="line">[root@server0 newspace]<span class="comment"># cat file2.txt </span></span><br><span class="line">Hello</span><br><span class="line">World</span><br><span class="line">[root@server0 newspace]<span class="comment"># rm -rf file1.txt </span></span><br><span class="line">[root@server0 newspace]<span class="comment"># cat file2.txt </span></span><br><span class="line">Hello</span><br><span class="line">World</span><br><span class="line">[root@server0 newspace]<span class="comment"># </span></span><br><span class="line"><span class="comment">#创建硬连接后，只要一个文件内容改变其它的跟着改变，且删除其中一个硬链接后不会影响其它链接，内容依然可用。</span></span><br></pre></td></tr></table></figure>
+<p>ls -s 命令创建软链接，也称为符号链接。软件连接是特殊的文件类型，它指向现在的文件或目录，软链接可以指向其它文件系统中的文件或目录。</p>
+<p><img src="/2018/04/17/chapter-14-accessing-linux-file-system/1523949252627674.png" alt="图片.png"></p>
+<p>当原始文件被删除后，软链接依然会指向该文件，但目标已经消失。指向缺失的文件的软链接称为：“悬挂的软链接”，查看时会提示文件或目录不存在。</p>
+<p><img src="/2018/04/17/chapter-14-accessing-linux-file-system/1523949409259777.png" alt="图片.png">  </p>
+<p>软链接指向目录时，可通过cd dir 进入到newdir/目录下。</p>
+<hr>
+<h4 id="find-and-locate-查找文件"><a href="#find-and-locate-查找文件" class="headerlink" title="find and locate 查找文件"></a>find and locate 查找文件</h4><p>locate 命令根据locate 数据库中的文件名和路径返回搜索结果。该数据库存储文件名和路径信息。</p>
+<p>调用locate搜索的用户必须对包含匹配元素的目录树具有读取权限才会有返回结果。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">locate passwd    <span class="comment">#查找文件名和路径包含passwd文件和目录</span></span><br><span class="line">locate -i messages    <span class="comment">#不区分大小写查找包含messages的文件和目录</span></span><br><span class="line">locate -n 5 snow.png    <span class="comment">#查找前5个匹配的文件或目录</span></span><br><span class="line">updatedb    <span class="comment">#更新locate数据库，默认每天自动更新。root用户可以updatedb手动更新。</span></span><br></pre></td></tr></table></figure>
+<p>find 命令实时搜索，查找符合命令行参数条件的文件。调用find搜索的用户必须对包含匹配元素的目录树具有读取权限才会有返回结果。find 的第一个参数为目录，如果缺省则默认为当前目录，并在当前目录树下搜索。find 可以根据文件名、文件大小、最近修改时间戳和其他文件特性的任意组合进行搜索。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">find / -name sshd_config    <span class="comment">#在/根目录和所有子目录中搜索名为sshd\_config的文件</span></span><br><span class="line">find / -name <span class="string">'*.txt'</span>    <span class="comment">#在/根目录和所有子目录中搜索以‘.txt’结尾的文件</span></span><br><span class="line">find /etc -name <span class="string">'*pass*'</span>    <span class="comment">#在/etc目录和所有子目录中搜索名称中包含pass的文件</span></span><br><span class="line">find / -iname <span class="string">'*messages*'</span>    <span class="comment">#-iname 不区分大小写，在/根目录和所有子目录中搜索名称中包含‘messages’的文件  </span></span><br><span class="line"></span><br><span class="line">find -user student    <span class="comment">#在当前目录查找student用户拥有的文件</span></span><br><span class="line">find -group student    <span class="comment">#在当前目录查找student组拥有的文件</span></span><br><span class="line">find -uid 1000    <span class="comment">#在当前目录查找uid为1000拥有的文件</span></span><br><span class="line">find -gid 1000    <span class="comment">#在当前目录查找gid为1000拥有的文件</span></span><br><span class="line">find / -user root -group mail    <span class="comment">#在/根目录下搜索root用户和mail组拥有的文件（同时）</span></span><br><span class="line"></span><br><span class="line">find /home -perm 764    <span class="comment">#在home目录下查找文件完全匹配权限为764的文件，777不满足</span></span><br><span class="line">find /home -perm -324    <span class="comment">#在home目录下查找文件对应权限至少包含324的文件，三个权限位置对应满足。</span></span><br><span class="line">find /home -perm /442    <span class="comment">#在home目录下查找文件中三个权限任何一位有4或2权限的文件</span></span><br><span class="line">find /home -perm -004    <span class="comment">#在home目录下查找其它人至少具有读权限的文件</span></span><br><span class="line">find /home -perm -002    <span class="comment">#在home目录下查找其它人至少具有写权限的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#-perm 选项用于查找具体特定权限集的文件，权限可以描述为八进制值，包含代表读取、写入和执行的4、2和1的某些组合，权限前面可以加上/或-符号。</span></span><br><span class="line"><span class="comment">#前面带有/的数字权限将匹配文件用户、组、其它人权限集中的至少一位。权限为r--r--r--的文件并不匹配/222，rw-r--r--的文件才匹配。即大于或等于其它中一位即为匹配。</span></span><br><span class="line"><span class="comment">#前面带有-的数字权限表示所有三个权限都必须存在。-222 只有rw-rw-rw才能匹配。默认值。</span></span><br><span class="line"><span class="comment"># 与 / 或 - 一起使用时 0 值类似于通配符。因为其表示至少无任何内容权限。</span></span><br><span class="line"></span><br><span class="line">find /home -size 10M    <span class="comment">#查找文件大小等于10M的文件，单位有k(小),M,G，+10M表示大于，-10M表示小于。</span></span><br><span class="line">find /home -size +10M    <span class="comment">#-size 单位修饰符将所有内容向上取整为一个单位，find -size 1M 将显示</span></span><br><span class="line">find /home -size -10M    <span class="comment">#小于1M的文件。向上取整为1M，尽量使用小单位。如查找1M文件使用或1024k</span></span><br><span class="line"></span><br><span class="line">find / -mmin 120    <span class="comment">#查找正好在前120分钟修改的所有文件</span></span><br><span class="line">find / -mmin +200    <span class="comment">#查找200分钟外修改的所有文件,同时也是200分钟内没有修改过的</span></span><br><span class="line">find / -mmin -150    <span class="comment">#查找在150分内修改的所有文件</span></span><br><span class="line"></span><br><span class="line">find / -<span class="built_in">type</span>    <span class="comment">#f:普通文件，d:目录，l：软链接，b:块设备</span></span><br><span class="line">find /etc -<span class="built_in">type</span> d    <span class="comment">#查找etc/目录下的文件夹</span></span><br><span class="line">find / -<span class="built_in">type</span> l    <span class="comment">#查找/根目录下的所有软链接</span></span><br><span class="line">find / -<span class="built_in">type</span> f -links +1    <span class="comment">#查找/目录下类型为文件，硬链接大于1个的文件。+：大于，-：小于</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/17/chapter-14-accessing-linux-file-system/" data-id="cjqikv04d001kzjkjs9dt43r5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-chatper-13-installing-and-updating-software-packages" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/17/chatper-13-installing-and-updating-software-packages/" class="article-date">
+  <time datetime="2018-04-17T00:49:48.000Z" itemprop="datePublished">2018-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/17/chatper-13-installing-and-updating-software-packages/">Chatper 13. Installing and updating software packages</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>红帽提供软件更新服务工具（收费）需要购买服务，并利用注册工具（subscription-manager-gui）进行注册软件管理服务器.</p>
+<h4 id="Register-用户和红帽账号绑定"><a href="#Register-用户和红帽账号绑定" class="headerlink" title="Register 用户和红帽账号绑定"></a>Register 用户和红帽账号绑定</h4><pre><code>1.在命令行command 输入 subscription-manager-gui,或者在GNOME界面Application--&gt;Other--&gt;Red Hat Subscription Manager 进入，输入对应的root 密码就可以进入图形操作，进入图形后点击右上角的Register会进入一个新的对话窗，subsription 默认服务器地址：subscription.rhn.redhat.com.Next后会要求输入RedHat的账号密码，默认会自动检查相应的订阅，也可以自己手动检查。最后点击Register完成注册。完成后就可以检查更新了。
+
+2.使用命令行完成自动注册
+</code></pre><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    subscription-manager register --username=yourname --password=yourpassword  <span class="comment">#订阅</span></span><br><span class="line">    subscription-manager list --available | less    <span class="comment">#查看有效的订阅</span></span><br><span class="line">    subscription-manager attach --auto    <span class="comment">#自动检查订阅</span></span><br><span class="line">    subscription-manager list --consumed    <span class="comment">#查看consumed（消费） 订阅</span></span><br><span class="line">    subscription-manager unregister    <span class="comment">#取消订阅</span></span><br></pre></td></tr></table></figure>
+<h5 id="Subscribe-订阅授权给指定的产品，选择-删除需要授权的产品"><a href="#Subscribe-订阅授权给指定的产品，选择-删除需要授权的产品" class="headerlink" title="Subscribe 订阅授权给指定的产品，选择/删除需要授权的产品"></a>Subscribe 订阅授权给指定的产品，选择/删除需要授权的产品</h5><p>Enable repositories 启用软件包的存储库（理解成yum 源库），每个订阅默认会开启多个存储库，可以根据需要关闭不需要的，如源代码、更新</p>
+<p>Review and track  查看和审查自己的订阅信息，可以在本地和红帽网站上查询</p>
+<h6 id="订阅的授权证书存放在-etc-pki-及其子目录中"><a href="#订阅的授权证书存放在-etc-pki-及其子目录中" class="headerlink" title="订阅的授权证书存放在/etc/pki 及其子目录中"></a>订阅的授权证书存放在/etc/pki 及其子目录中</h6><p>/etc/pki/product    #安装在Red Hat中的产品证书<br>/etc/pki/consumer    #存储在这个系统中的RedHat的账号的证书<br>/etc/pki/entitlement    #包含了订阅了哪个许可的证书</p>
+<p>可以使用rct程序检查证书，相比下subscription-manager程序读取证书更加友好  </p>
+<hr>
+<p>rpm and yum</p>
+<p>rpm =red hat packet manager</p>
+<p>rpm 包的文件格式：</p>
+<p>name-version-release.architectrue</p>
+<p>httpd-tools.2.4.6.7-7.e17.x86_64.rpm  </p>
+<p>httpd-tools=name    名字</p>
+<p>2.4.6.7=version    版本</p>
+<p>7.el7=release    基于版本的发行号</p>
+<p>x86_64=arch    架构</p>
+<p>默认安装时只需要使用RPM包的名字，如果有多个版本存在默认安装版本最高的</p>
+<h6 id="每个RPM包包含以下三个组成部份："><a href="#每个RPM包包含以下三个组成部份：" class="headerlink" title="每个RPM包包含以下三个组成部份："></a>每个RPM包包含以下三个组成部份：</h6><p>软件安装的文件、</p>
+<p>与软件包（元数据）有关的信息，摘要，描述、是否要求安装其它软件，授权许可、更改日志、以及其它详细信息</p>
+<p>在安装、更新或删除此软件包时可能运行的脚本、或此过程中可能触发的脚本。  </p>
+<p>如果软件构建为不冲突的文件名，则可以安装多个版本。例如kernel 否则只能安装一个版本。</p>
+<h6 id="yum———软件包管理器"><a href="#yum———软件包管理器" class="headerlink" title="yum———软件包管理器"></a>yum———软件包管理器</h6><p>PackageKit 和yum 等工具是rpm的前端应用，可以用于安装单个软件包或软件包集合，并解决RPM无法解决的依赖关系。</p>
+<p>yum 的主要配置文件为：/etc/yum.conf,其它存储库配置文件位于在/etc/yum.repos.d目录中。  </p>
+<p>存储库配置文件至少包含一个存储库ID （在方括号中）、一个名称以及软件包存储库的URL位置。URL可以指向本地目录（文件）或远程网络共享(http和ftp等)。如果将该URL粘贴到浏览器中，则显示的内容应该有RPM软件包（可能位于一个或多个子目录中）。以及包含可用软件包相关信息的repodata目录。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#yum 命令用于列出存储库、软件包和软件包组</span></span><br><span class="line">yum repolist </span><br><span class="line">yum list yum*    <span class="comment">#显示已安装和可用的软件包</span></span><br><span class="line">yum grouplist</span><br><span class="line">yum search apache    <span class="comment">#在名字和摘要字段搜索关键字列出的软件包</span></span><br><span class="line">yum search all <span class="string">'web server'</span>    <span class="comment">#搜索名字、摘要、描述等字段中包含'web server'的软件包</span></span><br><span class="line">yum info PACKAGENAME    <span class="comment">#提供与指定软件包相关的详细信息，包括安装所需的磁盘空间。</span></span><br><span class="line">yum provides /var/www/html    <span class="comment">#显示与指定的路径名（通常包含通配符）匹配的软件包</span></span><br><span class="line">yum install PACKAGENAME    <span class="comment">#获取并安装软件包，包括依赖项</span></span><br><span class="line">yum update PACKAGENAME    <span class="comment">#获取并安装更新版本的软件包，包括所有依赖项。通常该进程尝试适当保留配置文件，但是在某些情况下，如果打包商认为旧文件在更新后将无法使用，则可能对其进行重命名，如果未指定软件包名称，它将安装所有相关更新</span></span><br><span class="line">yum remove PACKAGENAME    <span class="comment">#删除已安装的软件包、包括所有支持软件包。有可能会导致意外删除软件包，因此删除前要仔细检查要删除的软件包列表。</span></span><br><span class="line">yum <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">uname -r     <span class="comment">#仅显示内核 的版本和发行版本</span></span><br><span class="line">uname -a     <span class="comment">#将显示内核发行版和其它信息</span></span><br></pre></td></tr></table></figure></p>
+<p>yum 有两种类型的组：常规组是软件包集合，环境组是其他组的集全。这些组包含自己的软件包。</p>
+<p>与yum list 相似，yum group list (或 yum grouplist ) 将列出已安装和可用的组名称，有些组通过环境安装，默认为隐藏，这些隐藏组也可以通过yum group list hidden 命令列出。如果添加ids 选项，则会显示组ID。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum grout list hidden    <span class="comment">#显示隐藏组</span></span><br><span class="line">yum group list = yum grouplist    <span class="comment">#显示已经安装和可选安装的软件包组。</span></span><br><span class="line">yum group info = yum groupinfo    <span class="comment">#它将列出改必选、默认和可选软件包名称或组ID。</span></span><br></pre></td></tr></table></figure></p>
+<p>#软件包名称或组前面可能标有标记。如下图：  </p>
+<p><img src="/2018/04/17/chatper-13-installing-and-updating-software-packages/1523863565421240.png" alt="图片.png"><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">yum group install = yum groupinstall     <span class="comment">#组安装</span></span><br><span class="line">yum group remove = yum groupremove    <span class="comment">#组删除</span></span><br><span class="line">yum group mark install GROUPNAME    <span class="comment">#标记为已安装，下次更新时将安装缺少的软件包和其依赖项。RHEL7 以后增加的命令</span></span><br><span class="line">tail -5 /var/<span class="built_in">log</span>/yum.log    <span class="comment">#查看事务历史记录</span></span><br><span class="line">yum <span class="built_in">history</span>     <span class="comment">#查看安装和删除事务的摘要</span></span><br><span class="line">yum <span class="built_in">history</span> undo 6    <span class="comment">#撤销事务</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">yum repolist all    <span class="comment">#查看所有可用的存储库</span></span><br><span class="line">yum-config-manager     <span class="comment">#启用和禁用存储库，这将更改/etc/yum.repos.d/redhat.repo 文件中的enabled 参数</span></span><br><span class="line">yum-config-manager  --<span class="built_in">enable</span> rhel-7-public-bate-debug-rpms      <span class="comment">#案例</span></span><br></pre></td></tr></table></figure></p>
+<p>第三方存储库：网站、ftp服务器、本地文件系统。将文件放到/etc/yum.repos.d/ 目录中以启用对第三方内容库的支持。内容库配置必须以.repo 结尾。</p>
+<p>存储库定义包含存储的URL和名称、也定义是否使用GPG检查 软件包签名；如果是，则还检查URL是否指向受信任的GPG密钥。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo=<span class="string">"http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/"</span>    <span class="comment">#增加epel的源，</span></span><br></pre></td></tr></table></figure></p>
+<p>执行完修改/etc/yum.repos.d/下生成的配置文件，提供自定义名称和GPG密钥位置。管理员应将该密钥下载到本地文件，而不是让yum从外部来源检索该密钥。</p>
+<p>安装Red Hat Enterprise Linux 7 EPEL存储库软件包:(默认提供配置文件、GPG公钥做为软件安装包的一部分)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm --import http://dl.fedoraproject.org/pub/epep/RPM-KEY-EPEL-7   </span><br><span class="line">``` </span><br><span class="line"><span class="comment">#如果不先安装GPG密钥安装软件时会报错，可以通过--nogpgcheck 忽略检查，不推荐这样操作。</span></span><br><span class="line">```sh</span><br><span class="line">yum install http://dl.fedoraproject.org/pub/epep/beta/7/x86_64/epel-release-7-0.1.noarch.rpm</span><br></pre></td></tr></table></figure></p>
+<p>配置文件通常在一个文件中列举多个存储库引用。每一存储库引用的开头为包含在方括号里的单一词语名称。可以通过“enabled=0 ”参数来关闭不需要使用的存储库。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager <span class="comment">#永久的启用或禁用存储库</span></span><br><span class="line">yum --enablerepo=PATTERN </span><br><span class="line">yum --disablerepo=PATTERN </span><br><span class="line">yum-config-manager --<span class="built_in">disable</span> content.example.com\_rhel7.0\_x86\_64\_rht    </span><br><span class="line"><span class="comment">#content.example.com\_rhel7.0\_x86\_64\_rht 通过yum repolist 查看</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">rpm -q PACKAGENAME    <span class="comment">#查看指定安装的软件名称，列出软件包的名称和版本，与yum list 类似</span></span><br><span class="line">rpm -qa         <span class="comment">#查看所有安装的软件</span></span><br><span class="line">rpm -q -p PACKAGENAME.rpm     <span class="comment">#-p 指定安装软件包文件</span></span><br><span class="line">rpm -q -f filename     <span class="comment">#查看哪个软件包提示了这个文件或文件夹</span></span><br><span class="line">rpm -q -i :软件包信息与yum info 类似</span><br><span class="line">rpm -q -l :    rpm -q -l yum-rhn-plugin    <span class="comment">#列出指定软件安装产生的文件</span></span><br><span class="line">rpm -q -c：    rpm -q -c yum-rhn-plugin    <span class="comment">#仅列出配置文件。</span></span><br><span class="line">rpm -q -d:    rpm -q -d yum-rhn-plugin    <span class="comment">#仅列出文档文件</span></span><br><span class="line">rpm -q --scripts :    rpm -q --scripts openssh-server    <span class="comment">#列出可能在安装或删除软件之前或之后运行的shell脚本</span></span><br><span class="line">rpm -q --changelog :    rpm -q --changlog audit    <span class="comment">#列出软件包的更改信息</span></span><br></pre></td></tr></table></figure>
+<p>cpio 从rpm包提示文件而不安装该软件包。rpm2cpio PACKAGERFILE.rpm 传送到cpio -id ，它会提取RPM中存储的所有文件。需要时会创建子目录树，也可以指定目录。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm2cpio wonderwidgets-1.0-4.x86_64.rpm | cpio -id <span class="string">"*.txt"</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/17/chatper-13-installing-and-updating-software-packages/" data-id="cjqikv04f001mzjkjgehbjau4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-chapter-12-archiving-and-copying-files" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/12/chapter-12-archiving-and-copying-files/" class="article-date">
+  <time datetime="2018-04-12T13:28:25.000Z" itemprop="datePublished">2018-04-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/12/chapter-12-archiving-and-copying-files/">Chapter 12. Archiving and copying Files</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="压缩命令：tar-gzip-bzip2-xz"><a href="#压缩命令：tar-gzip-bzip2-xz" class="headerlink" title="压缩命令：tar , gzip ,bzip2, xz"></a>压缩命令：tar , gzip ,bzip2, xz</h5><p>tar 命令参数：c(create) , t (list the contents) ,x (extract)  f (后面要跟filename），v (verbose 详细信息),</p>
+<p>使用tar 命令打包文件或者文件夹前检查是否有同名的压缩文件，tar会覆盖原文件不提示。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">tar cf archive.tar file1 file2 file3  <span class="comment">#压缩 file1,file2,file3 到archive.tar </span></span><br><span class="line">tar cf directory.tar directory1/    <span class="comment">#压缩 directory1 目录到directory.tar</span></span><br><span class="line">tar tf archive.tar           <span class="comment">#查看archive.tar 里的内容</span></span><br><span class="line">tar cf /root/etc.tar  /etc      <span class="comment"># 指定压缩包的保存位置， 默认情况下，被压缩的路径前导符 “/”（/etc 在tar包里为etc） 在压缩时会被删除，为了以后解压时出现覆盖情况，</span></span><br></pre></td></tr></table></figure>
+<p>tar 默认会保存文件的访问权限，如果需要同时保存selinux的上下文和acl权限，需要使用 –xattrs(需要root权限执行),–selinux，–acls 查看tar –help  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">tar cf archive.tar --xattrs --selinux  filename   <span class="comment">#创建</span></span><br><span class="line">tar xfp archive.tar --xattrs --selinux    <span class="comment">#解压带权限</span></span><br></pre></td></tr></table></figure>
+<p>默认情况下，使用root解压文件会保留文件所属权限，使用普通用户解压会修改文件所属为当前用户,在解压时一般会删除umask 权限，如果需要保留使用-p 选项</p>
+<p>z for gzip  (filename.tar.gz or filename.tgz)</p>
+<p>j for bzip2 (filename.tar.bz2)  </p>
+<p>J for xz (filename.tar.xz)  </p>
+<p><img src="/2018/04/12/chapter-12-archiving-and-copying-files/1523583168668639.png" alt="图片.png"></p>
+<p>==========压缩<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar   czf    filename.tar.gz</span><br><span class="line">tar   czf    filename.tgz</span><br><span class="line">tar   cjf    filename.bz2</span><br><span class="line">tar   cJf    filename.xz</span><br></pre></td></tr></table></figure></p>
+<p>==========解压<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar   xzf    filename.tar.gz</span><br><span class="line">tar   xzf    filename.tgz</span><br><span class="line">tar   xjf    filename.bz2</span><br><span class="line">tar   xJf    filename.xz</span><br></pre></td></tr></table></figure></p>
+<p>同时可以使用gzip,bzip2,xz 对tar包进行二次压缩</p>
+<h3 id="2018-04-13"><a href="#2018-04-13" class="headerlink" title="2018-04-13"></a>2018-04-13</h3><p>scp  基于ssh 的安全传输</p>
+<p>scp  root@host:/path<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp server0:/etc/hostname /home student/    <span class="comment">#从远程下载</span></span><br><span class="line">scp /etc/yum.conf /etc/hosts server0:/home/student/        <span class="comment">#上传到远程</span></span><br><span class="line">scp -r root@server0:/var/<span class="built_in">log</span> /tmp            <span class="comment">#递归复制，针对整个目录</span></span><br></pre></td></tr></table></figure></p>
+<p>sftp 互动型文件传输，同样基于ssh的FTP安全传输,<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sftp server0    <span class="comment">#连接后输入对应的用户密码，默认为当前同名用户</span></span><br><span class="line">sftp root@server0    <span class="comment">#使用root用户登录</span></span><br></pre></td></tr></table></figure></p>
+<p>常用ftp 命令: ls ,cd ,mkdir ,rmdir ,pwd ,查看本地lcd ,lls ,lpwd 等，详细可以在ftp 模式下”?”查看，put 上传，get 下载，exit退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[student@desktop0 ~]$ sftp server0</span><br><span class="line">student@server0<span class="string">'s password: </span></span><br><span class="line"><span class="string">Connected to server0.</span></span><br><span class="line"><span class="string">sftp&gt; pwd</span></span><br><span class="line"><span class="string">Remote working directory: /home/student</span></span><br><span class="line"><span class="string">sftp&gt; mkdir hostbackup      </span></span><br><span class="line"><span class="string">sftp&gt; cd hostbackup/</span></span><br><span class="line"><span class="string">sftp&gt; put /etc/hosts        #上传</span></span><br><span class="line"><span class="string">Uploading /etc/hosts to /home/student/hostbackup/hosts</span></span><br><span class="line"><span class="string">/etc/hosts                                    100%  231     0.2KB/s   00:00    </span></span><br><span class="line"><span class="string">sftp&gt; get /etc/yum.conf     #下载</span></span><br><span class="line"><span class="string">Fetching /etc/yum.conf to yum.conf</span></span><br><span class="line"><span class="string">/etc/yum.conf                                 100%  813     0.8KB/s   00:00    </span></span><br><span class="line"><span class="string">sftp&gt; exit</span></span><br></pre></td></tr></table></figure>
+<h4 id="rsync-远程同步"><a href="#rsync-远程同步" class="headerlink" title="rsync  远程同步"></a>rsync  远程同步</h4><p>-a    归档模式archive mode ，支持软连接,不支持高级权限如ACL,SELINUX 上下文</p>
+<p>-A  -a     启用支持高级权限如ACL</p>
+<p>-X  -a     启用Selinux  </p>
+<p>-n    测试模式，不做更改  </p>
+<p>-r    递归模式</p>
+<p>-l    同步符号连接，保存为连接</p>
+<p>-p    保留权限</p>
+<p>-H    保留硬连接</p>
+<h5 id="本地目录及文件同步："><a href="#本地目录及文件同步：" class="headerlink" title="本地目录及文件同步："></a>本地目录及文件同步：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#命令    参数    源    目地</span></span><br><span class="line">rsync  -av  /var/<span class="built_in">log</span>  /tmp <span class="comment">#同步log文件夹及其内容</span></span><br><span class="line">rsync  -av /var/<span class="built_in">log</span>/  /tmp    <span class="comment">#仅同步文件夹下的内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#远程目录及文件同步,方式和scp 类似  </span></span><br><span class="line"></span><br><span class="line">rsync  -av /var/<span class="built_in">log</span>   server0:/tmp</span><br><span class="line">rsync  -av server0:/var/<span class="built_in">log</span>  /tmp</span><br><span class="line">rsync -av  root@server0:/var/<span class="built_in">log</span>   /tmp</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/12/chapter-12-archiving-and-copying-files/" data-id="cjqikv01f0006zjkjgezyf5fc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-chapter-11-manager-network" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/11/chapter-11-manager-network/" class="article-date">
+  <time datetime="2018-04-11T08:05:34.000Z" itemprop="datePublished">2018-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/11/chapter-11-manager-network/">Chapter 11. Manager Network</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>常见服务端口查看文件：/etc/services<br>rhel 7开始网卡的命令开头规则为：<br>以太网：en；无线网：wl；WWAN：ww；<br>后面根网卡接口类型：<br>hotplug 热插拔：s; PCI接口 :p<br>主板集成：o；x:MAC地址使用<br>最后的数字是：索引、ID或端口。<br>如：eno1,ens33,enp2s0,eth0<br>无法确认的情况下，使用ethN 传统的形式。  </p>
+<p>biosdevname 包用来定义udev设备的名称规则，PIC(S)网卡名pYpX ，Y代表slot number ,X 代表当前板卡的第几个口</p>
+<p> ==============================================================<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ip addr show ens33      <span class="comment">#查看信息</span></span><br><span class="line">ip -s link show eth0      <span class="comment">#显示统计信息tatistics（统计）</span></span><br><span class="line">ip route                 <span class="comment">#查看路由</span></span><br><span class="line">ping -c3 192.168.1.1  -cN     <span class="comment">#指定ping的次数</span></span><br><span class="line">tracepath access.redhat.com      <span class="comment">#跟踪路由，默认使用UDP路由，然后UDP经常被封</span></span><br></pre></td></tr></table></figure></p>
+<p>traceroute 有 -I(ICMP) , -T (TCP) 选项<br>RTT  :Round trip timging; MTU:Maximum transmission unit<br>ss  -ta 显示tcp  socket 统计信息 -t=tcp ,-a=all.   ss类似netstat 命令<br>-n 以数字形式显示端口或地址<br>-t  tcp<br>-u     udp<br>-l     显示处于Listening状态的服务<br>-a  显示所有  </p>
+<p>-p   显示进程使用的socket</p>
+<p> ==============================================================</p>
+<p>配置文件位置/etc/sysconfig/network-scripts/<br>网络管理服务：NetworkManager,命令是nmcli  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmcli con show                 <span class="comment">#显示所有连接的网卡</span></span><br><span class="line">nmcli con show --active         <span class="comment">#显示处于激活状态的网卡</span></span><br><span class="line">nmcli con show <span class="string">"ens33"</span>            <span class="comment">#显示网卡的详细信息,对应的详细说明查看man nm-settings </span></span><br><span class="line">nmcli dev status</span><br><span class="line">nmcli dev show ens33               <span class="comment">#显示指定网卡</span></span><br><span class="line">nmcli dev show                    <span class="comment">#显示网卡</span></span><br><span class="line">nmcli con show                    <span class="comment">#显示连接</span></span><br><span class="line">nmcli con up  &lt;<span class="string">"ID"</span>&gt;              <span class="comment">#启用网卡</span></span><br><span class="line">nmcli con down  &lt;<span class="string">"ID"</span>&gt;             <span class="comment">#关闭网卡</span></span><br><span class="line">nmcli dev dis  &lt;<span class="string">"ID"</span>&gt;             <span class="comment">#断开连接</span></span><br><span class="line">nmcli net off                     <span class="comment">#停用网卡</span></span><br><span class="line">nmcli net on                      <span class="comment">#启用网卡</span></span><br><span class="line">nmcli con add  ….               <span class="comment">#添加连接</span></span><br><span class="line">nmcli con mod  &lt;<span class="string">"ID"</span>&gt;             <span class="comment">#修改连接</span></span><br><span class="line">nmcli con del  &lt;<span class="string">"ID"</span>&gt;             <span class="comment">#删除连接</span></span><br><span class="line">man nm-connection-editor            <span class="comment">#查看详细说明</span></span><br></pre></td></tr></table></figure>
+<p>==============================================================</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmcli con add con-name <span class="string">"default"</span> <span class="built_in">type</span> ethernet ifname eth0</span><br><span class="line">nmcli con add con-name <span class="string">"static"</span> ifname eth0 autoconnect no <span class="built_in">type</span> ethernet ip4 172.25.1.10/24 gw4 172.25.1.254 </span><br><span class="line">nmcli con up <span class="string">"static"</span></span><br><span class="line">nmcli con up <span class="string">"default"</span></span><br><span class="line">nmcli con mod <span class="string">"static"</span> connection.autoconnect yes</span><br><span class="line">nmcli con mod <span class="string">"static"</span> ipv4.dns 172.24.1.254</span><br><span class="line">nmcli con mod <span class="string">"static"</span> +ipv4.dns 8.8.8.8</span><br><span class="line">nmcli con mod <span class="string">"static"</span> ipv4.address <span class="string">"172.25.2.10/24 172.25.2.254"</span></span><br><span class="line">nmcli con mod <span class="string">"static"</span> +ipv4.address 192.168.1.1/24</span><br></pre></td></tr></table></figure>
+<p> ==============================================================</p>
+<p>修改配置文件后使用  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmcli con reload  重新加载配置文件  </span><br><span class="line">nmcli con down;nmcli con up</span><br></pre></td></tr></table></figure>
+<p> ==============================================================<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hostname  查看主机名</span><br><span class="line"></span><br><span class="line">hostnamectl <span class="built_in">set</span>-hostname deskop.example.com</span><br><span class="line"></span><br><span class="line">hostnamectl status   <span class="comment">#查看主机信息，包括主机名、计算机类型、系统类型、版本、架构</span></span><br><span class="line">cat /etc/hostname  <span class="comment">#主机名保存的文件，/etc/sysconfig/network (老版本)</span></span><br></pre></td></tr></table></figure></p>
+<p>/etc/hosts 文件配置静态域名解析，本地解析</p>
+<p>getent hosts <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>  #getent 解析域名，同nslookup，对hosts文件有支持<br>host classroom.example.com  #解析域名，同nslookup</p>
+<p>/etc/resolv.conf  配置 DNS 服务器地址,支持内容如下：</p>
+<pre><code>nameserver: DNS 的IP地址，最多可以设置3个
+
+search : 一般用域名，
+
+domain :一般用域名
+</code></pre><p>PEERDNS=no 时，不会影响/etc/resolv.conf ，如果网卡配置PEERDNS=yes ,重启网卡时会覆盖resolv.conf</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/11/chapter-11-manager-network/" data-id="cjqikv01d0005zjkj7jt1hfv8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL124/">RHEL124</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL134/">RHEL134</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/pxe/">pxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/">samba</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/pxe/" style="font-size: 10px;">pxe</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 change<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

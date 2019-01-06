@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Chapter 15. Using virtualized system | rhel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="KVM(基于内核的虚拟机)是标准Red Hat Enterprise Linux 内核中内置的完整虚拟化解决方案。它可以运行多款未经修改的Windows 和Linux 虚拟客户操作系统。Red Hat Enterprise Linux中的KVM系统管理程序通过libvirt API 和实用程序进行管理。如virt-manager 和virsh等。由于Red Hat Enterprise Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter 15. Using virtualized system">
+<meta property="og:url" content="http://yoursite.com/2018/04/18/chapter-15-using-virtualized-system/index.html">
+<meta property="og:site_name" content="rhel">
+<meta property="og:description" content="KVM(基于内核的虚拟机)是标准Red Hat Enterprise Linux 内核中内置的完整虚拟化解决方案。它可以运行多款未经修改的Windows 和Linux 虚拟客户操作系统。Red Hat Enterprise Linux中的KVM系统管理程序通过libvirt API 和实用程序进行管理。如virt-manager 和virsh等。由于Red Hat Enterprise Linux">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/04/18/chapter-15-using-virtualized-system/1524011869875353.png">
+<meta property="og:updated_time" content="2019-01-06T15:40:28.498Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 15. Using virtualized system">
+<meta name="twitter:description" content="KVM(基于内核的虚拟机)是标准Red Hat Enterprise Linux 内核中内置的完整虚拟化解决方案。它可以运行多款未经修改的Windows 和Linux 虚拟客户操作系统。Red Hat Enterprise Linux中的KVM系统管理程序通过libvirt API 和实用程序进行管理。如virt-manager 和virsh等。由于Red Hat Enterprise Linux">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/18/chapter-15-using-virtualized-system/1524011869875353.png">
+  
+    <link rel="alternate" href="/atom.xml" title="rhel" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rhel</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">growing study</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-chapter-15-using-virtualized-system" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/18/chapter-15-using-virtualized-system/" class="article-date">
+  <time datetime="2018-04-18T02:57:03.000Z" itemprop="datePublished">2018-04-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chapter 15. Using virtualized system
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>KVM(基于内核的虚拟机)是标准Red Hat Enterprise Linux 内核中内置的完整虚拟化解决方案。它可以运行多款未经修改的Windows 和Linux 虚拟客户操作系统。Red Hat Enterprise Linux中的KVM系统管理程序通过libvirt API 和实用程序进行管理。如virt-manager 和virsh等。由于Red Hat Enterprise Linux 是红帽企业虚拟化和红帽OpenStack 平台的基础。因此KVM是红帽云基础架构多种产品的一致组件。</p>
+<p><img src="/2018/04/18/chapter-15-using-virtualized-system/1524011869875353.png" alt="图片.png"></p>
+<ul>
+<li><p>KVM提供横跨所有红帽产品的虚拟机（VM）技术，不仅包含Red Hat Enterprise Linux 的单机物理实例，更有OpenStack 云平台。从上图的左上角起：</p>
+</li>
+<li><p>物理（传统）系统-Red Hat Enterprise Linux 安装在传统硬件上，提供KVM虚拟化，最高可达单一系统的物理极限，并且由virt-manager 等libvirt实用程序进程管理。Red Hat Enterprise Linux 实例也可通过红帽云访问。直接托管在红帽认证云提供商处。</p>
+</li>
+<li><p>红帽企业Linux 通常配置为胖主机，即在支持VM的同时，也提供其他本地和网络服务、应用和管理功能。</p>
+</li>
+<li><p>红帽企业虚拟化（RHEV）–支持跨越多个红帽企业虚拟化系统管理程序 （RHEV-H）系统的KVM实例。提供由RHEV管理（RHEV-H）管理的KVM迁移、冗余和高可用性。</p>
+</li>
+<li><p>红帽企业虚拟化系统管理程序 是瘦主机，是专门精简和调优过的Red Hat Enterprise Linux 版本，专用于满足和支持虚拟客户机VM的唯一目的。</p>
+</li>
+<li><p>RHEL OpenStack平台——在带有KVM的Red Hat Enterprise Linux 基础上使用集成和调优的OpenStack 的红帽私有云架构，通过红帽OpenStack 仪表板（Horizon 组件）或红帽 CloudForms 进程管理。</p>
+</li>
+<li><p>公共云中的OpenStack——在红帽认证云提供商处实施的OpenStack 公共云架构，由OpenStack Horizon 组件或红帽 CloudForms进行管理。</p>
+</li>
+<li><p>混合云——红帽CloudForms 云管理实用程序管理和迁移红帽RHEV和OpenStack 架构之间的KVM实例，以及通过第三方OpenStack和VMware平台转换KVM实例。</p>
+</li>
+<li><p>KVM实例配置在红帽产品之间兼容。安装要求、参数和步骤在受支持的平台上相当的。</p>
+</li>
+</ul>
+<p>KVM系统管理程序需要Intel 处理器（Intel VT-x 和基于X86 的系统的Intel 64扩展），或者AMD处理器（AMD-V 及AMD64扩展）。验证是否支持可能通过：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep --color -E <span class="string">"vmx|svm"</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure></p>
+<p>在Red Hat Enterprise Linux 上构建主机时并不需要No eXecute (NX)功能（Intel 称之为eXecute Disable(XD),AMD则称之为Enhanced Virus Protection）,但是红帽企业虚拟化系统管理程序（RHEV-H）需要此功能。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep --color -E <span class="string">"nx"</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure></p>
+<p>构建RHEL虚拟化主机至少需要qemu-kvm和qemu-img软件包，以提供用户级KVM模拟器和磁盘映像管理器<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install qemu-kvm qemu-img</span><br></pre></td></tr></table></figure></p>
+<p>建议安装的其它虚拟化管理软件包有：</p>
+<ul>
+<li><p>python-virtinst —— 提供virt-install命令，供创建虚拟机使用</p>
+</li>
+<li><p>libvirt —— 提供主机和服务库，以便与系统管理程序和主机系统交互  </p>
+</li>
+<li><p>libvirt-python —— 包含允许Python应用使用libvirt API的模块  </p>
+</li>
+<li><p>virt-manager —— 为管理VM提供虚拟机管理器图形工具，将libvirt-client库用作管理  </p>
+</li>
+<li><p>libvirt-client —— 为访问libvirt服务器提供客户端API和库，以及用于管理和控制VM的virsh命令行工具。  </p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install python-virtinst libvirt libvirt-python virt-manager libvirt-client</span><br></pre></td></tr></table></figure>
+<p>RHEL7 更新版anaconda图形安装程序 ，安装程序时不再提供选择个别RPM软件的功能，而只能选择基地环境和适合于所选基础的附加程。因而消除了猜测、使用配置更加精简。在安装完成后依然可能通过rmp 、yum或GNOME PackageKit 安装其他所需的RPM软件包。  </p>
+<p>Red Hat Enterprise Linux 使用基于libvirt的工具，作为虚拟化管理的默认方式。其支持RHEL 5 Xen 系统管理程序，以及RHEL 5、6和7上的KVM。下列管理工具使用libvirt:</p>
+<ul>
+<li><p>virsh —— virsh 命令行管理工具是图形版 virt-manager 应用程序的代替工具。无特权用户能以只读模式使用模式virsh，或者通过root 访问权限使用完整的管理功能。virsh命令是编写虚拟化管理脚本的理想选择。</p>
+</li>
+<li><p>virt-manager —— virt-manager 是一款图形化桌面工具，可以访问虚拟客户机控制台，用于执行虚拟机创建、迁移、配置和管理任务。可以通过单一界面管理本地和远程系统。</p>
+</li>
+<li><p>RHEV-M —— 红帽企业虚拟化管理器为物理和虚拟资源提供一个中央化管理平台，允许在主机之间启用、停止、构建和迁移虚拟机。RHEV-M 也可以管理数据中心的存储和网络组件，提供安全的远程图形化虚拟客户机控制台访问方式。</p>
+</li>
+</ul>
+<p>virsh 作为交互式shell使用:</p>
+<p>list —— 查看，–all 可查看全部  </p>
+<p>destroy —— 强制关闭，后面跟虚机名，与将其拔出相似  </p>
+<p>stop —— 暂时运行，后面跟虚机名</p>
+<p>start —— 启动虚机，后面跟虚机名</p>
+<p>edit —— 编辑域的配置文件，这会在虚拟客户机下一次启动时产生作用</p>
+<p>connect —— 使用qemu://host 语法连接本地或远程KVM主机。  </p>
+<p>nodeinfo —— 返回主机的基地信息，如CPU和内存等。  </p>
+<p>autostart —— 将KVM域配置为在主机系统启动时启动。  </p>
+<p>console —— 连接到虚拟客户机的虚拟串行控制台。  </p>
+<p>create —— 从XML 配置文件创建域，并将它启动。  </p>
+<p>define —— 从XML 配置谁的创建域，但不启动它。  </p>
+<p>undefine —— 取消定义域。如果域为不活动，则域配置将被删除。  </p>
+<p>reboot —— 重新启动域，就如从客户机内部运行reboot 命令一样  </p>
+<p>shutdown —— 正常地关闭域，就如从虚拟客户机内部运行shutdown 一样。  </p>
+<p>screenshot —— 为当前域控制台抓取屏幕截图，并存储在文件中。  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">配置说明</th>
+<th style="text-align:left">红帽产品</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">提供KVM支持的单系统硬件</td>
+<td style="text-align:left">红帽企业Linux</td>
+</tr>
+<tr>
+<td style="text-align:left">提供虚拟化冗余的多系统硬件</td>
+<td style="text-align:left">红帽企业虚拟化</td>
+</tr>
+<tr>
+<td style="text-align:left">提供私有云的多系统硬件</td>
+<td style="text-align:left">RHEL OpenStack平台</td>
+</tr>
+<tr>
+<td style="text-align:left">提供公共云的云提供商</td>
+<td style="text-align:left">公共云中的OpenStack</td>
+</tr>
+<tr>
+<td style="text-align:left">用于独立KVM主机的管理实用程序</td>
+<td style="text-align:left">virt-manager</td>
+</tr>
+<tr>
+<td style="text-align:left">用于多主机虚拟化平台的管理实用程序</td>
+<td style="text-align:left">RHEV-M</td>
+</tr>
+<tr>
+<td style="text-align:left">用于所有虚拟化和云平台组合的管理实用程序</td>
+<td style="text-align:left">CloudForms</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/18/chapter-15-using-virtualized-system/" data-id="cjqikv01i0009zjkj3ibxo0b0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/19/chapter-7-monitoring-and-managing-linux-processes/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Chapter 7. Monitoring and Managing Linux Processes
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/17/chapter-14-accessing-linux-file-system/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Chapter 14. Accessing Linux File System</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL124/">RHEL124</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL134/">RHEL134</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/pxe/">pxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/">samba</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/pxe/" style="font-size: 10px;">pxe</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 change<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

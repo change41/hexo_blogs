@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>RH134 第八章 连接到网络定义的用户和组 | rhel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用身份管理服务用户信息和身份验证服务 集中式身份管理系统至少需要提供两项服务： 1、账户信息：包括用户名、主目录位置、UID 和 GID 、组成员身份等信息。常用的解决方案包括 LDAP （轻量级目录访问协议，用于 Active Directory 和 IPA 服务器等多个产品中）以及网络信息服务（NIS）。 2、身份验证信息：系统验证用户身份的一种方法。这可以通过两种方式完成：向客户端系统提供">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RH134 第八章 连接到网络定义的用户和组">
+<meta property="og:url" content="http://yoursite.com/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/index.html">
+<meta property="og:site_name" content="rhel">
+<meta property="og:description" content="使用身份管理服务用户信息和身份验证服务 集中式身份管理系统至少需要提供两项服务： 1、账户信息：包括用户名、主目录位置、UID 和 GID 、组成员身份等信息。常用的解决方案包括 LDAP （轻量级目录访问协议，用于 Active Directory 和 IPA 服务器等多个产品中）以及网络信息服务（NIS）。 2、身份验证信息：系统验证用户身份的一种方法。这可以通过两种方式完成：向客户端系统提供">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/1530842356574303.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/1530861460111883.png">
+<meta property="og:updated_time" content="2019-01-06T17:36:18.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RH134 第八章 连接到网络定义的用户和组">
+<meta name="twitter:description" content="使用身份管理服务用户信息和身份验证服务 集中式身份管理系统至少需要提供两项服务： 1、账户信息：包括用户名、主目录位置、UID 和 GID 、组成员身份等信息。常用的解决方案包括 LDAP （轻量级目录访问协议，用于 Active Directory 和 IPA 服务器等多个产品中）以及网络信息服务（NIS）。 2、身份验证信息：系统验证用户身份的一种方法。这可以通过两种方式完成：向客户端系统提供">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/1530842356574303.png">
+  
+    <link rel="alternate" href="/atom.xml" title="rhel" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rhel</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">growing study</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/" class="article-date">
+  <time datetime="2018-07-06T10:00:19.000Z" itemprop="datePublished">2018-07-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RH134 第八章 连接到网络定义的用户和组
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="使用身份管理服务"><a href="#使用身份管理服务" class="headerlink" title="使用身份管理服务"></a>使用身份管理服务</h3><p>用户信息和身份验证服务</p>
+<p>集中式身份管理系统至少需要提供两项服务：</p>
+<p>1、账户信息：包括用户名、主目录位置、UID 和 GID 、组成员身份等信息。常用的解决方案包括 LDAP （轻量级目录访问协议，用于 Active Directory 和 IPA 服务器等多个产品中）以及网络信息服务（NIS）。</p>
+<p>2、身份验证信息：系统验证用户身份的一种方法。这可以通过两种方式完成：向客户端系统提供加密密码哈希，或向服务器发送（加密）密码并接收响应。 LDAP 服务器不仅提供账号信息，也提供身份验证信息。 Kerberos 仅提供 sso 身份验证服务，通常与 LDAP 用户信息一起使用。 Kerberos 可用于 IPA 服务器和 Active Directory。</p>
+<p>在 RHEL7 系统上，本地用户信息由 /etc/passwd 提供，而身份验证信息（采用哈希密码的形式）由 /etc/shadow 提供。</p>
+<p>将系统连接到集中式 LDAP 服务器和 Kerberos 服务器</p>
+<h6 id="Authconfig"><a href="#Authconfig" class="headerlink" title="Authconfig"></a>Authconfig</h6><p>将 RHEL 7 系统配置为使用集中式身份管理服务器需要编辑各种文件，以及配置某些守护进程。为连接到中央 LDAP 服务器和 Kerberos 服务器，至少需要更新以下文件：</p>
+<p>/etc/ldap.conf：关于中央 LDAP 服务器及其设置的信息</p>
+<p>/etc/krb5.conf：关于中央 Kerberos 基础架构的信息</p>
+<p>/etc/sssd/sssd.conf：用于配置系统安全服务守护进程（sssd），即负责检索和缓存用户信息和身份验证信息的守护进程</p>
+<p>/etc/nsswitch.conf：为系统指明应使用哪些用户信息和身份验证服务</p>
+<p>/etc/pam.d/*：配置应如何处理各种服务的身份验证</p>
+<p>/etc/openldap/cacerts：用于存储根证书颁发机构（CA），这些证书颁发机构可以验证用来识别 LDAP 服务器的 SSL 证书。</p>
+<p>sssd 守护进程需要先启用并启动，然后才能供系统使用  </p>
+<p>配置如此多的文件和服务很容易出错 ， RHEL 7 随附了一套工具，可以自动完成这些配置：authconfig. authconfig 包含三个全部可以执行相同操作的相关工具：</p>
+<p>authconfig：命令行工具。此工具可用于在多个系统间自动进程配置。与 authconfig 配置使用的命令往往都较长，其中会传递多个选项。此工具使用 authconfig 软件包安装。</p>
+<p>authconfig-tui: authconfig 的交互式版本。使用菜单驱动的文本界面。可通过 ssh 使用。此工具使用 authconfig 软件包安装</p>
+<p>authconfig-gtk：此版本将启动图形界面，它也可以作为 system-config-authentication 启动。此工具使用 authconfig-gtk 软件安装。</p>
+<h6 id="必需的LDAP-参数"><a href="#必需的LDAP-参数" class="headerlink" title="必需的LDAP 参数"></a>必需的LDAP 参数</h6><p>要连接到中央LDAP服务以获取用户信息，authconfig 需要一些设置：</p>
+<p>LDAP 服务器的主机名称</p>
+<ul>
+<li><p>系统应在其中查找用户的LDAP树部分的base DN(区分名称)。这通常类似于 dc=example,dc=com 或 ou=People,o=PonyCorp. 此信息将由 LDAP 服务器管理员提供。</p>
+</li>
+<li><p>如果使用SSL/TLS 为与 LDAP 服务器的通信加密，那么 LDAP 服务器将提供可验证证书的根CA证书。</p>
+</li>
+</ul>
+<p>重要信息：系统还需要安装一些额外的软件包来提供LDAP 客户端功能。安装 sssd 将提供所有必需的依赖关系。</p>
+<h6 id="必需的-Kerberos-参数"><a href="#必需的-Kerberos-参数" class="headerlink" title="必需的 Kerberos 参数"></a>必需的 Kerberos 参数</h6><p>要将系统配置为使用集中工 Kerberos 系统进程用户身份验证，authconfig 需要以下设置：</p>
+<ul>
+<li><p>要使用 Kerberos 域的名称， Kerberos 域是全部使用一组共同的 Kerberos 服务器和用户进行身份验证的计算机组成的域。</p>
+</li>
+<li><p>一个或多个关键分发中心（KDC）。这是Kerberos 服务器的主机名称。</p>
+</li>
+<li><p>一个或多个管理服务器主机名称。这是客户端在希望更改密码或执行其他修改时将联系的计算机。它通常与主KDC 相同，但也可以是不同的计算机。</p>
+</li>
+</ul>
+<p>此外，管理员可以指定是否应使用 DNS 来查找要为特定主机名称使用的域，以及自动查找 KDC 服务器和管理服务器。可以安装一个额外的软件包 krb5-workstation ,以便帮助对 Kerberos 问题进行调试，以及从命令行处理 Kerberos 票据。</p>
+<h6 id="使用authconfig-gtk"><a href="#使用authconfig-gtk" class="headerlink" title="使用authconfig-gtk"></a>使用authconfig-gtk</h6><p>要使用authconfig-gtk 配置系统以采用 LDAP + Kerberos 请执行以下步骤：</p>
+<p>1、安装必需的软件包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install authconfig-gtk sssd krb5-workstation pam_krb5(必须)</span><br></pre></td></tr></table></figure></p>
+<p>2、启动authconfig-gtk   </p>
+<p>3、填写相关信息，如图</p>
+<p><img src="/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/1530842356574303.png" alt="image.png"></p>
+<p>4、如果支持 TLS ，请选中使用 TLS 加密连接，然后下载 CA 证书  </p>
+<p>5、从身份验证方法下载菜单选择 Kerberos 密码，然后填写域，KDC 和管理服务器字段。如果选中使用 DNS 查找域的 KDC 选项，则最后两个字段不可用。</p>
+<p>6、如果中央目录不可用，用户可以通过选项高级选项上的在首次登录时创建的主目录框，在首次登录时创建目录</p>
+<p>7、单击应用按钮以保存并激活更改。这将写入所有相关配置文件，并（重新）启动 sssd 服务。</p>
+<h6 id="测试配置"><a href="#测试配置" class="headerlink" title="测试配置"></a>测试配置</h6><p>要测试 LDAP + Kerberos 配置，管理员只需要尝试使用某个网络用户的凭据登录系统（通过ssh ），此外，getent 命令可用于检索有关某个网络用户的信息，格式为 getent passwd <username>  </username></p>
+<p>TIPS ： 在默认配置中，当没有为 getent  命令指定用户名时， sssd 不会列举网络用户，这是为保持图形登录 屏幕的整洁以及节省宝贵的网络资源和时间。</p>
+<h6 id="将系统连接到-IPA-服务器"><a href="#将系统连接到-IPA-服务器" class="headerlink" title="将系统连接到 IPA 服务器"></a>将系统连接到 IPA 服务器</h6><p>红帽提供了一种配置 LDAP 和 Kerberos 的集成解决方案：IPA (身份、策略和审核)服务器。 IPA 服务器提供 LDAP 和 Kerberos ,还有一套基于命令行和基于Web 的管理工具。除用户和身份验证信息以外， IPA 服务器还可以将 sudo 规则、ssh 公钥、SSH 主机密钥、TLS 证书、自动挂载器映射以及更多功能集中化。</p>
+<p>使用 ipa-client </p>
+<p>可以通过 authconfig 这套工具将 RHEL7 系统配置为使用 IPA 服务器，但还有一种专用的工具：ipa-client-install  。此命令可从ipa-client 包安装，该软件包将引入所有依赖关系（如 sssd）</p>
+<p>使用 ipa-client-install 的优势之一是，它可以从DNS 检索到几乎所有的必要信息（当由IPA服务器配置或由管理员手动配置时），并能够在 IPA服务器上创建主机条目和更多信息。这就使 IPA 服务器管理员可以为该主机设置访问策略、创建服务主体（例如，对于 NFSv4 导出）等等</p>
+<p>当不带任何参数运行 ipa-client-install 时，它将首次尝试从 DNS 检索有关为其DNS 域配置的 IPA 服务器信息，如果失败，它将提示管理员输入必要信息，例如IPA 服务器的域名和要使用的域。需要提供的其他信息是允许在 IPA 服务器上创建新计算机条目的账户的用户名和密码。除非已为此目的创建了另一个账户，否则默认 IPA 服务器管理员账户（admin） 可以用于此目的。</p>
+<p>DNS 驱动配置参考：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipa-client-install --domain=server0.example.com --no-ntp --mkhomedir</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/1530861460111883.png" alt="image.png"></p>
+<p>可以将所有必需信息作为命令行参数指定，从而使无人值守设置作为系统初始配置的一部分完成：例如通过kickstart 指定这些信息。  </p>
+<p>使系统加入 Active Directory   </p>
+<p>RHEL 7 提供多种方法可使系统加入 Active Directory 。管理员可以选择安装 samba-winbind 软件包，然后通过authconfig 系统工具配置winbind;，也可以安装 sssd 和 realmd 软件包，然后使用 sssd 和 realm 命令。</p>
+<p>注意：rcalm 命令也可以用于加入 Kerberos 域或 IPA 服务器域，但最终配置略有不同。例如，用户的用户名将加上@domain .ipa-client-install 是加入 IPA 域的首选方法。</p>
+<p>例：假定 Active Directory 域名为 domain.example.com<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、yum -y install realmd        <span class="comment">#安装必要的软件包 realmd </span></span><br><span class="line">2、sudo realm discover domain.example.com        <span class="comment">#发现domain域的设置</span></span><br><span class="line">3、sudo realm join domain.example.com             <span class="comment">#加入域并配置 sssd、pam、 /etc/nsswitch.conf .此命令尝试使用 Administrator 账户使本地系统加入 Active directory ，系统提示时输入此账户密码。要使用其它账户，请使用 --user 参数。</span></span><br><span class="line">4、<span class="comment">#Active Directory 账户现在本地可用，但使用 Active Directory 登录仍处理禁用状态。要启用登录，请使用以下命令：</span></span><br><span class="line">sudo realm permit --realm domain.example.com --all</span><br><span class="line"><span class="comment">#要仅允许特定用户登录，请将 --all 替换为这些用户的列表。例如：</span></span><br><span class="line">sudo realm permit --realm domain.example.com DOMAIN\\\Itchy DOMAIN\\\Scratchy.</span><br></pre></td></tr></table></figure></p>
+<h6 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h6><p>默认情况下，域用户必须使用其完全限定名称登录；例如</p>
+<p><a href="mailto:ipauser@ipa.example.com" target="_blank" rel="noopener">ipauser@ipa.example.com</a>(IPA 用户) 或 DOMAIN\Picard (Active Directory)。要禁用此功能，请将 /etc/sssd/sssd.conf 中相应域块中的 use_fully_qualified_names 设置更改为False ，或将其完全删除，然后重新启动 sssd 服务。</p>
+<p>authconfig{ , -{ ,-gtk , -tui}}  可用于将系统配置为使用集中式身份管理服务  </p>
+<p>sssd 配置为后台检索、验证缓存身份验证和用户信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/" data-id="cjqikv04k001tzjkj3nyp9kmc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RH134 第九章 向linux 系统添加磁盘、分区和文件系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">RH134 第七章 管理 SELINUX 安全性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL124/">RHEL124</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL134/">RHEL134</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/pxe/">pxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/">samba</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/pxe/" style="font-size: 10px;">pxe</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 change<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>RH134 第三章 使用VIM创建和编辑文本文件 | rhel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="当非特权用户在RHEL7 计算机上使用vi时，执行的命令将是vim。这是在shell 启动时通过/etc/profile.d/vim.sh 中设置的别名完成的。   对于 UID 小于或等于200的用户，没有设置这一别名。这些用户将执行vi，也就是vi兼容模式中的vim。这意思意味了典型vi中没有的功能将被禁用。在需要较新的功能时，建议始终执行vim 命令。而不要依赖不一定可用的别名。用户通常需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RH134 第三章 使用VIM创建和编辑文本文件">
+<meta property="og:url" content="http://yoursite.com/2018/05/08/rh134-e7-ac-ac-e4-b8-89-e7-ab-a0-e4-bd-bf-e7-94-a8vim-e5-88-9b-e5-bb-ba-e5-92-8c-e7-bc-96-e8-be-91-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/index.html">
+<meta property="og:site_name" content="rhel">
+<meta property="og:description" content="当非特权用户在RHEL7 计算机上使用vi时，执行的命令将是vim。这是在shell 启动时通过/etc/profile.d/vim.sh 中设置的别名完成的。   对于 UID 小于或等于200的用户，没有设置这一别名。这些用户将执行vi，也就是vi兼容模式中的vim。这意思意味了典型vi中没有的功能将被禁用。在需要较新的功能时，建议始终执行vim 命令。而不要依赖不一定可用的别名。用户通常需要">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-06T16:59:55.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RH134 第三章 使用VIM创建和编辑文本文件">
+<meta name="twitter:description" content="当非特权用户在RHEL7 计算机上使用vi时，执行的命令将是vim。这是在shell 启动时通过/etc/profile.d/vim.sh 中设置的别名完成的。   对于 UID 小于或等于200的用户，没有设置这一别名。这些用户将执行vi，也就是vi兼容模式中的vim。这意思意味了典型vi中没有的功能将被禁用。在需要较新的功能时，建议始终执行vim 命令。而不要依赖不一定可用的别名。用户通常需要">
+  
+    <link rel="alternate" href="/atom.xml" title="rhel" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rhel</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">growing study</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-rh134-e7-ac-ac-e4-b8-89-e7-ab-a0-e4-bd-bf-e7-94-a8vim-e5-88-9b-e5-bb-ba-e5-92-8c-e7-bc-96-e8-be-91-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/08/rh134-e7-ac-ac-e4-b8-89-e7-ab-a0-e4-bd-bf-e7-94-a8vim-e5-88-9b-e5-bb-ba-e5-92-8c-e7-bc-96-e8-be-91-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/" class="article-date">
+  <time datetime="2018-05-08T03:07:04.000Z" itemprop="datePublished">2018-05-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RH134 第三章 使用VIM创建和编辑文本文件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当非特权用户在RHEL7 计算机上使用vi时，执行的命令将是vim。这是在shell 启动时通过/etc/profile.d/vim.sh 中设置的别名完成的。  </p>
+<p>对于 UID 小于或等于200的用户，没有设置这一别名。这些用户将执行vi，也就是vi兼容模式中的vim。这意思意味了典型vi中没有的功能将被禁用。在需要较新的功能时，建议始终执行vim 命令。而不要依赖不一定可用的别名。用户通常需要以root身份操作时尤其需要这么做。</p>
+<p><strong>三种不同版本的vim   
+</strong></p>
+<p>vim-minimal:仅提供vi功能和相关命令，此版本包括在RHEL7最小化安装里。</p>
+<p>vim-enhanced：此版本提供vim命令，提供表达式，高亮，文件类型插件，和拼写检查</p>
+<p>vim-X11：此版本提供gvim 图形化的vim.同时支持鼠标</p>
+<p><strong>vim 的三个主要模式：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">功能</th>
+<th>模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">命令模式</td>
+<td>此模式用于文件导航，剪切和粘贴以及简单命令。 撤销，重做和其他操作也可以从此模式执行</td>
+</tr>
+<tr>
+<td style="text-align:left">插入模式</td>
+<td>此模式用于正常文本编。替换模式是插入模式的一种变体，替换文本而不是插入文本。</td>
+</tr>
+<tr>
+<td style="text-align:left">执行模式</td>
+<td>此模式用于保存，退出和打开文件，以及搜索和替换等更复杂的操作。从这种模式中，可以将程序的输出插入到当前文件中.配置 vim等等。 任何操作都有可能可能使用ex这个模式完成。</td>
+</tr>
+</tbody>
+</table>
+<p>打开文件后，vim将在命令模式中启动。将在屏幕左下角看到有关已打开文件信息（文件名、行数、字符数），并将在右下角看到当前的光标位置（行、字符）以及正在显示文件的哪个部分（ALL表示全部，Top表示文件前几行，Bot 表示文件底部），或者显示百分比来表示当前所处文件位置。最下方线条在vim术语中称为标尺。  </p>
+<p>要切换到插入模式，系统提供了可用的命令，且每个命令在键盘上均分配有一个不同的键</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">键</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">i</td>
+<td>切换到插入模式，并在当前光标位置之前插入</td>
+</tr>
+<tr>
+<td style="text-align:left">a</td>
+<td>切换到插入模式，并在当前光标位置之后插入</td>
+</tr>
+<tr>
+<td style="text-align:left">I</td>
+<td>将光标移至当前行的开头位置，并切换到插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">A</td>
+<td>将光标移到当前行的结尾位置，并切换到插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">R</td>
+<td>从光标下的字符开始，切换到替换模式。处理替换模式时，不会插入文件，输入的每个字符均将替换当前文档中的字符。</td>
+</tr>
+<tr>
+<td style="text-align:left">o</td>
+<td>在当前行的下方新打开一个行，并切换到插入模式。</td>
+</tr>
+<tr>
+<td style="text-align:left">O</td>
+<td>在当前行的上方新打开一个行，并切换到插入模式。</td>
+</tr>
+</tbody>
+</table>
+<p>每次处于插入或替换模式时，标尺将会显示–INSERT– 或 –REPLACE–。按Esc 即可返回命令模式。</p>
+<p>RHEL 随附的vi和vim 版本已经配置为在命令和插入模式中识别和使用常规光标键以及如PgUp和End等键，这并不是vi所有安装版本上的默认行为。事实上，之前版本的vi根本不识别光标键，而是只允许在命令模式中使用诸如hjkl的键来操作。  </p>
+<p><strong>vim光标操作</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">键</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">h</td>
+<td>向左移动一个位置</td>
+</tr>
+<tr>
+<td style="text-align:left">l</td>
+<td>向右移动一个位置</td>
+</tr>
+<tr>
+<td style="text-align:left">j</td>
+<td>向下移动一下位置</td>
+</tr>
+<tr>
+<td style="text-align:left">k</td>
+<td>向上移动一个位置</td>
+</tr>
+<tr>
+<td style="text-align:left">^</td>
+<td>移至当前行首</td>
+</tr>
+<tr>
+<td style="text-align:left">$</td>
+<td>移至当前行尾</td>
+</tr>
+<tr>
+<td style="text-align:left">gg</td>
+<td>移至文件第一行</td>
+</tr>
+<tr>
+<td style="text-align:left">G</td>
+<td>移至文件最后一行</td>
+</tr>
+</tbody>
+</table>
+<p>保存文件通过ex模式实现，在命令模式下按  :（冒号）进入 ex模式</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">键</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">:wq</td>
+<td>保存并退出当前文件</td>
+</tr>
+<tr>
+<td style="text-align:left">: x</td>
+<td>保存当前文件（如果存在未保存的更改），然后退出</td>
+</tr>
+<tr>
+<td style="text-align:left">:w</td>
+<td>保存当前文件并保留在编辑器中</td>
+</tr>
+<tr>
+<td style="text-align:left">:w <filename></filename></td>
+<td>以其他文件名保存当前文件</td>
+</tr>
+<tr>
+<td style="text-align:left">:q</td>
+<td>退出当前文件（仅在没有未保存更改的的情况下）</td>
+</tr>
+<tr>
+<td style="text-align:left">:q!</td>
+<td>退出当前文件，忽略任何未保存更改，！表示强制</td>
+</tr>
+<tr>
+<td style="text-align:left">:3</td>
+<td>跳到第3行</td>
+</tr>
+</tbody>
+</table>
+<p>高级移动命令，仅在命令模式中可用，所有移到命令可以通过键入数字来加上前缀，如5w,将光标移动5个单词，或者12j将光标向下移到12行。实际上，每个命令（包括切换到插入模式）都可通过实际命令前键入重复次数来重复执行一定的次数，在vim术语中，这称为计数。  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">键</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">w</td>
+<td>将光标移到下一单词的开头（w包含标点符号）</td>
+</tr>
+<tr>
+<td style="text-align:left">b</td>
+<td>将光标移到上一单词的开头（b包含标点符号）</td>
+</tr>
+<tr>
+<td style="text-align:left">(</td>
+<td>将光标移到当前或上一句子的开头</td>
+</tr>
+<tr>
+<td style="text-align:left">)</td>
+<td>将光标移到下一句子的开头</td>
+</tr>
+<tr>
+<td style="text-align:left">{</td>
+<td>将光标移到当前/上一段落的开头</td>
+</tr>
+<tr>
+<td style="text-align:left">}</td>
+<td>将光标移到下一段落的开头</td>
+</tr>
+</tbody>
+</table>
+<p>替换文本，vim允许用户通过”change”命令替换大量（或少量）文件。”change”命令的使用方式为：按 c 键，后面加上光标移动；例如cw可以将当前光标位置更改到当前单词的末尾。要替换的文本被删除（放置在未命名寄存器中），vim 也会切换到插入模式。  </p>
+<p>按c 两下（cc）将开始以行范围的方式替换，即替换一整行（或者带上数字时替换多行）同样的操作也适用于删除（d）</p>
+<p>大多数移动命令可以带上i和a前缀，以选择inner 或a 版本的移动。例如ciw将替换整个当前单词，而不仅仅是从当前光标位置起，而caw则执行相同的功能，但包括周围任何空白区。</p>
+<p>要替换到行末为止，可以使用cS，但C可执行相同的功能。（同样适用于删除命令（D））</p>
+<p>要权替换光标处的字符，可按r再键入新的字符</p>
+<p>要改变光标处字符的大小写，或按 ~</p>
+<p>删除文本的操作方式与替换文本相同。用于删除文本的命令是d,而且对更改文本有效的所有相同移到也适用于删除，包括D可以删除光标位置到行末的内容。</p>
+<p><strong>复制和粘贴</strong>  </p>
+<p>vim 用于描述复制和粘贴操作的术语与大多数人目前熟悉的稍有不同，复制操作也称为拖拉，而粘贴操作则叫做放置，这体现在分配给这些操作的键盘命令上：拖拉是y加上移到，而放置操作则通过p和P执行。</p>
+<p>拖拉操作遵循与替换和删除操作相同的通用方案：如用户可以选择键入要重复某一操作的次数，后面加上y，再加上一种移到。例如5yaw，将复制当前的单词，以及后面4个单词（共5个）.按yy将拖拉一整行，等等</p>
+<p>放置（粘贴）通过p和P命令执行；小写p将内容放置到当前光标位置的后面（如果粘贴是的是行范围数据，则放在当前行下面），而大写P则放置到当前光标位置的前面或者当前行上方。与所有其它命令一样，放置命令可以加上寄存器粘贴次数作为前缀。</p>
+<p><strong>多个寄存器</strong></p>
+<p>vim 不是仅提供一个供复制和粘贴 使用的剪贴板，而是提供26个命名寄存器，以及欠点特殊用途的寄存器。拥有多个寄存器可以让用户更加高效地很乖剪切和粘贴命令，而不必担心丢失数据，或者过多的移动光标。如果未指定要使用的寄存器，则将使用“未命名”寄存器。常规寄存器称为a到z,通过在命令的计数和实际命令之间放入”registername来选择，例如：要复制当前行和后面2行到t寄存器中，用户可以使用3”tyy</p>
+<p>要放置命名寄存器中的内容，只需要在放置命令之前加上”registername，例如：”sp将在光标位置后面放置s寄存器中的内容。</p>
+<p>每次使用命名寄存器时，未命名寄存器也会更新。</p>
+<p>删除和更改操作也可加上寄存器选择作为前缀。未指定寄存器时，将仅使用未命名寄存器。当使用寄存器的大写版本时，被剪切或拖拉的文本将附加到该寄存器，而不是覆盖它。</p>
+<p><strong>特殊寄存器</strong></p>
+<p>有10个数字编号的寄存器，分别为”0 - “9寄存器，”0使用拥有最近拖拉文本的副本，而寄存器”1则具有最近删除的文本的副本。当新的文本补更改或删除时，”1的内容将移到”2中，”2的内容移动”3中，以此类推。与命名寄存器不同，数字编号寄存器的内容不会在会话之间保存。</p>
+<p><strong>可视模式</strong></p>
+<p>在进入可视模式后（通过标尺–VISUAL–表示），任何光标移动将开始选择文本。可视模式中发出的任何更改、删除或拖拉命令不需要光标移动部分，而是对选定的文件起作用。</p>
+<p>可视模式有三个类别：基于字符（通过 v 启动）、基于行（通过 V 启动） 、基于块（通过 Ctrl+v 启动）。使用gvim时，也可通过鼠标选择文本。</p>
+<p>可视模式中发出的任何ex 命令也默认对选定的文本起作用。</p>
+<p><strong>搜索</strong></p>
+<p>在当前文档中搜索可能通过两种方式：按 / 键从光标处向前搜索，或者按 ？从当前光标位置向后搜索。进入搜索模式后，可以键入要搜索的正则表达式，然后按Enter 键跳到第一个匹配项。</p>
+<p>要搜索下一个或者上一个匹配项可分别按 n 和 N 键。</p>
+<p>奖励快捷方式：* 将立即向前搜索光标处的单词。</p>
+<p><strong>搜索和替换</strong></p>
+<p>vim 中的搜索和替换通过 ex 命令实施，其使用的语法与用户通过sed 搜索和替换时所用的相同，包括使用正则表达式进入搜索的功能：</p>
+<p>ranges/pattern/string/flags</p>
+<p>range 可以是行号（43）、行范围（1，7 表示1 - 7行）、搜索条件（/README\.txt）、%(当前文档中的所有行；搜索和替换通常仅会对当前行操作)，或者’&lt;,’&gt;(当前的可视选择)。</p>
+<p>两个最常见的flaga 是 g （替换一行中多个位置上的pattern） 和 i  （使当前的搜索区分大小写）</p>
+<p>:%s/\&lt;cat\&gt;/god/gi     #搜索文档中每个位置的cat ，并替换成dog ，不区分大小写，但仅对完整的词语，而不是诸如：”catalog” 中的一部分。</p>
+<p><strong>撤消和恢复</strong></p>
+<p>为了允许人为的失误存在，vim配备了撤消/恢复机制。只要在命令模式中按u 即可撤消最近一个操作。如果撤消了过多操作，按 Ctrl + r 即可恢复最近一次撤消。</p>
+<p>奖励诀窍：从命令模式中按 . (句号 英文)将对当前恢复最近一个编辑操作。这可以用于对多个行轻松执行同一编辑操作。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/08/rh134-e7-ac-ac-e4-b8-89-e7-ab-a0-e4-bd-bf-e7-94-a8vim-e5-88-9b-e5-bb-ba-e5-92-8c-e7-bc-96-e8-be-91-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/" data-id="cjqikv04h001pzjkjsuvof1td" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/14/rh134-e7-ac-ac-e5-9b-9b-e7-ab-a0-e8-ae-a1-e5-88-92-e5-b0-86-e6-9d-a5-e7-9a-84linux-e4-bb-bb-e5-8a-a1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RH134 第四章 计划将来的linux 任务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/06/e7-ac-ac-e4-ba-8c-e7-ab-a0-e9-80-9a-e8-bf-87grep-e4-bd-bf-e7-94-a8-e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">RH134 第二章 通过GREP使用正则表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL124/">RHEL124</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL134/">RHEL134</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/pxe/">pxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/">samba</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/pxe/" style="font-size: 10px;">pxe</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 change<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>rhel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="rhel">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="rhel">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rhel">
+  
+    <link rel="alternate" href="/atom.xml" title="rhel" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rhel</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">growing study</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/" class="article-date">
+  <time datetime="2018-10-18T09:17:36.000Z" itemprop="datePublished">2018-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、系统应借助以下设置业验证使用 LDAP 和 Kerberos  的用户身份：  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">LDAP 服务器</td>
+<td style="text-align:left">classroom.example.com</td>
+</tr>
+<tr>
+<td style="text-align:left">搜索基础</td>
+<td style="text-align:left">dc=example,dc=com</td>
+</tr>
+<tr>
+<td style="text-align:left">使用 TLS</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:left">TLS CA 证</td>
+<td style="text-align:left"><a href="http://classroom.example.com/pub/example-ca.crt" target="_blank" rel="noopener">http://classroom.example.com/pub/example-ca.crt</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Kerberos 域</td>
+<td style="text-align:left">EXAMPLE.COM</td>
+</tr>
+<tr>
+<td style="text-align:left">Kerberos KDC</td>
+<td style="text-align:left">classroom.example.com</td>
+</tr>
+<tr>
+<td style="text-align:left">Kerberos 管理服务器</td>
+<td style="text-align:left">classroom.example.com</td>
+</tr>
+</tbody>
+</table>
+<p>为了进行测试，可用用户ldapuserX ,密码为kerberos </p>
+<p>1、安装 authconfig-gtk , sssd 软件包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]$ sudo yum install -y authconfig-gtk sssd</span><br></pre></td></tr></table></figure></p>
+<p>2、运行authconfig-gtk ,并输入提供的信息，请不要忘记取消选中使用 DNS 查找域的 KDC 选项<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]$ sudo authconfig-gtk</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/1539846626591619.png" alt="image.png"></p>
+<p>二、LDAP 用户的主目录应当在访问时自动挂载。这些主目录是由NFS 共享 classroom.example.com:/home/guests 提供的</p>
+<p>1、安装autofs 软件包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]$ sudo yum install autofs -y</span><br></pre></td></tr></table></figure></p>
+<p>2、创建包含以下内容的新文件 /etc/auto.master.d/guests.autofs<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/guests /etc/auto.guests</span><br></pre></td></tr></table></figure></p>
+<p>3、创建包含以下内容的新文件 /etc/auto.guests<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* -rw,sync classroom.example.com:/home/guests/&amp;</span><br></pre></td></tr></table></figure></p>
+<p>4、启用并启动 autofs.service 服务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> systemctl <span class="built_in">enable</span> autofs.service</span><br><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> systemctl start autofs.service</span><br></pre></td></tr></table></figure></p>
+<p>三、server0 会导出 CIFS 共享，westeros 。该共享应当在启动时自动挂载到挂载点 /mnt/westeros 。要挂载该共享，您需要使用用户名 tyrion 密码 slapjoffreyslap 。该密码不应存储在非特权用户只可以读取的任何位置。</p>
+<p>1、安装 cifs-utils 软件包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]$ sudo yum install cifs-utils -y</span><br></pre></td></tr></table></figure></p>
+<p>2、创建挂载点<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mkdir -p /mnt/westeros</span><br></pre></td></tr></table></figure></p>
+<p>3、创建包含以下内容的凭据文件，/root/tyrion.creds，然后将该文件的权限设置为：0600<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">username=tyrion</span><br><span class="line">password=slapjoffryslap</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> chmod 0600 /root/tyrion.creds</span><br></pre></td></tr></table></figure>
+<p>4、将以下行添加到 /etc/fstab：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//server0.example.com/westeros /mnt/westeros cifs creds=/root/tyrion.creds 0 0</span><br></pre></td></tr></table></figure></p>
+<p>5、挂载所有文件系统，然后检查挂载的文件系统。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mount -a</span><br><span class="line">[student@desktop0 Desktop]<span class="variable">$cat</span> /mnt/westeros/README.txt</span><br></pre></td></tr></table></figure></p>
+<p>四、server0 会导出 NFSv4 共享 /essos  。需要使用 Kerberos 身份验证、加密和完整性检查来在启动时将该共享以只读写形式挂载到 /mnt/essos 。</p>
+<p>可以从 <a href="http://classroom.example.com/pub/keytabs/desktop0.keytab" target="_blank" rel="noopener">http://classroom.example.com/pub/keytabs/desktop0.keytab</a> 下载系统的keytab </p>
+<p>1、创建挂载点<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mkdir -p /mnt/essos</span><br></pre></td></tr></table></figure></p>
+<p>2、下载系统的 keytab<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktop0.keytab</span><br></pre></td></tr></table></figure></p>
+<p>3、将以下行添加到 /etc/fstab :<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$server0</span>.example.com:/essos /mnt/essos nfs sec=kerb5p,rw 0 0</span><br></pre></td></tr></table></figure></p>
+<p>4、启动并启用 nfs-secure.service 服务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> systemctl <span class="built_in">enable</span> nfs-secure.service </span><br><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> systemctl start nfs-secure.service</span><br></pre></td></tr></table></figure></p>
+<p>5、挂载所有文件系统<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mount -a</span><br></pre></td></tr></table></figure></p>
+<p>五、在新的2 G 卷组stark 中配置新 512M 逻辑卷 arya 。  </p>
+<p>新逻辑卷应使用 xfs 文件系统进行格式化，并永久挂载到 /mnt/underfoot </p>
+<p>1、在第二块磁盘上创建 2G 的分区</p>
+<p><img src="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/1539847801848346.png" alt="image.png"></p>
+<p>2、将新分区变为物理卷<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> pvcreate /dev/sdb1</span><br></pre></td></tr></table></figure></p>
+<p>3、使用新物理卷构建新卷组<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> vgcreate stark /dev/sdb1</span><br></pre></td></tr></table></figure></p>
+<p>4、在新卷组中创建 512M 的新逻辑卷<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> lvcreate -n arya -L 512M stark</span><br></pre></td></tr></table></figure></p>
+<p>5、使用 xfs 文件系统对新 LV 进行格式化<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]$ sudo mkfs -t xfs /dev/mapper/stark-arya</span><br></pre></td></tr></table></figure></p>
+<p>6、创建挂载点<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mkdir -p /mnt/underfoot</span><br></pre></td></tr></table></figure></p>
+<p>7、将以下行添加到 /etc/fstab<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/mapper/stark-arya /mnt/underfoot xfs defaults 1 2</span><br></pre></td></tr></table></figure></p>
+<p>8、挂载所有文件系统<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mount -a</span><br></pre></td></tr></table></figure></p>
+<p>六、系统应该配备新的 512 M 交换分区，并在启动时自动激活。  </p>
+<p>1、第二块磁盘上创建 512 M 的新分区，然后将该分区类型设置为 82 </p>
+<p><img src="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/1539848579837356.png" alt="image.png"></p>
+<p>2、将新分区格式化成交换分区<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mkswap /dev/sdb2</span><br></pre></td></tr></table></figure></p>
+<p>3、检索UUID 中的交换分区<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> blkid /dev/sdb2</span><br></pre></td></tr></table></figure></p>
+<p>4、向/etc/fstab 添加以下行；确保使用上一步找到的UUID，假设为UUID=dfce28a9-015d-4908-8206-840920260310<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=dfce28a9-015d-4908-8206-840920260310  swap swap defaults 0 0</span><br></pre></td></tr></table></figure></p>
+<p>5、激活所有交换分区<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> swapon -a</span><br></pre></td></tr></table></figure></p>
+<p>七：创建新组 kings ，以及四个属于该组的新用户： stannis，joffery,renly和robb。  </p>
+<p>1、创建 kings 组<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> groupadd kings</span><br></pre></td></tr></table></figure></p>
+<p>2、创建四个用户，并将他们添加到kings 组<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$for</span> NEWUSER <span class="keyword">in</span> stannis joffrey renly robb; <span class="keyword">do</span></span><br><span class="line">&gt;sudo useradd -G kings <span class="variable">$&#123;NEWUSER&#125;</span></span><br><span class="line">&gt;<span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
+<p>八、创建新目录 /ironthrone  该目录由拥有权限 0700 的 root:root 所有。</p>
+<p>配置该目录，以便 kings 组中的用户拥有该目录的读写权限，但用户 joffrey 除外，该用仅被授予读取特权。</p>
+<p>这些限制还应当应用到 /ironthrone 目录下创建的所有新文件和目录。</p>
+<p>1、创建权限正常的目录<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mkdir -m 0700 /ironthone</span><br></pre></td></tr></table></figure></p>
+<p>2、 在 /ironthone 中添加 ACL ，从而向 kings 组中的用户授予读写特权。请不忘记添加执行权限，因为这是一个目录。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> setfacl -m g:kings:rwX /ironthone</span><br></pre></td></tr></table></figure></p>
+<p>3、为用户 joffrey 添加ACL ，使其拥有只读和执行权限<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> setfacl -m u:joffrey:r-x /ironthone</span><br></pre></td></tr></table></figure></p>
+<p>4、也添加前两个 ACL 作为默认 ACL<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> setfacl -m d:g:kings:rwx /ironthone</span><br><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> setfacl -m d:u:joffrey:r-x /ironthone</span><br></pre></td></tr></table></figure></p>
+<p>九、安装 httpd 和 mod_ssl 软件包，然后启用并启动 httpd.service 服务</p>
+<p>1、安装 httpd 和 mod_ssl 软件包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> yum install httpd mod_ssl -y</span><br></pre></td></tr></table></figure></p>
+<p>2、启动并启用 httpd.service 服务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> systemctl <span class="built_in">enable</span> httpd</span><br><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> systemctl start httpd</span><br></pre></td></tr></table></figure></p>
+<p>十、在系统上所有行防火墙的默认区域打开端口12345/tcp </p>
+<p>1、在防火墙默认区域永久配置中打开端口 12345/tcp<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> firewall-cmd --permanent --add-port=12345/tcp</span><br></pre></td></tr></table></figure></p>
+<p>2、重新加载防火墙以激活更改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure></p>
+<p>十一、创建新目录 /docroot 。确保该目录的 SELinux 上下文设置为 Public_content_t ，并且该上下文在重新标记操作后继续生效  </p>
+<p>1、创建/docroot 目录<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> mkdir /docroot</span><br></pre></td></tr></table></figure></p>
+<p>2、为 /docroot 目录及其所有子目录添加新的默认上下文<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> semanage fcontext -a -t public_content_t <span class="string">'/docroot(/.*)?'</span></span><br></pre></td></tr></table></figure></p>
+<p>3、重新标记 /docroot 目录<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> [student@desktop0 Desktop]<span class="variable">$sudo</span> restorecon -RvF /docroot</span><br></pre></td></tr></table></figure></p>
+<p>十二、<a href="http://server0.example.com/logfile" target="_blank" rel="noopener">http://server0.example.com/logfile</a> 包含最近项目的日志。下载该文件，然后将所有以 ERROR 或 FAIL 结尾的行提取到文件 /home/student/errors.txt ，所有行都应按日志文件中显示的顺序排列。  </p>
+<p>1、下载文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$wget</span> http://server0.example.com/logfile</span><br></pre></td></tr></table></figure></p>
+<p>2、将以 ERROR 和 FAIL 结尾的第一行提取到文件 /home/student/errors.txt 中，同时保持行顺序不变<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$grep</span> -e <span class="string">"ERROR$"</span> -e <span class="string">"FAIL$"</span> logfile &gt; /home/student/errors.txt</span><br></pre></td></tr></table></figure></p>
+<p>十三、系统中应该有一个用于存储临时文件 /run/veryveryvolatile 的新目录。每当运行 systemd-tmpfiles –clean 时，任何超过 5秒的文件都应该从该目录中删除。  </p>
+<p>该目录应该拥有权限 1777 并由 root:root 所有。</p>
+<p>1、创建包含以下内容的新文件 /etc/tmpfiles.d/veryveryvolatile.conf:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d /run/veryveryvolatile 1777 root root 5s</span><br></pre></td></tr></table></figure></p>
+<p>2、使用 systemd-tmpfiles 创建目录。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@desktop0 Desktop]<span class="variable">$sudo</span> systemd-tmpfiles --create</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/" data-id="cjqikv04p0021zjkj2z0ug674" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/" class="article-date">
+  <time datetime="2018-10-17T10:20:04.000Z" itemprop="datePublished">2018-10-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="Netfilter-和-firewalld-概念"><a href="#Netfilter-和-firewalld-概念" class="headerlink" title="Netfilter 和 firewalld 概念"></a>Netfilter 和 firewalld 概念</h5><p>Linux 内核包含一个强大的网络过滤子系统 netfilter.netfilter 子系统允许内核模块对遍历系统的每个数据进行检查。这表示在任何传入、传出或转发的网络数据包到达用户喷雾健康的组件之前，都可以通过编程方式检查 、修改、丢弃、或拒绝这些数据包。这是在 RHEL 7 计算机上构建防火墙的主要构建块。</p>
+<h5 id="与-netfilter-交互"><a href="#与-netfilter-交互" class="headerlink" title="与 netfilter 交互"></a>与 netfilter 交互</h5><p>尽管管理员理论上可以编写自己的内核模块与 netfilter 交互，但通常不会这样做。取而代之会使用其他程序来与 netfilter 交互。这些程序中，最常见和最知名的是iptables 。在先前的 RHEL  版本中， iptables 是与内核 netfilter 子系统交互的主要方法。</p>
+<p>iptables 命令是一个低级工具，使用该工具正常管理防火墙可能具有挑战性。此外，它仅能调整 ipv4 防火墙规则。为保证更完成的防火墙覆盖率，需要使用其他实用程序，例如用于 ipv6 的ip6tables 和用于软件桥的ebtalbes 。</p>
+<h5 id="firewalld-简介。"><a href="#firewalld-简介。" class="headerlink" title="firewalld 简介。"></a>firewalld 简介。</h5><p>RHEL 7 中引入了一种与 netfilter 交互的新方法：firewalld , firewalld 是一个可以配置和监控系统防火墙规则的系统守护进程。应用可以通过 DBus 消息系统与 firewalld 通信以请求打开端口，此功能可以禁用或锁定。该守护进程不仅涵盖ipv4、ipv6，还能涵盖 ebtables 设备。 firewalld 守护进程从 firewalld 软件包安装。此软件包属于Base 安装的一部分，但不属于minimal安装的一部分。</p>
+<p>firewalld 将所有网络流量分为多个区域，从而简化防火墙管理。根据数据包源 ip 地址或传入网络接口等条件。流量将转入相应的防火墙规则。每个区域都可以具有自己的要打开和关闭的端口和服务列表。</p>
+<h6 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h6><p>对于笔记本电脑或经常更改网络的其他计算机，可以使用 NetworkManager 自动设备连接防火墙区域。（ZONE=home）可以使用适于特定连接的规则来自定义区域。</p>
+<p>对于传入系统的每个数据包，将首先检查其源地址。如果该原地址关联到特定区域，则将分析该区域的规则。如果该源地址未关联某个区域，则将使用传入网络接口的区域。</p>
+<p>如果出于某种原因，网络接口未与某个区域关联，则将使用默认区域。默认区域本身不是一个单独的区域；它是其他区域中的一个。默认情况下使用 public 区域，但系统管理员可以更改此默认值。</p>
+<p>大多数区域会允许与特定端口和协议（“631/udp”）或预定义服务（”ssh”）的列表匹配的流量通过防火墙。如果流量不与允许的端口/协议或服务匹配，则通常会被拒绝。（trusted区域默认情况下允许所有流量，它是此规则的一个例外）。</p>
+<h6 id="预定义区域"><a href="#预定义区域" class="headerlink" title="预定义区域"></a>预定义区域</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">区域名称</th>
+<th>默认配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">trusted</td>
+<td>允许所有传入流量</td>
+</tr>
+<tr>
+<td style="text-align:left">home</td>
+<td>除非与传出流量相关，或与 ssh、mdsn、ipp-client、samba-client 或 dhcpv6-client 预定义服务匹配，否则拒绝传入流量</td>
+</tr>
+<tr>
+<td style="text-align:left">internal</td>
+<td>除非与传出流量相关，或与 ssh、mdsn、ipp-client、samba-client 或 dhcpv6-client 预定义服务匹配，否则拒绝传入流量（一开始与 home 区域相同）</td>
+</tr>
+<tr>
+<td style="text-align:left">work</td>
+<td>除非与传出流量相关，或与 ssh、ipp-client 或 dhcpv6-client 预定义服务匹配，否则拒绝传入流量</td>
+</tr>
+<tr>
+<td style="text-align:left">public</td>
+<td>除非与传出流量相关，或与 ssh 或 dhcpv6-client 预定义服务匹配，否则拒绝传入流量，新增加网络接口的默认区域</td>
+</tr>
+<tr>
+<td style="text-align:left">external</td>
+<td>除非与传出流量相关，或与 ssh 预定义服务匹配，否则拒绝传入流量，通过此区域转发的 ipv4 传出流量将进行伪装，以使其看起来像是来自传出接口的ipv4地址</td>
+</tr>
+<tr>
+<td style="text-align:left">dmz</td>
+<td>除非与传出流量相关，或与 ssh 预定义服务匹配，否则拒绝传入流量</td>
+</tr>
+<tr>
+<td style="text-align:left">block</td>
+<td>除非与传出流量相关，否则拒绝传入流量</td>
+</tr>
+<tr>
+<td style="text-align:left">drop</td>
+<td>除非与传出流量相关，否则拒绝传入流量（甚至不产生包含 ICMP 错误的响应）</td>
+</tr>
+</tbody>
+</table>
+<p>有关所有可用预定义区域及其预期用途的列表，参阅 firewalld.zones(5)手册页。  </p>
+<h6 id="预定义服务"><a href="#预定义服务" class="headerlink" title="预定义服务"></a>预定义服务</h6><p>firewalld 还随附一些预定义服务，这些服务可用于方便地允许特定网络服务的流量通过防火墙，下表详细说明了防火墙区域默认中使用的预定义的配置。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">服务名称</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ssh</td>
+<td>本地ssh 服务器。到22/tcp的流量</td>
+</tr>
+<tr>
+<td style="text-align:left">dhcpv6-client</td>
+<td>本地 DHCPv6客户端，到 fe80::/64 IPv6 网络中 546/udp 的流量</td>
+</tr>
+<tr>
+<td style="text-align:left">ipp-client</td>
+<td>本地IPP 打印，到 631/udp的流量</td>
+</tr>
+<tr>
+<td style="text-align:left">samba-client</td>
+<td>本地 windows 文件和打印共享客户端，到137/udp,和138/udp的流量</td>
+</tr>
+<tr>
+<td style="text-align:left">mdns</td>
+<td>多播DNS(mDNS)本地链路名称解析。到5353/udp 指向 224.0.0.251 (IPv4)或 ff02::fb(IPv6)多播地址的流量</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<h6 id="tips-1"><a href="#tips-1" class="headerlink" title="tips:"></a>tips:</h6><p>还存在许多其他预定义服务。firewall-cmd –get-services 命令可以列出这些服务。可在 /usr/lib/firewalld/services 目录中找到用于定义 firewalld 软件包中所含预定义服务的配置文件，其格式由 firewalld.zone(5)定义。本章中不会进一步讨论这些文件。</p>
+<h5 id="配置防火墙设置"><a href="#配置防火墙设置" class="headerlink" title="配置防火墙设置"></a>配置防火墙设置</h5><h6 id="三种主要方式与-firewalld-交互。"><a href="#三种主要方式与-firewalld-交互。" class="headerlink" title="三种主要方式与 firewalld 交互。"></a>三种主要方式与 firewalld 交互。</h6><p>1、直接编辑配置文件</p>
+<p>2、使用 firewall-config 图形工具</p>
+<p>3、从命令行使用 firewall-cmd </p>
+<h6 id="使用firewall-cmd-配置防火墙设置"><a href="#使用firewall-cmd-配置防火墙设置" class="headerlink" title="使用firewall-cmd 配置防火墙设置"></a>使用firewall-cmd 配置防火墙设置</h6><p>firewall-cmd 作为主firewalld 软件包的一部分安装。firewall-cmd 可以执行 firewall-config 能够执行的相同操作。</p>
+<p>常用 firewall-cmd 命令及其说明（默认修改运行配置），当指定 –permanent （永久）选项时除外。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">firewall-cmd 命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">–get-default-zone</td>
+<td>查询当前默认区域</td>
+</tr>
+<tr>
+<td style="text-align:left">–set-default-zone=<zone></zone></td>
+<td>设置当前默认区域</td>
+</tr>
+<tr>
+<td style="text-align:left">–get-zones</td>
+<td>列出所有可用区域</td>
+</tr>
+<tr>
+<td style="text-align:left">–get-active-zones</td>
+<td>列出当前正在使用的所有区域（具有关联的端口或者源）及其接口信息</td>
+</tr>
+<tr>
+<td style="text-align:left">–add-source=<cidr>[–zone=<zone>]</zone></cidr></td>
+<td>将来自 IP 地址或网络 /子网掩码 <cidr> 的所有流量路由到指定区域，如果未提供 –zone= 选项，则将使用默认区域。</cidr></td>
+</tr>
+<tr>
+<td style="text-align:left">–remove-source=<cidr></cidr></td>
+<td>从指定区域中删除用于路由来自 ip 地址或 网络/子掩码<cidr>的所有流量的规则 。如果未提供 –zone= 选项，则将使用默认区域。</cidr></td>
+</tr>
+<tr>
+<td style="text-align:left">–add-interface=<interface></interface></td>
+<td>将来自<interface>网卡的所有流量路由到指定区域。如果未提供 –zone=选项，则将使用默认区域。</interface></td>
+</tr>
+<tr>
+<td style="text-align:left">–change-interface=<interface></interface></td>
+<td>将接口与 <zone>而非其当前区域关联。如果未提供 –zone 选项，则将使用默认区域</zone></td>
+</tr>
+<tr>
+<td style="text-align:left">–list-all</td>
+<td>列出<zone>的所有已经配置接口、源、服务和端口。如果未提供 –zone 选项，则将使用默认区域</zone></td>
+</tr>
+<tr>
+<td style="text-align:left">–list-all-zoness</td>
+<td>检索所有区域的所有信息。（接口、源、服务、端口）</td>
+</tr>
+<tr>
+<td style="text-align:left">–add-service=<service></service></td>
+<td>允许到<service>的流量。如果未提供–zone 选项。则将使用默认区域</service></td>
+</tr>
+<tr>
+<td style="text-align:left">–add-port=&lt;PORT/PROTOCOL&gt;</td>
+<td>允许到&lt;PORT/PROTOCOL&gt;端口的流量。如果未提供 –zone 则将使用默认区域</td>
+</tr>
+<tr>
+<td style="text-align:left">–remove-service=<service></service></td>
+<td>从区域的允许 列表中删除<service>.如果未提供 –zone 选项则将使用默认区域</service></td>
+</tr>
+<tr>
+<td style="text-align:left">–remove-port=&lt;PORT/PROTOCAL&gt;</td>
+<td>从区域的允许列表中删除&lt;PORT/PROTOCOL&gt;端口。如果未提供 –zone 选项，则将使用默认区域</td>
+</tr>
+<tr>
+<td style="text-align:left">–reload</td>
+<td>丢弃运行时配置并应用永久配置</td>
+</tr>
+</tbody>
+</table>
+<h6 id="firewall-cmd-示例："><a href="#firewall-cmd-示例：" class="headerlink" title="firewall-cmd 示例："></a>firewall-cmd 示例：</h6><p>下例显示默认区域设备为 dmz ,来自192.168.0.0/24 网络的所有流量都被分配给 internal 区域。而 internal 区域上打开了用于mysql 的网络端口<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --<span class="built_in">set</span>-default-zone=dmz</span><br><span class="line">firewall-cmd --<span class="built_in">set</span>-source=192.168.0.0/24 --zone=internal    <span class="comment">#临时生效</span></span><br><span class="line">firewall-cmd --add-service=mysql --zone=internal    <span class="comment">#临时生效</span></span><br><span class="line">firewall-cmd --permanent --<span class="built_in">set</span>-source=192.168.0.0/24 --zone=internal    <span class="comment">#永久配置</span></span><br><span class="line">firewall-cmd --permanent --<span class="built_in">set</span>-service=mysql --zone=internal    <span class="comment">#永久配置</span></span><br><span class="line">firewall-cmd --reload    <span class="comment">#永久配置才需要</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="tips-2"><a href="#tips-2" class="headerlink" title="tips:"></a>tips:</h6><p>对于 firewalld 的基本语法不够的情况，系统管理员还可以添加富规则（一种更具表达力的语法）来编写更加复杂的规则，如果富规则语法也不够，系统管理员还可以直接配置规则，基本上是将与 firewalld 规则混合使用的原始 iptables 语法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/" data-id="cjqikv04r0023zjkjh6hkntiw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/" class="article-date">
+  <time datetime="2018-10-16T03:38:24.000Z" itemprop="datePublished">2018-10-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="REHL-7-启动过程"><a href="#REHL-7-启动过程" class="headerlink" title="REHL 7 启动过程"></a>REHL 7 启动过程</h5><p>1、计算机已接通电源</p>
+<p>2、系统固件搜索可启动设备</p>
+<p>3、系统固件从磁盘读取启动加载器，然后将系统控制权交给启动加载器。在 RHEL 7 中这通常是 grub2。</p>
+<p> 通过以下方式进行配置 ：grub2-install </p>
+<p>4、启动加载器从磁盘加载其配置，然后向用户显示用于启动的可能配置的菜单。</p>
+<p>   通过以下方式进行配置：/etc/grub.d/ 、/etc/default/grub 和 （非手动） /boot/grub2/grub.cfg  </p>
+<p>5、在用户做出选择（或发生自动超时）后，启动加载器会从磁盘加载配置的内核及initramfs 并将它们置于内存中。initramfs 是经过 gzip 的cpio 归档，其中包含启动时所有必要硬件的内核模块、初始化脚本等。在 RHEL7 中，initramfs 包含自身可用的整个系统。  </p>
+<p>  通过以下方式进行配置：/etc/dracut.conf  </p>
+<p>6、启动加载器将系统控制权交给内核，从而传递启动加载器的内核命令行中指定的任何选项，以及initramfs 在内存中的位置。</p>
+<p>   通过以下方式进行配置：/etc/grub.d/、/etc/default/grub 和 (非手动) /boot/grub2/grub.cfg  </p>
+<p>7、对于内核可在 initamfs 中找到驱动程序的所有硬件，内核会初始化这些硬件，然后作为 PID 1 从 initramfs 执行 /sbin/init 。在 RHEL 7 中initramfs 包含systemd 的工作副本作为 /sbin/init ，并包含 udev 守护进程</p>
+<p>  通过以下方式进行配置 init = 命令行参数  </p>
+<p>8、initramfs 中的 systemd 实例会执行 initrd.target 目标的所有单元。这包括在 /sysroot 上挂载实际的 root 文件系统 。</p>
+<p>   通过以下方式进行配置： /etc/fstab   </p>
+<p>9、内核 root 文件系统从initramfs root 文件系统切换（回转）为之前挂载于 /sysroot 上的系统 root 文件系统。随后 ，systemd 会使用系统中安装 systemd 副本来自动重新执行。</p>
+<p>10、systemd 会查找从内核命令传递或系统中配置的默认目标，然后启动（或停止）单元，以符合目标的配置，从而自动解决单元间的依赖关系。本质上，systemd 目标是一组应在激活后达到所需系统状态的单元。这些目标通常至少包含一个生成基于文本的登录或图形登录屏幕。</p>
+<p>   通过以下方式进行配置： /etc/systemd/system/default.target 、/etc/systemd/system/  </p>
+<h5 id="启动、重新启动和关闭"><a href="#启动、重新启动和关闭" class="headerlink" title="启动、重新启动和关闭"></a>启动、重新启动和关闭</h5><hr>
+<p>要关闭或从命令行重新启动正在运行的系统，管理员可以使用systemcl 命令</p>
+<p>systemctl poweroff 会停止所有运行的服务，卸载所有文件系统（或者在文件系统无法卸载时以只读形式将其重新挂载），然后关闭系统。</p>
+<p>systemctl reboot 会停止所有运行的服务，卸载所有文件系统，然后重新启动系统。</p>
+<p>为了方便身后兼容，poweroff 和 reboot 命令仍然存在，但是在RHEL 7 中，它们是指向 systemctl 工具的的符号链接。</p>
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h3><p>systemctl halt 和 halt 也用于停止系统，但与其poweroff 不同，这些命令不会关闭系统而是让系统进入能安全地手动关闭的状态。  </p>
+<h3 id="选择systemd-目标"><a href="#选择systemd-目标" class="headerlink" title="选择systemd 目标"></a>选择systemd 目标</h3><p>systemd 目标是一组应在启动后到达所需状态的systemd 单元。下表列出了这些目标的最重要的信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">目标</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">graphical.target</td>
+<td>多用户、图形+文本</td>
+</tr>
+<tr>
+<td style="text-align:left">multi-user.target</td>
+<td>多用户、文本登录</td>
+</tr>
+<tr>
+<td style="text-align:left">rescue.target</td>
+<td>sulogin 提示，表示基本系统初始化已完成</td>
+</tr>
+<tr>
+<td style="text-align:left">emergency.target</td>
+<td>sulogin 提示，表示 initramfs 回转完成，且系统 root 以只读形式挂载于 / 上</td>
+</tr>
+</tbody>
+</table>
+<p>某个目标可能属于另一目标：例如 graphical.target 包含 multi-user.target 。后者反过来取决于 basic.target 和其他目标，使用以下命令可从命令行查看这些依赖关系；<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-dependencies graphical.target | grep target    <span class="comment">#查看依赖关系</span></span><br><span class="line">systemctl list-units --<span class="built_in">type</span>=target --all <span class="comment">#查看所有可用目标的描述</span></span><br><span class="line">systemctl list-units-files --<span class="built_in">type</span>=target --all <span class="comment">#查看磁盘上安装的所有目标的概述</span></span><br><span class="line">systemctl isolate multi-user.target    <span class="comment">#在运行的系统中，切换到其他目标，类似于老版本 init 5</span></span><br></pre></td></tr></table></figure></p>
+<p>隔离某个目标会停止该目标（及其依赖项）不需要的所有服务，并启动任何尚未启动的所需服务。</p>
+<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><p>并非所有目标都能隔离。只有单元文件中设置了 AllowIsolate=yes 的目标才可以隔离；例如 graphical.target 目标可以隔离，但 cryptsetup.target 目标不能隔离。AllowIsolate 设置在target 文件中配置</p>
+<h6 id="设置默认目标"><a href="#设置默认目标" class="headerlink" title="设置默认目标"></a>设置默认目标</h6><p>在系统启动且将控制权从 initramfs 交给systemd 后，systemd 会尝试激活 default.target 目标。通常，default.target 目标是 (/etc/systemd/system中) 指向 graphical.target 或 multi-user.target 的符号链接。</p>
+<p>systemctl 工具随附两个命令（get-default 和 set-default ） 用于管理该符号链接，而不是手动编辑该连接。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># systemctl get-default</span></span><br><span class="line">multi-user.target</span><br><span class="line">[root@client ~]<span class="comment"># systemctl set-default graphical.target</span></span><br><span class="line">Removed symlink /etc/systemd/system/default.target.</span><br><span class="line">Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/graphical.target.</span><br></pre></td></tr></table></figure></p>
+<h6 id="在启动时选择其他目标"><a href="#在启动时选择其他目标" class="headerlink" title="在启动时选择其他目标"></a>在启动时选择其他目标</h6><p>要在启动时选择其它目标，可从启动加载器将特殊选项附加到内核命令行：systemd.init= .</p>
+<p>例如，要使系统启动进入救援 shell  （在这种情况下，系统可在（几乎）没有任何服务运行的情况下进行配置更改），则在启动前，可从交互式启动加载器菜单中附加以下内容：</p>
+<p>systemd.unit=rescue.target</p>
+<p>该配置更改仅影响单个启动，这使其成为排除启动过程故障的有用工具。</p>
+<p>要使用这种选择其他目标的方法，请针对 RHEL 7 系统执行以下步骤：</p>
+<p>1、（重新）启动系统 </p>
+<p>2、按任意键中断启动加载菜单倒计时。</p>
+<p>3、将光标移动至要启动的条目</p>
+<p>4、按e 编辑当前条目</p>
+<p>5、将光标移动至以 linux16 开关行。此为内核命令行</p>
+<p>6、附加 systemd.unit=desired.target </p>
+<p>7、按 Ctrl +x 使用这些更改进行启动.</p>
+<p>修复常见启动问题  </p>
+<hr>
+<h3 id="恢复root-密码"><a href="#恢复root-密码" class="headerlink" title="恢复root 密码"></a>恢复root 密码</h3><p>每个系统管理员都应该能完成一项任务是恢复丢失的root密码，如果管理员仍处于登录状态，不管是作为拥有完成sudo 访问权限的非特权用户，还是作为root 用户，这个任务都很简单。如果未登录则复杂一点。  </p>
+<p>有一些方法可用于设备新的root 密码。例如，系统管理员可以使用live cd 启动系统，从此处挂载root文件系统。然后编辑 /etc/shadow 。在本节中，我们将探讨一个无需使用外部介质的方法。</p>
+<h6 id="注意：-1"><a href="#注意：-1" class="headerlink" title="注意："></a>注意：</h6><p>在RHEL 6及早期版本中，管理员可以启动系统进入runlevel 1 然后看到一个root 提示。在 RHEL7 中与 runlevel 1 最接近的是 rescue.target  和emergency.target 目标，这两个目标都需要 root 密码才能登录 。</p>
+<p>在 RHEL 7中，可以使从 initramfs 运行的脚本在某些点暂停，提供 root shell ，然后在该 shell 存在的情况下继续 。虽然主要是为了进行调试，但也可用户恢复丢失的 root 密码。</p>
+<p>1、重新启动</p>
+<p>2、按任意键中断启动加载器倒计时。</p>
+<p>3、将光标移动到需要启动的条目</p>
+<p>4、按 e 编辑选定的条目</p>
+<p>5、将光标移到内核命令行（以 linux16开头的行）</p>
+<p>6、附加 rd.break （就在从initramfs 向实际系统移交控制权前，该操作会中断）。</p>
+<h6 id="注意：-2"><a href="#注意：-2" class="headerlink" title="注意："></a>注意：</h6><pre><code>initramfs 提示会显示在内核命令行中指定为最后的任何控制台中。  
+</code></pre><p>7、Ctrl +x 使用这些更改进行启动</p>
+<h6 id="注意：-3"><a href="#注意：-3" class="headerlink" title="注意："></a>注意：</h6><pre><code>预建的映像可能会在内核中放置多个 console = 参数，以全支持各种各校的实施场景，对于 rd.break ，有一点需要注意的是，尽管许多内核消息将会发送到所有控制台，但提示符最终都将使用最后一个控制台。如果未看到提示符，可能要临时调整 console = 参数的顺序。  
+</code></pre><p>此时，会显示 root shell ，且实际系统的 root 文件系统会在 /sysroot 中以只读方式挂载。</p>
+<h6 id="重要："><a href="#重要：" class="headerlink" title="重要："></a>重要：</h6><pre><code>由于此时尚未启动 selinux ，因此任何创建的新文件都不会创建分配有selinux 上下文。请记住，有些工具（如passwd ）首先会创建一个新文件，然后移动新文件以代替要编辑的文件，从而有地创建不 selinux 上下文的新文件。  
+</code></pre><h6 id="此时要恢复-root-密码，请使用以下步骤："><a href="#此时要恢复-root-密码，请使用以下步骤：" class="headerlink" title="此时要恢复 root 密码，请使用以下步骤："></a>此时要恢复 root 密码，请使用以下步骤：</h6><p>1、以读写方式重新挂载 /sysroot </p>
+<p>mount -o remount,rw /sysroot</p>
+<p>2、切换为 chroot 存入位置，其中 /sysroot 被视为文件系统树的 root </p>
+<p>chroot /sysroot</p>
+<p>3、设置新 root 密码</p>
+<p>passwd root</p>
+<p>4、确保所有未标记的文件（包括此时的 /etc/shadow）在启动过程中都会重新获得标记。</p>
+<p>touch /.autorelabel</p>
+<p>5、键入 exit 两次，第一次将退出 chroot 存放位置，第二次将退出 initramfs 调试 shell 。此时系统将继续进行启动，执行完整的 selinux 重新标记，然后再次重新启动。  </p>
+<h4 id="使用-journalctl"><a href="#使用-journalctl" class="headerlink" title="使用 journalctl"></a>使用 journalctl</h4><p>查看以前（失败）启动日志会很有用。如果 journald 日志已被已久性的，则使用 journaclctl 工具即可查看。</p>
+<p>首先确定启用了永久性的 journald 记录<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p -m2775 /var/<span class="built_in">log</span>/journal</span><br><span class="line">chwon :systemd-journal /var/<span class="built_in">log</span>/journal</span><br><span class="line">killall -USR1 systemd-journald</span><br></pre></td></tr></table></figure></p>
+<p>要检查上一次启动的日志文件，请在journalctl 中使用 -b 选项。无需任何参数，-b 选项即可将输出过滤为仅包含与该启动有关的消息，但是如果参数为负数，则此选项将过滤出上次启动。例如：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">journalctl -b -l -p err</span><br></pre></td></tr></table></figure></p>
+<p>该命令将显示上次启动中被评为错误或更严重级别的所有消息。</p>
+<h5 id="诊断和修复-systemd-启动问题"><a href="#诊断和修复-systemd-启动问题" class="headerlink" title="诊断和修复 systemd 启动问题"></a>诊断和修复 systemd 启动问题</h5><p>如果在启动服务过程中出现问题，则有几个工具可供管理员用于协助调试和 / 或故障排除：</p>
+<h6 id="早期调试-shell"><a href="#早期调试-shell" class="headerlink" title="早期调试 shell"></a>早期调试 shell</h6><p>通过运行 systemctl enable debug-shell.service 启动序列早期将在 tty9 (Ctrl + Alt +f9 )上生成一个root shell 。该 shell 会自动作为 root 登录 ，这样管理员可以在系统仍在启动时使用一些其他高度工具。</p>
+<h6 id="tips-1"><a href="#tips-1" class="headerlink" title="tips :"></a>tips :</h6><p>在完成调试后，请不要忘记禁用 debug-shell.service 服务，因为该服务会使未经身份验证的 root shell 向任何有本地控制台访问权限的人员开放。</p>
+<h6 id="紧急情况和救援目标"><a href="#紧急情况和救援目标" class="headerlink" title="紧急情况和救援目标"></a>紧急情况和救援目标</h6><p>通过从启动器加载将 systemd.unit=rescue.target 或 systemd.unit=emergency.target 附加到内核命令行，系统将生成特殊的救援或紧急情况 shell ，而不是正常启动。这两个 shell 都需要提供 root 密码。 emergency 目标使 root 文件系统以只读方式挂载，而rescue.target 等待sysinit.target 先完成，这样更多的系统会进行初始化 （例如日志记录、文件系统等）。</p>
+<p>这些 shell 可以用于修复妨碍系统正常启动的任何问题；例如，服务之间的依赖关系循环、或 /etc/fstab  中的错误条目。从这些 shell 退出后，系统会继续进行正常启动过程</p>
+<h6 id="阻塞作业"><a href="#阻塞作业" class="headerlink" title="阻塞作业"></a>阻塞作业</h6><p>在启动过程中，systemd 会生成大量作业。如果其中某些作业无法完成，则它们会妨碍其他作业运行。要检查当前作业列表，管理员可以使用命令 systemctl list-jobs 。所有列出为 running 的作业都必须先完成，然后列为 waiting 的作业可以继续。</p>
+<h4 id="修复在启动时出现的文件系统问题"><a href="#修复在启动时出现的文件系统问题" class="headerlink" title="修复在启动时出现的文件系统问题"></a>修复在启动时出现的文件系统问题</h4><p>/etc/fstab 中的错误和损坏的文件系统可能会阻止系统启动。在大多数情况下，systemd 实际上会在超时后继续启动，或者降至需要提供 root 密码的紧急修复 shell </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">问题</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">损坏文件系统</td>
+<td>systemd 将会尝试 fsck ,如果问题太严重而无法自动修复，则系统会提示用户从紧急 shell 手动运行 shell </td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/fstab 中引用的设备 /UUID 不存在</td>
+<td>systemd 将等待一定的时间，等设备变得可用。如果设备未变得可用，则系统会在超时后用户降至紧急 shell 。</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/fstab 中的挂载点不存在</td>
+<td>systemd 会创建挂载点（如果可能） ; 否则，它会降至紧急 shell </td>
+</tr>
+</tbody>
+</table>
+<p>/etc/fstab 中指定的挂载点错误|系统将用户降至紧急 shell<br>|在所有情况下，管理员都可以使用 emergency.target 目标来诊断和修复问题，因为在显示紧急 shell 之前 ，不会挂载任何文件系统。</p>
+<h6 id="注意：-4"><a href="#注意：-4" class="headerlink" title="注意："></a>注意：</h6><p>在文件系统问题中使用自动恢复 shell 时，请不要忘记在编辑 /etc/fstab 后发出 systemctl daemon-reload ，如果不重新加载，systemd 将继续使用旧版本。</p>
+<h6 id="修复启动加载器问题"><a href="#修复启动加载器问题" class="headerlink" title="修复启动加载器问题"></a>修复启动加载器问题</h6><p>RHEL 7 中默认使用的启动加载是 grub2, GRand Unified Bootloader 的第二个主要版本</p>
+<p>grub2 可以用来在 BIOS和 UEFI系统中进行启动，并且支持启动现代硬件上运行的几乎所有操作系统。</p>
+<p>grub2 的主要配置文件是 /boot/grub2/grub.cfg ，但是管理员不应直接编辑文件，而是应用使用一组不同的配置文件和安装的内核列表，并借助名为 grub2-mkconfig 的工具生成配置。</p>
+<p>grub2-mkconifg 会查看 /etc/default/grub 的选项（例如要使用的默认菜单超时及内核命令行），然后在 /etc/grub.d/ 中使用一组脚本来生成配置文件。</p>
+<p>要永久更改启动加载器配置，管理员需要编辑前面列出的配置文件，然后运行以下命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub2-mkconfig &gt; /boot/grub2/grub.cfg</span><br></pre></td></tr></table></figure></p>
+<p>在进行较大更改的情况下，管理员可能更喜欢不经过重定向即运行该命令，这样可以首先检查结果。</p>
+<h6 id="重要指令"><a href="#重要指令" class="headerlink" title="重要指令"></a>重要指令</h6><p>要为损坏的 grub2 配置排除故障，管理员需要先了解 /boot/grub2/grub.cfg 的语法。实际可启动条目是在 menuentry 块中编码的。在这些块中，linux16 和 initrd16 行指向（随内核命令行）从磁盘加载的内核以及要加载的 initramfs 。在启动时进行交互编辑的过程中，Tab 实例可用于查找这些文件。</p>
+<p>这些块中的 set root 行不指向 rhel 7 系统的root 文件系统，而是指向 grub2 应从加载内核及 initramfs 文件的文件系统。语法为 harddrive,partition ，其中 hd0 是系统中的第一个硬盘驱动器，hd1 是第二个硬盘驱动器，依此类推。指定为 msdos1 的分区是该驱动器上的第一个 MBR 分区，指定为 gpt1 分区的第一个GPT分区  </p>
+<h6 id="重新安装启动加载器"><a href="#重新安装启动加载器" class="headerlink" title="重新安装启动加载器"></a>重新安装启动加载器</h6><p>在启动加载器自身已损坏的情况下，可以使用 grub2-install 命令重新安装。在 BIOS系统中，应提供 MBR 中应安装 grub2 的磁盘作为参数。在 UEFI 系统中，当 EFI 系统分区挂载于 /boot/efi/上时，无需提供任何参数。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/" data-id="cjqikv04n001zzjkj2tv8z8c3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/" class="article-date">
+  <time datetime="2018-10-12T13:10:31.000Z" itemprop="datePublished">2018-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Autofs"><a href="#Autofs" class="headerlink" title="Autofs"></a>Autofs</h1><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install autofs -y</span><br></pre></td></tr></table></figure>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><h5 id="配置文件默认目录"><a href="#配置文件默认目录" class="headerlink" title="配置文件默认目录"></a>配置文件默认目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc</span><br></pre></td></tr></table></figure>
+<h5 id="主配置模板auto-master"><a href="#主配置模板auto-master" class="headerlink" title="主配置模板auto.master"></a>主配置模板auto.master</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/etc/auto.master</span><br><span class="line"><span class="comment">#/media /etc/auto.media</span></span><br><span class="line"><span class="comment">#目录/media  配置文件/etc/auto.media</span></span><br><span class="line">/etc/auto.master </span><br><span class="line">/media/misc     /etc/auto.misc     --timeout=5</span><br><span class="line">/media/net      /etc/auto.net      --timeout=60</span><br><span class="line"><span class="comment">#第一列是基础主目录，第二列是对接的配置文件，第三列是自动超时时间，timeout 为可选参数，单位为秒</span></span><br><span class="line"><span class="comment">#最好保证模板文件末尾有一个空行。</span></span><br></pre></td></tr></table></figure>
+<p>如果您的系统上不存在基目录，则将创建该目录。将挂载基目录以加载动态加载的媒体，这意味着在启用autofs时将无法访问基目录中的任何内容。但是，此过程是非破坏性的，因此如果您不小心自动挂载到实时目录中，只需更改位置auto.master并重新启动AutoFS即可重新获得原始内容。</p>
+<p>如果您仍想自动挂载到目标非空目录并且希望即使在挂载动态加载目录后也可以使用原始文件，则可以使用autofs将它们挂载到另一个目录（例如/var/autofs/net）和创建软链接。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ln -s /var/autofs/net/share\_name /media/share\_name</span></span><br></pre></td></tr></table></figure></p>
+<p>或者，您可以让autofs将媒体安装到特定文件夹，而不是在公共文件夹中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/etc/auto.master</span><br><span class="line">/  -  /etc/auto.template</span><br><span class="line"><span class="comment">#不指定基础目录</span></span><br><span class="line">/etc/auto.template</span><br><span class="line">/path/to/folder -options:/device/path</span><br><span class="line">/home/user/usbstick -fstype = auto，async，nodev，nosuid，<span class="built_in">umask</span> = 000:/dev/sdb1</span><br></pre></td></tr></table></figure></p>
+<h5 id="可移动媒体"><a href="#可移动媒体" class="headerlink" title="可移动媒体"></a>可移动媒体</h5><p>打开/etc/auto.misc以添加，删除或编辑其他设备。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/etc/auto.misc</span><br><span class="line"><span class="comment">#kernel -ro </span></span><br><span class="line">ftp.kernel.org:/pub/linux <span class="comment">#boot -fstype = ext2:/dev/hda1 </span></span><br><span class="line">usbstick -fstype = auto，async，nodev，nosuid，<span class="built_in">umask</span> = 000:/dev/sdb1 </span><br><span class="line">cdrom -fstype = iso9660 ，ro:/dev/cdrom </span><br><span class="line"><span class="comment">#floppy -fstype = auto:/dev/fd0</span></span><br></pre></td></tr></table></figure></p>
+<p>如果您有CD / DVD组合驱动器，则可以更改该cdrom行以-fstype=auto自动检测介质类型。</p>
+<h5 id="NFS-检查挂载"><a href="#NFS-检查挂载" class="headerlink" title="NFS 检查挂载"></a>NFS 检查挂载</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showmount &lt;servername&gt; -e</span><br></pre></td></tr></table></figure>
+<h5 id="手动NFS配置"><a href="#手动NFS配置" class="headerlink" title="手动NFS配置"></a>手动NFS配置</h5><p>要将名为/srv/shared_dir的server_name上的NFS共享挂载到位于/mnt/foo的另一台名为client_pc的计算机，请编辑nfs.autofs并为该共享创建配置文件（auto.nfsserver_name）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/etc/auto.master.d/auto.nfsserver_name</span><br><span class="line">foo -rw,soft,intr,rsize=8192,wsize=8192 server\_name/srv/shared\_dir</span><br></pre></td></tr></table></figure></p>
+<h5 id="samba-的配置方法"><a href="#samba-的配置方法" class="headerlink" title="samba 的配置方法"></a>samba 的配置方法</h5><h6 id="samba-检查方法"><a href="#samba-检查方法" class="headerlink" title="samba 检查方法"></a>samba 检查方法</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">smbclient  -L  //servername </span><br><span class="line"></span><br><span class="line">/etc/auto.master.d/auto.smb</span><br><span class="line">smb -fstype=cifs,\[other\_options\]   :// \[remote\_server\]/\[remote\_share\_name\]</span><br><span class="line"><span class="comment">#\[any\_name\] -fstype=cifs,username=\[username\],password=\[password\],\[other\_options\] ://\[remote\_server\]/\[remote\_share_name\]</span></span><br></pre></td></tr></table></figure>
+<h5 id="ftp"><a href="#ftp" class="headerlink" title="ftp"></a>ftp</h5><p>安装 curlftpfs (未完待续)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install curlftpfs -y</span><br><span class="line">modprobe fuse</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/" data-id="cjqikv0190004zjkjvmu5own1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/" class="article-date">
+  <time datetime="2018-10-11T07:12:19.000Z" itemprop="datePublished">2018-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RHEL 使用 samba 服务提供 windows 客户端可以使用的服务。samba 实施“服务器消息块（SMB）协议”，而 “常用Internet 文件系统”（CIFS）是SMB的一种方言，这两个名称经常互换使用。  </p>
+<h6 id="连接至SMB-CIFS共享"><a href="#连接至SMB-CIFS共享" class="headerlink" title="连接至SMB/CIFS共享"></a>连接至SMB/CIFS共享</h6><p>红帽桌面和服务器均可连接到由使得SMB协议的任何服务器所提供的共享</p>
+<h6 id="访问SMB-共享的三个基本步骤："><a href="#访问SMB-共享的三个基本步骤：" class="headerlink" title="访问SMB 共享的三个基本步骤："></a>访问SMB 共享的三个基本步骤：</h6><p>1、识别要访问的远程共享</p>
+<p>2、确定挂载点（应该将共享挂载到的位置），并创建挂载点的空目录。</p>
+<p>3、挂载网络文件系统（通过适当的命令或配置更改）。</p>
+<p>开始之前，必须先安装一上软件包才能挂载 SMB共享：cifs-utils. mount 命令和autofs 自动挂载程序 均依赖此软件包来挂载 CIFS文件系统。第二个软件包 samba-client 具有一些有用的命令行实用程序（如smbclient），因此也经常值得安装</p>
+<h6 id="挂载-SMB共享"><a href="#挂载-SMB共享" class="headerlink" title="挂载 SMB共享"></a>挂载 SMB共享</h6><p>1、识别： SMB服务器主机管理员可提供共享的详细信息，如用户名和密码、共享名称等。另一种方式是使用可浏览共享的客户端，如smbclient<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -L /serverX</span><br></pre></td></tr></table></figure></p>
+<p>-L 选项要求 smbclient 列出 serverX 上可用的共享</p>
+<p>2、挂载点：使用mkdir 在合适位置中创建挂载点。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mountpoint</span><br></pre></td></tr></table></figure></p>
+<p>3、挂载： 手动挂载，或并入 /etc/fstab 文件中，为任一操作切换到root 或使用sudo </p>
+<h6 id="手动：使用mount-命令"><a href="#手动：使用mount-命令" class="headerlink" title="手动：使用mount 命令"></a>手动：使用mount 命令</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t cifs -o guest //serverX/share /mountpoint</span><br></pre></td></tr></table></figure>
+<p>-t cifs 选项是 SMB共享的文件系统类型； -o guest 选项指示 mount 以guest 账户身份（无需输入密码）尝试并进行身份验证。</p>
+<p>/etc/fstab ：使用vim 来编辑 /etc/fstab 文件并将挂载条目添加到文件的底部。将在每次启动时挂载 SMB 共享<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fstab </span><br><span class="line">……</span><br><span class="line">//serverX/share /mountpoint  cifs  guest  0 0</span><br></pre></td></tr></table></figure></p>
+<p>使用umount 和root 特权，手动卸载共享<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo umount /mountpoint</span><br></pre></td></tr></table></figure></p>
+<p>对SMB 共享执行身份验证。 SMB 共享可以标记为“no-browsable (不可浏览)”，这意味着 smbclient 等客户端将不会显示它们。但是，如果在挂载操作期间明确指定SMB 共享名称，则仍可以访问这些 SMB 共享。 SMB 服务器通常限制 对特定用户或用户组的访问，如果访问受保护的共享，需向 SMB服务器提供合适的凭证。</p>
+<p>身份验证的一个常用予以反击用户名和密码对。这些对既可添加至mount 命令（或/etc/fstab 条目），也可存储在挂载操作期间被引用的凭据文件中。如果未提供密码，mount 命令将会提示输入密码，但是使用 /etc/fstab 时必须提供密码。可通过 guest 选项来请求来宾访问权限 。</p>
+<h6 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t cifs -o guest //serverX/docs /public/docs</span><br></pre></td></tr></table></figure>
+<p>在 /public/docs 中挂载 SMB共享 //serverX/docs 并尝试以 guest 执行身份验证<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t cifs -o username=watson //serverX/cases /bakerst/cases</span><br></pre></td></tr></table></figure></p>
+<p>在 /bakerst/cases 中挂载 SMB 共享 //serverX/cases 并尝试以 watson 执行身份验证。在此示例中，mount 命令将提示输入密码。</p>
+<p>凭据谁的能提供更高的安全性，这是因为密码存储在更为安全的文件中，而/etc/fstab 文件则比较易于检查。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t cifs -o credentials=/secure/sherlock  //serverX/sherlook /home/sherlock/work</span><br></pre></td></tr></table></figure></p>
+<p>在/home/sherlock/work中挂载 SMB共享 //serverX/sherlock 并尝试使用存储于/secure/sherlock 中的凭据执行身份验证。</p>
+<p>凭据文件格式为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">username=username</span><br><span class="line">password=password</span><br><span class="line">domain=domian</span><br></pre></td></tr></table></figure></p>
+<p>应将其放置在仅具有 root 访问权限的某个安全位置（如 chmod 600 ）</p>
+<p>在文件操作期间， SMB服务器将根据用于挂载共享的凭据，检查文件的访问权限。客户端将根据从服务器发送来的文件 UID/GID，检查文件的访问权限。这意味着，客户端需要具有与 SMB服务器的文件相同的UID/GID 以及补充组成员资格（如有必要）</p>
+<p>处理本地访问检查和备用身份验证方法的挂载选项有很多，例如多用户（和cifscreds）以及基于Kerberos的选项。</p>
+<h6 id="使用自动挂载程序挂载-SMB-文件系统"><a href="#使用自动挂载程序挂载-SMB-文件系统" class="headerlink" title="使用自动挂载程序挂载 SMB 文件系统"></a>使用自动挂载程序挂载 SMB 文件系统</h6><p>要使用 mount 命令，需要具有root 特权以连接到 SMB 共享。或者可将条目添加至/etc/fstab,但是此后与SMB服务器的连接需一直保持活动状态。</p>
+<p>当某一进程试图访问SMB共享上的文件时，可以将自动挂载程序 （或autofs）服务配置为“按需”挂载 SMB 共享。当共享不再使用并处于不活动状态达一段时间以后，自动挂载程序将会挂载该共享。</p>
+<p>使用autofs 在 SMB 共享上设置自动挂载的进程实质与其它自动挂载相同。</p>
+<p>添加一个可识别共享基础目录和关联映射文件的auto.master.d 配置文件</p>
+<p>创建或编辑映射文件。包括 SMB共享的挂载详细信息</p>
+<p>启用并启动 autofs 服务</p>
+<h6 id="tips"><a href="#tips" class="headerlink" title="tips :"></a>tips :</h6><p>如果尚未安装此服务，则安装 autofs 软件包，与 mount一样，自动挂载也依赖 cifs-utils软件包来挂载 SMB 共享。</p>
+<p>映射文件</p>
+<p>指定文件系统类型需要先使用 -fstype=cifs 选项，然后使用一列以逗号分隔的挂载选项（与mount 相同）服务器 URI 地址以冒号“：”为前缀。</p>
+<h6 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h6><p>以下示例在路径 /bakerst/cases 为 SMB 共享 //serverX/cases 创建一个自动挂载，并根据凭据文件 /secure/sherlock 进行身份验证。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/etc/auto.master.d/bakerst.autofs</span><br><span class="line"></span><br><span class="line">/bakerst /etc/auto.bakerst</span><br><span class="line"></span><br><span class="line">/etc/auto.bakerst</span><br><span class="line"></span><br><span class="line">cases -fstype=cifs,credentials=/secure/sherlock ://serverX/cases</span><br><span class="line"></span><br><span class="line">/secure/sherlock 内容（属于root,权限 0600）:</span><br><span class="line"></span><br><span class="line">username=sherlock</span><br><span class="line">password=violin2018</span><br><span class="line">domain=BAKERST</span><br><span class="line"></span><br><span class="line">autofs 启用并启动</span><br><span class="line"></span><br><span class="line">sudo systemctl enable autofs</span><br><span class="line">sudo systemctl start autofs</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h6 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install cifs-utils autofs -y</span><br><span class="line">sudo vim /etc/auto.master.d/shares.autofs</span><br><span class="line">  /share /etc/auto.shares</span><br><span class="line">sudovim /etc/auto.shares</span><br><span class="line">  work -fstype=cifs,credentials=/etc/me.cred ://server0/student</span><br><span class="line">  docs -fstype=cifs,guest ://server0/public</span><br><span class="line">  cases -fstype=cifs,credentials=/etc/me.cred ://server0/student</span><br><span class="line">sudo vim /etc/my.cred</span><br><span class="line">  username=student</span><br><span class="line">  password=student</span><br><span class="line">  domain=MYGROUP</span><br><span class="line">groups    <span class="comment">#查看当前用户所属组</span></span><br><span class="line">sudo groupadd bakerst -g 10221    <span class="comment">#创建组</span></span><br><span class="line">sudo usermod -aG bakerst student    <span class="comment">#附加组</span></span><br><span class="line">newgrp bakerst    <span class="comment">#切换（更新）组</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/" data-id="cjqikv02c0017zjkj3ehcg0na" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/samba/">samba</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh134-e7-ac-ac-e5-8d-81-e4-b8-80-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89-e7-bd-91-e7-bb-9c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f-ef-bc-88nfs-ef-bc-89-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/10/rh134-e7-ac-ac-e5-8d-81-e4-b8-80-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89-e7-bd-91-e7-bb-9c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f-ef-bc-88nfs-ef-bc-89-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/" class="article-date">
+  <time datetime="2018-09-10T09:47:03.000Z" itemprop="datePublished">2018-09-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/10/rh134-e7-ac-ac-e5-8d-81-e4-b8-80-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89-e7-bd-91-e7-bb-9c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f-ef-bc-88nfs-ef-bc-89-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十一章 访问具有网络文件系统（NFS）的网络存储</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h6 id="手动挂载和卸载-NFS-共享"><a href="#手动挂载和卸载-NFS-共享" class="headerlink" title="手动挂载和卸载 NFS 共享"></a>手动挂载和卸载 NFS 共享</h6><p>NFS （网络文件系统）是由Linux 、UNIX 及类似操作系统用作本地文件系统的一种互联网标准协议。它是一种活动扩展之下的开放标准，可支持本地 Linux 权限和文件系统功能。</p>
+<p>RHEL 7 在默认情况下支持NFSv4 （版本4）,向下兼容v3及v2版本。NFSv4使用 TCP 协议与服务器进行通信，而较早版本的NFS则可能使用 TCP 或UDP 。</p>
+<p>NFS 服务器导出共享（目录）,而NFS 客户端将导出的共享挂载到本地挂载点（目录）.本地挂载点必须已存在。可以通过多种方式挂载NFS 共享</p>
+<ul>
+<li><p>使用mount 命令手动挂载 NFS 共享。</p>
+</li>
+<li><p>使用/etc/fstab 在启动时自动挂载 NFS共享。</p>
+</li>
+<li><p>通过称为自动挂载的过程要挂需要挂载 NFS 共享。</p>
+</li>
+</ul>
+<h6 id="保护-NFS-共享的文件访问权限"><a href="#保护-NFS-共享的文件访问权限" class="headerlink" title="保护 NFS 共享的文件访问权限"></a>保护 NFS 共享的文件访问权限</h6><p>NFS 服务器通过多种方法保护文件的访问权限：none ,sys,krb5,krb5i和 krb5p .NFS 服务器可以选择为每个导出的共享提供一种方式或多种广场。NFS 客户端必须使用为已导出共享规定的方法之一连接到该共享，该方法以挂载选项 sec=method 的形式指定。</p>
+<h6 id="安全性方法："><a href="#安全性方法：" class="headerlink" title="安全性方法："></a>安全性方法：</h6><p>none:可对文件进行匿名访问，对服务器的写入（如允许）将分配 UID,GID为nfsnobody </p>
+<p>sys:文件访问权限基于UID和GID的值的标准Linux 文件权限。如果未指定，则此方法是默认值</p>
+<p>krb5:客户端必须使用Kerberos 证明身份，然后适用标准Linux 的文件权限 </p>
+<p>krb5i:添加加密性强的保证，确保每个请求中的数据未被篡改。</p>
+<p>krb5p:为客户端与服务器之间的所有请求添加加密，防止网络中的数据泄露。这会对性能产生影响。</p>
+<h6 id="TIPS："><a href="#TIPS：" class="headerlink" title="TIPS："></a>TIPS：</h6><p>Kerberos 选项将至少需要 /etc/krb5,keytab和本节中未论述的其它身份验证配置（加入kerberos域）。/etc/krb5.keytab 通常将由身份验证或安全性管理员提供。请求包含主体和 / 或 nfs 主体（最好包含两者）的keytab</p>
+<p>连接到Kerberos 保护的共享时，NFS 使用 nfs-secure 服务来帮助协商和管理与服务器之间的通信。此服务必须正在运行，才能使用受保护的NFS共享；对其使用 start 和 enable 命令以确保其始终可用。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nfs-secure</span><br><span class="line">systemctl <span class="built_in">enable</span> nfs-secure</span><br><span class="line">systemctl start nfs-secure</span><br></pre></td></tr></table></figure></p>
+<h6 id="挂载-NFS-共享有三个基本步骤："><a href="#挂载-NFS-共享有三个基本步骤：" class="headerlink" title="挂载 NFS 共享有三个基本步骤："></a>挂载 NFS 共享有三个基本步骤：</h6><p>1、识别 NFS 服务器的管理员可能提供导出详细信息，包括安全性要求。或者 NFSv4 共享可通过挂载NFS 服务器的根文件并浏览已导出目录来识别。以root 用户身份执行此操作。使用 Kerberos 安全对共享的访问将被拒绝，但共享（目录）名称将可见。可以浏览其它共享目录。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mountpoint</span><br><span class="line">mount /serverX:/ /mountpoint </span><br><span class="line">ls /mountpoint</span><br></pre></td></tr></table></figure></p>
+<p>可以使用 showmount 发现 NFSv2和 NFSv3共享<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showmount -e serverX</span><br></pre></td></tr></table></figure></p>
+<p>2、挂载点：使用mkdir  在合适的地方创建挂载点<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mountpoint</span><br></pre></td></tr></table></figure></p>
+<p>3、挂载：这里有两种选择，手动挂载，或并入 /etc/fstab 文件中，为任一操作切换到root 或使用sudo</p>
+<ul>
+<li>手动使用 mount 命令</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t nfs -o sync serverX:/share /mountpoint</span><br></pre></td></tr></table></figure>
+<p>-t nfs 选择是 NFS 共享的文件系统类型（未严格要求）。-o sync 选择使用 mount 立即与 NFS 服务器同步写操作（默认为异步）。默认安全性方法（sec=sys）将用于尝试挂载NFS 共享，使用标准 Linux 文件权限。  </p>
+<ul>
+<li>/etc/fstab 使用vim 编辑 /etc/fstab 文件，将挂载条目添加到文件底部。 NFS 共享将在每次系统启动时挂载。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">vim /etc/fstab </span><br><span class="line">……</span><br><span class="line">serverX:/share /mountpoint nfs sync 0 0</span><br><span class="line"></span><br><span class="line">root 用户使用 umount  命令手动卸载共享  </span><br><span class="line"></span><br><span class="line">umount /mountpoint</span><br></pre></td></tr></table></figure>
+<h6 id="通过-NFS-自动挂载网络存储"><a href="#通过-NFS-自动挂载网络存储" class="headerlink" title="通过 NFS 自动挂载网络存储"></a>通过 NFS 自动挂载网络存储</h6><p>自动挂载器是一种服务(autofs) ，它可以根据需要自动挂载 NFS 共享，并将在不再使用 NFS共享时自动卸载这些共享。</p>
+<p>自动挂载器优势</p>
+<ul>
+<li><p>用户无需具有root 特权就可以运行 mount /umount 命令</p>
+</li>
+<li><p>自动挂载器中配置的 NFS 共享可供计算机上的所有用户使用，受访问权限约束</p>
+</li>
+<li><p>NFS 共享不像 /etc/fstab 中的条目一样永久连接，从而可释放网络和系统资源。</p>
+</li>
+<li><p>自动挂载器完全在客户端配置，无需进行任何服务器配置</p>
+</li>
+<li><p>自动挂载器与 mount 命令使用相同的挂载选项，包括安全性选项。</p>
+</li>
+<li><p>支持直接和间接挂载点映射，在挂载点位置方面提供了灵活性。</p>
+</li>
+<li><p>间接挂载点可通过 autofs 创建和删除，从而减少了手动管理这些挂载点的需求。</p>
+</li>
+<li><p>NFS 是自动挂载器的默认文件系统，但自动挂载器也可以用于自动挂载多种不同的文件系统 。</p>
+</li>
+<li><p>autofs 是管理方式类似于其他系统服务的一种服务。</p>
+</li>
+</ul>
+<h6 id="创建自动挂载"><a href="#创建自动挂载" class="headerlink" title="创建自动挂载"></a>创建自动挂载</h6><p>配置自动挂载的过程包括多个步骤：</p>
+<p>1、安装 autofs<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install autofs</span><br></pre></td></tr></table></figure></p>
+<p>此软件包含使用自动挂载器挂载NFS 共享所需要的所有内容</p>
+<p>2、向/etc/auto.master.d 添加一个主映射文件；此文件确定用于挂载点的基础目录，并确定用于创建自动挂载的映射文件。</p>
+<p>使用vim 创建并编辑主映射文件：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/auto.master.d/demo.autofs</span><br></pre></td></tr></table></figure></p>
+<p>主映射文件的名称不重要，但它通常是一个有意义的名称，唯一的要求就是扩展名必须为.autofs ，主映射文件可以保存多个映射条目，或者使用多个文件来将配置数据分开。</p>
+<p>在此例中，为间接映射的挂载添加主映射条目：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/shares /etc/auto.demo</span><br></pre></td></tr></table></figure></p>
+<p>此条目将使用 /shares目录作为将来间接自动挂载的基础目录。/etc/auto.demo 文件包含挂载详细信息；使用绝对文件名，需要在启动autofs 服务之前 创建auto.demo 文件</p>
+<p>要使用直接映射 的挂载点，请向同一文件（或在单独的文件中）添加条目：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/- /etc/auto.direct</span><br></pre></td></tr></table></figure></p>
+<p>所有直接映射条目都使用 “/-”作为基础目录。在此例中，包含挂载详细信息的映射的文件是/etc/auto.direct </p>
+<p>3、创建映射文件，映射文件确定挂载点、挂载选项和挂载的源位置</p>
+<p>使用vim 创建并编辑映射文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> sudo vim /etc/auto.demo</span><br></pre></td></tr></table></figure></p>
+<p>文件名不重要，按照惯例，该文件位于 /etc 中并且名为 auto.name ，其中 name 是对所有包含内容有意义的名称<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">work -rw,sync serverX:/shares/work</span><br></pre></td></tr></table></figure></p>
+<p>条目的格式为挂载点、挂载选项和源位置。此示例显示基本的间接映射条目。</p>
+<ul>
+<li><p>挂载点在 man page 中被称为 “密钥” ,它将由 autofs 服务自动创建和删除。在此例中完全限制挂载点将是 /shares/work; autofs 将根据需要创建和删除/shares 目录和 work 目录</p>
+</li>
+<li><p>挂载选项以 “-”开关，并使用逗号分隔，不带空格。可以选项与手动挂载选项相同。几个常用的自动挂载器特定选项 -fstype= 和 -strict  文件文件系统 不是NFS 则使用fstype ，可指定文件系统 ；挂载文件系统时，使用strict 可将错误视为严重。</p>
+</li>
+<li><p>NFS 共享的源位置遵循 host:/pathname 模式；在此示例中为 serverX:/shares/work ，此目录需要已在 serverX 上导出，并带有读/写访问权限和标准的linux 文件权限的支持，这样才能挂载成功。如果要挂载的文件系统以 “/”开关，例如本地设备条目或者SMB 共享，则需要添加一个“：”作为前缀，例如 SMB 共享为 ：//serverX/share。</p>
+</li>
+</ul>
+<p>4、启动并启用自动挂载服务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> autofs</span><br><span class="line">sudo systemctl start autofs</span><br></pre></td></tr></table></figure></p>
+<h5 id="映射文件-直接映射"><a href="#映射文件-直接映射" class="headerlink" title="映射文件 - 直接映射"></a>映射文件 - 直接映射</h5><p>直接映射用于将NFS 共享映射到现在的挂载点。自动挂载器不会尝试自动创建挂载点；在 autofs 服务启动之前 挂载点必须存在</p>
+<p>继续前面的示例，/etc/auto.direct 文件的内容可能 类似下文：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/mnt/docs -rw,sync serverX:/shares/docs</span><br></pre></td></tr></table></figure></p>
+<p>挂载点（或密钥）始终为绝对路径，以 “/“ 开关。映射文件其余部分使用相同的结构。</p>
+<p>只有最右侧的目录受自动挂载程序控制，因此挂载点挂载点（此示例中为 /mnt ）以上的目录结构不会被 autofs 遮盖。</p>
+<h5 id="映射文件-间接通配符映射"><a href="#映射文件-间接通配符映射" class="headerlink" title="映射文件 -- 间接通配符映射"></a>映射文件 -- 间接通配符映射</h5><p>当 NFS 服务器导出一个目录中的多个子目录时，可将自动挂载程序配置为使用单个映射条目访问这些子目录其中的任何一个，作为示例，对于从NFS 服务器自动挂载用户主目录，此功能非常有用。</p>
+<p>继续前面的示例，如果 serverX:/share 导出两个或多个子目录,并且能使用相同的挂载选项访问这些子目录，则/etc/auto.demo 文件内容可能类似于正文：</p>
+<ul>
+<li>-rw,sync serverX:/shares/&amp;</li>
+</ul>
+<p>挂载点是“*”，而源位置上的子目录是 “&amp;” 。条目中的所有其它内容都相同</p>
+<p>当用户尝试访问/shares/work 时，挂载点 “*”（此示例中为work）将代替源位置中的 &amp; 符号，并将挂载 serverX:/shares/work。对于间接示例，autofs 服务将自动创建和删除work 目录。</p>
+<h5 id="实验："><a href="#实验：" class="headerlink" title="实验："></a>实验：</h5><h6 id="间接通配符映射"><a href="#间接通配符映射" class="headerlink" title="间接通配符映射"></a>间接通配符映射</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo -y install autofs</span><br><span class="line">vim /etc/auto.master.d/home.autofs   <span class="comment">#主配置文件</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line">/home/guests /etc/auto.home</span><br><span class="line"><span class="comment">###</span></span><br><span class="line">vim /etc/auto.home    <span class="comment">#详细信息</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line">* -rw,sync classroom:/home/guests/&amp;</span><br><span class="line"><span class="comment">###</span></span><br><span class="line">systemctl <span class="built_in">enable</span> autofs</span><br><span class="line">systemctl start autofs</span><br></pre></td></tr></table></figure>
+<h6 id="间接映射"><a href="#间接映射" class="headerlink" title="间接映射"></a>间接映射</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo -y install autofs</span><br><span class="line">vim /etc/auto.master.d/public.autofs   <span class="comment">#主配置文件</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line">/shares /etc/auto.public</span><br><span class="line"><span class="comment">###</span></span><br><span class="line">vim /etc/auto.public    <span class="comment">#详细信息</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line">public -rw,sync classroom:/shares/public</span><br><span class="line"><span class="comment">###</span></span><br><span class="line">systemctl <span class="built_in">enable</span> autofs</span><br><span class="line">systemctl start autofs</span><br></pre></td></tr></table></figure>
+<h6 id="直接映射（需要提前创建挂载点）"><a href="#直接映射（需要提前创建挂载点）" class="headerlink" title="直接映射（需要提前创建挂载点）"></a>直接映射（需要提前创建挂载点）</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo -y install autofs</span><br><span class="line">vim /etc/auto.master.d/public.autofs   <span class="comment">#主配置文件</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line">/- /etc/auto.public</span><br><span class="line"><span class="comment">###</span></span><br><span class="line">vim /etc/auto.public    <span class="comment">#详细信息</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line">/mnt/public -rw,sync classroom:/shares/public</span><br><span class="line"><span class="comment">###</span></span><br><span class="line">mkdir /mnt/public     <span class="comment">#创建目录</span></span><br><span class="line">systemctl <span class="built_in">enable</span> autofs</span><br><span class="line">systemctl start autofs</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/10/rh134-e7-ac-ac-e5-8d-81-e4-b8-80-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89-e7-bd-91-e7-bb-9c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f-ef-bc-88nfs-ef-bc-89-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/" data-id="cjqikv04m001xzjkju17g5zql" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/" class="article-date">
+  <time datetime="2018-07-31T09:42:47.000Z" itemprop="datePublished">2018-07-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/">RH134 第十章 管理逻辑卷管理(LVM)存储</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="逻辑卷管理（LVM）概念"><a href="#逻辑卷管理（LVM）概念" class="headerlink" title="逻辑卷管理（LVM）概念"></a>逻辑卷管理（LVM）概念</h3><p>逻辑卷和逻辑卷管理有助于更加轻松的管理磁盘空间。如果 LVM 托管的文件系统需要更多的空间，可以将其卷组中的可用空间分配给逻辑卷，并且可以调整文件系统的大小。如果磁盘开始出现错误，可以将替换磁盘注册为物理卷放入卷组中，并且逻辑卷的区块可迁移到新磁盘。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532914548221728.png" alt="image.png"></p>
+<ul>
+<li><p>物理设备是用于保留逻辑卷中所存储的存储设备。它们是块设备，可以是磁盘分区、整个磁盘、RAID阵列或SAN磁盘。设备必须初始化为 LVM 物理卷，才能与 LVM结合使用。整个”设备“将作用一个物理卷。</p>
+</li>
+<li><p>物理卷（PV）用于注册基础物理设备以便在卷组中使用。 LVM 自动将 PV划分为物理区块(PE);它们是充当 PV 是最小的存储块的小块数据。</p>
+</li>
+<li><p>卷组（VG） 是存储池，由一个或多个物理卷组成。一个PV只能分配给一个 VG ，VG 可以包含未使用的空间和任意数目的逻辑卷。</p>
+</li>
+<li><p>逻辑卷（LV）根据卷组中的空闲物理范围创建，提供应用、用户和操作系统所使用的”存储“设备。 LV是逻辑区块 （ LE）的集合， LE映射到物理区块（PV 的最小存储块）。默认情况下，每个 LE将映射到一个PE ，设置特定的 LV选项将会更改此映射；例如：镜像会导致每个 LE映射到两个 PE。</p>
+</li>
+</ul>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532915362809606.png" alt="image.png"></p>
+<h4 id="管理逻辑卷"><a href="#管理逻辑卷" class="headerlink" title="管理逻辑卷"></a>管理逻辑卷</h4><h5 id="创建逻辑卷"><a href="#创建逻辑卷" class="headerlink" title="创建逻辑卷"></a>创建逻辑卷</h5><h6 id="创建可用的逻辑卷需要五个步骤："><a href="#创建可用的逻辑卷需要五个步骤：" class="headerlink" title="创建可用的逻辑卷需要五个步骤："></a>创建可用的逻辑卷需要五个步骤：</h6><p>1、准备物理设备</p>
+<p> 使用 fdisk 、gdisk 或 parted 创建新分区，以便与 LVM 结合使用。在 LVM 分区上，始终将分区类型设备为 Linux LVM 。也可以使用完成的磁盘、RAID 阵列或 SAN 磁盘。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532915604992709.png" alt="image.png"></p>
+<p>2、创建物理卷</p>
+<p>使用pvcreate 为分区（或其他物理设备）添加标签，使其作为物理卷与 LVM 结合使用。会将用于存储 LVM 配置数据的一个标头直接写入到 PV ，PV 分为多个固定大小的物理范围（PE），以空格分隔多个设备名。  </p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532915758521488.png" alt="image.png"></p>
+<p>此命令会将设备 /dev/vda2 和 /dev/vdb1 标记为 PV，准备好分配到卷组中。</p>
+<p>仅当没有空闲的 PV 可以创建或扩展 VG 时，才需要创建 PV</p>
+<p>3、创建卷组</p>
+<p> vgcreate 用于创建包含一个或多个物理卷的池，称为卷组。 VG 的大小由池中的物理范围的总数决定。 VG  负责通过向 LV 分配空闲 PE 来托管一个或多个逻辑卷；因此 ，在创建 LV时 ,VG 必须具有足够的空闲 PE 可用。</p>
+<p>以 vgcreate 的参数形式，定义 VG 名称并列出一个或多个要分配给 VG 的 PV。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532916156887043.png" alt="image.png"></p>
+<p>此命令将创建名为 vg-alpha 的 VG ，它的大小是 /dev/sda2 和 /dev/vdb1 ，这两个PV的总大小（以PE单位计）</p>
+<p>仅当没有现有 VG 时才需要创建VG.可能会出于管理原因创建额外的 VG ，用于管理 PV和 LV的使用。否则，可在需要时扩展现有 VG 以容纳新的 LV。</p>
+<p>4、创建逻辑卷</p>
+<p> lvcreate 根据卷组中的可用物理范围创建新的逻辑卷。至少为 lvcreate 使用以下参数：使用 -n 选项设置 LV名称，使用 -L 选项设置 LV 大小（以字节为单位），并确定要在其中创建 LV 的 VG 名称。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532916442904085.png" alt="image.png"></p>
+<p>此命令将在 VG vg-alpha 中创建一个名为 hercules 的 LV ，其大小为 2GB.必须有足够的空闲物理范围来分配 2GB，如有必要会将其取整为 PE 单元大小的倍数。</p>
+<p>有多种方式可以指定大小： -L 要求以字节或更大指定值为单位的大小。例如 M,G。-l 选项要求以物理范围数为单位进行衡量的大小。</p>
+<p>lvcreate -L 128M,将逻辑卷的大小确定为正好 128 MiB</p>
+<p>lvcreate -l 128,将逻辑卷的大小确定为正好128个范围（PE）的大小，大小取决于 PE 块的大小。</p>
+<h6 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS :"></a>TIPS :</h6><p>不同的工具将使用传统名称 /dev/vgname/lvname 或内核设备映射程序名。 /dev/mapper/vgname-lvname 。显示逻辑卷名。</p>
+<p>5、添加文件系统</p>
+<p>使用 mkfs 在新逻辑卷上创建文件系统（xfs,ext4）</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532917059786660.png" alt="image.png"></p>
+<h5 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h5><h6 id="删除所有逻辑卷组件需要四个步骤："><a href="#删除所有逻辑卷组件需要四个步骤：" class="headerlink" title="删除所有逻辑卷组件需要四个步骤："></a>删除所有逻辑卷组件需要四个步骤：</h6><p>1、准备文件系统</p>
+<p>将必须保留的所有数据移动到另一个文件系统，然后使用 umount 卸载该文件系统。不要忘记删除与此文件系统关联的任何/etc/fstab 条目</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532923101657518.png" alt="image.png"></p>
+<h6 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h6><p>删除逻辑卷会破坏该逻辑卷上存储的所有数据。删除逻辑卷之前，请备份或移动数据 </p>
+<p>2、删除逻辑卷</p>
+<p>使用 lvremove 删除不再使用的逻辑卷。使用设备名称作为参数。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532923218881106.png" alt="image.png"></p>
+<p>运行此命令之前，必须卸载 LV 文件系统。删除 LV 之前，将请求确认</p>
+<p>LV 的物理范围将会被释放，并可用于分配给卷组中的现在 LV 或新 LV。</p>
+<p>3、删除卷组</p>
+<p>使用 vgremove 删除不再需要的卷组。使用 VG 名称作为参数。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532923227946554.png" alt="image.png"></p>
+<p>VG 的物理卷组会被释放，并可用于分配给系统中的现在 VG 或新 VG</p>
+<p>4、删除物理卷</p>
+<p>使用 pvremove 删除不再需要的物理卷。使用空格分隔的 PV 设备列表同时删除多个 PV 。PV 元数据将从分区（或磁盘）清除，分区现在已空闲，可重新分配或重新格式化。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532923483491728.png" alt="image.png"></p>
+<h5 id="查看-LVM-状态信息"><a href="#查看-LVM-状态信息" class="headerlink" title="查看 LVM 状态信息"></a>查看 LVM 状态信息</h5><p>使用 pvdisplay 显示有关物理卷的信息。如果未随命令指定任何参数，则它将列出有关系统上所有 PV 的信息。如果参数为特定设备名称，则将仅显示特定 PV 的信息。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532923530769371.png" alt="image.png"></p>
+<ol>
+<li><p>PV Name 映射到设备名称</p>
+</li>
+<li><p>VG Name 显示将 PV 分配到的卷组。</p>
+</li>
+<li><p>PV Size 显示 PV 的物理大小，包括任何不可用的空间。</p>
+</li>
+<li><p>PE Size 是物理范围大小，它是逻辑卷中可分配的最小大小。</p>
+</li>
+</ol>
+<ol>
+<li>它也是计算以 PE 单位报告的任何值（如 Free PE）的大小时的倍数，例如：26个 PE x 4MiB（PE Size）可提供104 MiB 可用空间。逻辑卷大小将取整为 PE 单位的倍数。  </li>
+</ol>
+<ol start="6">
+<li>Free PE 显示有多少 PE 单位可用于分配给新逻辑卷。</li>
+</ol>
+<h6 id="卷组"><a href="#卷组" class="headerlink" title="卷组"></a>卷组</h6><p> 使用 vgdisplay 显示有关卷组的信息。如果没有为命令指定任何变量，则它将显示有关所有 VG 的信息， 使用 VG 名称作为变量将仅显示该特定 VG 的信息。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532923545926922.png" alt="image.png"></p>
+<ol>
+<li><p>VG Name 是此卷组的名称</p>
+</li>
+<li><p>VG Size 是存储池可用于逻辑卷分配的总大小。</p>
+</li>
+<li><p>Total PE 是以 PE 单位表示的总大小</p>
+</li>
+<li><p>Free PE /Size 显示 VG 中有多少空闲空间可用于分配给新 LV 或扩展现在 LV。</p>
+</li>
+</ol>
+<h6 id="逻辑卷"><a href="#逻辑卷" class="headerlink" title="逻辑卷"></a>逻辑卷</h6><p> 使用 lvdisplay 显示有关逻辑卷的信息。同样，如果未随命令指定任何参数，则将显示有关所有 LV 的信息； 而使用 LV 设备名称任何参数将仅显示有关该特定设备的信息。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532923602504982.png" alt="image.png"></p>
+<ol>
+<li><p>LV Patch 显示此逻辑卷的设备名称；某些工具可能会将设备名报告为/dev/mapper/vgname-lvname; 两个名称都表示同一 LV </p>
+</li>
+<li><p>VG Name 显示从其分配 LV的卷组。</p>
+</li>
+<li><p>LV Size 显示 LV的总大小。使用文件系统工具检查可用空间和数据存储的已用空间。</p>
+</li>
+<li><p>Current LE 显示此 LV 使用的逻辑范围数。 LE 通常映射到 VG 中的物理范围，并因此映射到物理卷。</p>
+</li>
+</ol>
+<h5 id="扩展逻辑卷"><a href="#扩展逻辑卷" class="headerlink" title="扩展逻辑卷"></a>扩展逻辑卷</h5><h6 id="扩展和缩减卷组"><a href="#扩展和缩减卷组" class="headerlink" title="扩展和缩减卷组"></a>扩展和缩减卷组</h6><p>可以通过添加额外的物理卷来为卷组增加更多磁盘空间。这种做法称为扩展卷组。由额外的物理卷提供的新物理区段可以分配给逻辑卷。</p>
+<p>可以将未使用的物理卷从卷组中删除。这种做法称为缩减卷组。可以使用名为 pvmove 的工具，将数据从一个物理卷上的区段移动到卷组中其他物理卷上的区段。通过这种方式，可以将新磁盘添加到现在卷组，将数据从较旧或较慢的磁盘移动到新磁盘，并将旧磁盘从卷组中删除。可在卷组中的逻辑卷正在使用时完成这些操作。</p>
+<h6 id="扩展卷组可能需要四个步骤："><a href="#扩展卷组可能需要四个步骤：" class="headerlink" title="扩展卷组可能需要四个步骤："></a>扩展卷组可能需要四个步骤：</h6><p>1、准备物理设备</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532934683798263.png" alt="image.png"></p>
+<p>2、创建物理卷</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532934694227911.png" alt="image.png"></p>
+<p>3、扩展卷组</p>
+<p>vgextend 用于向卷组添加新物理卷。使用 VG 名称和 PV 设备名称作为 vgextend 的参数。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532934705170371.png" alt="image.png"></p>
+<p>4、验证新空间是否可用</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532934716787931.png" alt="image.png"></p>
+<h6 id="缩减卷组需要两个步骤："><a href="#缩减卷组需要两个步骤：" class="headerlink" title="缩减卷组需要两个步骤："></a>缩减卷组需要两个步骤：</h6><p>1、移动物理区段</p>
+<p>使用 pvmove将物理卷上使用的任何物理区段重新分配给 VG 中的其他 PV。仅当 VG 中存在足够的空间范围，且所有这些范围都来自其他 PV 时，才能执行此操作。使用将移动的 PE 所属的 PV 设备名称作为该命令的参数。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532934896111896.png" alt="image.png"></p>
+<h5 id="警告："><a href="#警告：" class="headerlink" title="警告："></a>警告：</h5><p>使用 pvmove 前建议备份卷组所有逻辑卷上存储的数据。如果操作期间意外断电，可能会导致卷组状态不一致。这可能导致卷组中逻辑卷上的数据丢失。</p>
+<p>2、缩减卷组</p>
+<p>使用 vgreduce 将物理卷从卷组中删除。使用VG 名称和 PV 设备名称作为该命令参数。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532935348576038.png" alt="image.png"></p>
+<p>/dev/vdb2 PV 现在已从 vg-alpha VG 删除，并可以添加到其他 VG 。或者 ，也可以使用 pvremove 永久停止将设备用作 PV。</p>
+<h5 id="扩展逻辑卷和-XFS-文件系统"><a href="#扩展逻辑卷和-XFS-文件系统" class="headerlink" title="扩展逻辑卷和 XFS 文件系统"></a>扩展逻辑卷和 XFS 文件系统</h5><p>逻辑卷是一个优势在于能够在不停机的情况下增加其大小。可将卷组中的空闲物理区段添加到逻辑卷以扩展其容量，然后可使用逻辑卷扩展所包含的文件系统。</p>
+<h6 id="扩展逻辑卷需要三个步骤："><a href="#扩展逻辑卷需要三个步骤：" class="headerlink" title="扩展逻辑卷需要三个步骤："></a>扩展逻辑卷需要三个步骤：</h6><p>1、验证卷组是否具有可用的空间</p>
+<p> 使用 vgdisplay 验证是否有足够的物理区段供使用。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532935692930444.png" alt="image.png"></p>
+<p>检查输入中的 Free PE /Size ，它应该报告一个等于或大于所需额外空间的值 。如果没有足够的可用空间，则卷组扩展幅度至少要达到所需空间的大小。</p>
+<p>2、扩展逻辑卷</p>
+<p> lvextend 可将逻辑卷扩展为新的大小。添加 LV设备名称作为命令的最后一个参数。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532935843642498.png" alt="image.png"></p>
+<p>此命令可将逻辑卷 hercules 的大小增加 300 M 。请注意空间大小前面的”+“，它表示 向现有大小增加此值；如无该符号，该值定义 LV 的最终确切大小。  </p>
+<p>与 lvcreate 类似，有多种方式可以指定大小：-l 通常要求物理区段值，而 -L 要求以字节或更大的单位表示 。</p>
+<p>lvextend -l 128 ：将逻辑卷的大小调整为正好 128 个范围</p>
+<p>lvextend -l +128：向逻辑卷的当前大小添加128 个范围</p>
+<p>lvextend -L 128M：将逻辑卷的大小调整为正好128M</p>
+<p>lvextend -L +128M：向逻辑卷的当前大小增加128M</p>
+<p>lvextend -l +50%FREEE：向 LV 添加 VG 中当前可以空间的 50%</p>
+<p>3、扩展文件系统</p>
+<p>xfs_growfs /mountpoint 扩展文件系统以占用已扩展的 LV。 xfs_growfs 要求在文件系统运行时进行搭载该系统；在调整大小操作期间仍然可以使用该文件系统。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1532936322407591.png" alt="image.png"></p>
+<h6 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h6><p>常见错误是运行 lvextend 但忘记运行 xfs_growfs  。两步合二为一的方法是 lvextend 使用 -r 作为命令的一个选项，这将使用 fsadm（8） 在扩展 LV后调整文件系统的大小。它可以用于多种不同的文件系统。</p>
+<h6 id="验证已挂载文件系统的新大小："><a href="#验证已挂载文件系统的新大小：" class="headerlink" title="验证已挂载文件系统的新大小："></a>验证已挂载文件系统的新大小：</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h /mountpoint</span><br></pre></td></tr></table></figure>
+<h6 id="扩展逻辑卷和ext-4文件系统"><a href="#扩展逻辑卷和ext-4文件系统" class="headerlink" title="扩展逻辑卷和ext 4文件系统"></a>扩展逻辑卷和ext 4文件系统</h6><p>扩展基于ext4 的逻辑卷的步骤基本和扩展基于 xfs的 LV 相同，只有调整文件系统大小的步骤不同</p>
+<p>1、验证卷组的可用性</p>
+<p>2、扩展逻辑卷</p>
+<p>3、扩展文件系统</p>
+<p>resize2fs /dev/vgname/lvname 扩展文件系统以占用新扩展的 LV。正与 xfs_growfs 一样，可以在文件系统正在运行时挂载该文件系统（可选）包含 -p 选项以查看调整大小操作的进度。</p>
+<p><img src="/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/1533021882431708.png" alt="image.png"></p>
+<h6 id="注意：-1"><a href="#注意：-1" class="headerlink" title="注意："></a>注意：</h6><p>xfs_growfs 与 resize2fs 之间的主要区别是为识别文件系统而传递的参数。</p>
+<p>xfs_growfs 采用挂载点，而resize2fs  采用逻辑卷名称。</p>
+<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><h6 id="管理逻辑卷-1"><a href="#管理逻辑卷-1" class="headerlink" title="管理逻辑卷"></a>管理逻辑卷</h6><ul>
+<li><p>pvcreate、pvremove和pvdisplay 创建、删除和列出物理卷（PV）</p>
+</li>
+<li><p>vgcreate、vgremove和vgdisplay 创建、删除和列出卷组（VG）</p>
+</li>
+<li><p>lvcreate、lvremove和lvdisplay 创建、删除和列出逻辑卷（LV）</p>
+</li>
+<li><p>添加逻辑卷以 PV、VG、和 LV的先后顺序完成。</p>
+</li>
+<li><p>删除逻辑卷以 LV、VG、和 PV 的先后顺序完成。</p>
+</li>
+</ul>
+<h6 id="扩展逻辑卷-1"><a href="#扩展逻辑卷-1" class="headerlink" title="扩展逻辑卷"></a>扩展逻辑卷</h6><ul>
+<li><p>使用 pvcreate 和 vgextend 扩展卷组（VG）；使用vgdisplay 检查结果。</p>
+</li>
+<li><p>使用pvmove 和 vgreduce 缩减 VG 。</p>
+</li>
+<li><p>使用xfs_growfs 调整xfs 文件系统的大小。</p>
+</li>
+<li><p>使用 resize2fs 调整ext4 文件系统的大小。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/31/rh134-e7-ae-a1-e7-90-86-e9-80-bb-e8-be-91-e5-8d-b7-e7-ae-a1-e7-90-86lvm-e5-ad-98-e5-82-a8/" data-id="cjqikv04w0027zjkj3mr7cc6s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/" class="article-date">
+  <time datetime="2018-07-12T03:21:48.000Z" itemprop="datePublished">2018-07-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/">RH134 第九章 向linux 系统添加磁盘、分区和文件系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用fdisk 在采用MBR 分区方案的磁盘上创建和删除磁盘分区  </p>
+<p>使用gdisk在采用 GPT 分区方案的磁盘上创建和删除磁盘分区</p>
+<p>使用mkfs 格式化带有文件系统的设备</p>
+<h6 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h6><p>硬盘分区可以将硬盘划分为多个逻辑存储单元，这些单元称为分区。通过将磁盘划分为多个分区，系统管理员可以使用不同的分区执行不同功能，例如：</p>
+<ul>
+<li><p>限制应用或用户的可用空间</p>
+</li>
+<li><p>允许从同一磁盘进行不同操作系统的多重启动</p>
+</li>
+<li><p>将操作系统和程序文件与用户文件分隔开。</p>
+</li>
+<li><p>创建用于操作系统虚拟内存交换的单独区域。</p>
+</li>
+<li><p>限制磁盘空间使用情况，提高诊断工具和备份映像的性能。</p>
+</li>
+</ul>
+<h6 id="MBR-分区方案"><a href="#MBR-分区方案" class="headerlink" title="MBR 分区方案"></a>MBR 分区方案</h6><p>MBR 指定BIOS 如果对磁盘进行分区，最多支持4个主分区，在linux 上可以使用扩展分区和逻辑分区来创建最多15个分区。由于分区大小数据以32位值存储，最大磁盘和分区大小限制为 2 TiB  </p>
+<h6 id="GPT-分区方案"><a href="#GPT-分区方案" class="headerlink" title="GPT 分区方案"></a>GPT 分区方案</h6><p>对于运行统一可扩展固件接口接口（UEFI）固件的系统，GPT 是在物理硬盘上布置上分区表的标准。GPT是UEFI 标准的一部分。GPT 默认情况下支持最多128个分区。GPT 使用 64 位值，支持最大 8 ZiB 。即80亿太字字的分区和磁盘。</p>
+<h6 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h6><p>GTP 的 8 ZiB限制是基于512字节的块大小，随着硬盘驱动器供应商转为使用 4096 字节块，此限制将增加至64 ZiB.</p>
+<p>除解决 MBR 分区方案的限制以外，GPT 还可提供一些其他功能特性和优势。正如其名，GPT 使用128的GUID 来唯一识别每个磁盘和分区。与 MBR 存在单一故障点不同， GPT 提供分区表信息的冗余。主GPT 位于磁盘头部，而备份副本（次要GPT）位于磁盘尾部。此外 GPT 采用 CRC 校验和来检测 GPT 头和分区表中的错误与损坏。</p>
+<h6 id="使用fdisk-管理MBR-分区"><a href="#使用fdisk-管理MBR-分区" class="headerlink" title="使用fdisk 管理MBR 分区"></a>使用fdisk 管理MBR 分区</h6><p>创建 MBR 式磁盘分区涉及八个步骤：</p>
+<p>1、指定设备，以root身份运行</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276497330227.png" alt="image.png"></p>
+<p>2、请求一个新的主分区可扩展分区</p>
+<p>输入 n 以请求一个新分区，并指定该分区是主分区还是扩展分区。默认为主分区类型，超过4个分区可通过扩展分区来解决</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276592930306.png" alt="image.png"></p>
+<p>3、指定分区编号  </p>
+<p>用来作为磁盘上新分区的标识使用，默认值是未使用的最小分区编号</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276722303229.png" alt="image.png"></p>
+<p>4、指定新分区开始的第一个扇区  </p>
+<p>默认值为第一个可用扇区，一般不需要改</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276804698343.png" alt="image.png"></p>
+<p>5、指定新分区结束 的最后一个扇区</p>
+<p>默认值是与新分区相邻的可用且未分区扇区中的最后一个扇区。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276896690206.png" alt="image.png"></p>
+<p>除末尾扇区编号以外，fdisk 还可以接受代表分区期望大小的数字，该数字以扇区数表示：</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276914317730.png" alt="image.png"></p>
+<p>fdisk 提供的最后一个，也是最为用户友好的输入选项，就是以单位 KB,MB,或GB 指定新分区的大小：</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276934798991.png" alt="image.png"></p>
+<p>输入分区的末尾边界后，fdisk 就会显示分区创建的确认信息。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276954842354.png" alt="image.png"></p>
+<p>6、定义分区类型</p>
+<p>如果新创建的分区应具有 Linux 以外的类型，请输入 t 命令来更改分区类型。输入新分区类型的十六进制代码。如果需要，可使用 L 命令显示所有分区类型的十六进制代码表。正确设置分区类型非常重要，因为某些工具依靠它才能正常运行。例如，当 Linux 内核遇到类型为 0xfd（Linux RAID）分区时，它将尝试自动启动 RAID 卷。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276971677806.png" alt="image.png"></p>
+<p>7、保存分区表更改</p>
+<p>发出 w 命令，以便将更改写入到磁盘分区表并退出 fdisk 程序。从而完成创建请求。  </p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531276989994678.png" alt="image.png"></p>
+<p>8、启动内核对新分区表的重新读取。</p>
+<p>运行partprobe 命令，并将磁盘设备名称作为参数，以强制重新读取其分区表。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531277008909144.png" alt="image.png"></p>
+<h6 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h6><p>仅当管理员发出 w 命令将所有分区表更改定稿到磁盘时，fdisk 程序才会将所有分区表编辑排队，并将这些编辑写入到磁盘。如果在退出交互式fdisk 会话之前未执行 w 命令，则所有请求都会被丢弃，而磁盘的分区表不变。此功能在向fdisk 发出错误命令时尤为实用，要放弃错误的命令并避免意想不到的后果。只需退出 fdisk 并且不保存分区表更改。</p>
+<p>删除 MBR 磁盘分区  </p>
+<p>使用 fdisk 从采用 MBR 分区的磁盘中删除分区需要到五个步骤：</p>
+<p>1、指定要删除分区的磁盘，执行 fdisk 命令，并指定磁盘设备名称作为参数</p>
+<p>2、确定要删除分区的编号，输入 p 以打印分区表</p>
+<p>3、请求删除分区，输入 d 命令启动分区删除，然后指定要删除的分区编号 </p>
+<p>4、保存分区表更改，发出 w 指令，将更改写入到分区表，从而完成分区表删除请求</p>
+<p>5、启动内核对分区表的重新读取，使用 partprobe 以磁盘名称为参数。 ps: partprobe /dev/sdb </p>
+<hr>
+<h6 id="使用-gdisk-管理gpt-分区"><a href="#使用-gdisk-管理gpt-分区" class="headerlink" title="使用 gdisk 管理gpt 分区"></a>使用 gdisk 管理gpt 分区</h6><p>对于采用 GPT 分区方案的磁盘，可使用 gdisk 分区编辑器管理分区。</p>
+<h6 id="警告："><a href="#警告：" class="headerlink" title="警告："></a>警告：</h6><p>尽管已向 fdisk 添加了 GPT 的支持，但该支持仍被视为实验性质，因此应使用 gdisk 命令在采用 GPT 分区方案进行分区的磁盘上执行分区更改。</p>
+<p>创建 GPT 磁盘分区需要八个步骤：</p>
+<p>1、指定要创建分区的设备，同 fdisk </p>
+<p>2、 请求新分区，同 fdisk </p>
+<p>3、指定分区编号 ，同 fdisk </p>
+<p>4、指定新分区开始的磁盘位置，同 fdisk ,支持指定大小（KB,MB,GB,TB,PB）的方式</p>
+<p>5、指定磁盘上新分区的最后一个扇区，同 fdisk </p>
+<p>6、定义分区类型，操作同 fdisk </p>
+<p>7、保存分区表</p>
+<p>8、重新加载分区</p>
+<p>删除 GPT 的磁盘分区表，同 fdisk 操作  </p>
+<h6 id="创建文件系统"><a href="#创建文件系统" class="headerlink" title="创建文件系统"></a>创建文件系统</h6><p>创建块设备后，下一步是为其应用文件系统格式。文件系统将向块设备应用一种结构 ，这样就可以存储数据并从中检索数据。红帽企业 Linux 支持许多不同的文件系统类型，其中两种常见的类型是 xfs 和 ext4 。红帽企业 Linux 安装程序 anaconda 中默认使用 xfs .  </p>
+<p>mkfs 命令可用于为块设备应用文件系统。如果不指定类型，则将使用扩展类型二（ext2）文件系统，该类型在许多使用场合下并不可取。要指定文件类型，应使用 -t 。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531296248918343.png" alt="image.png"></p>
+<h6 id="挂载文件系统"><a href="#挂载文件系统" class="headerlink" title="挂载文件系统"></a>挂载文件系统</h6><p>应用文件系统格式后，添加新文件系统的文件最后一步是将该文件系统连接到目录结构中。文件系统连接到目录层次结构中后，用户空间实用程序可以访问设备上的文件或在设备上写入文件。</p>
+<h6 id="手动挂载文件系统"><a href="#手动挂载文件系统" class="headerlink" title="手动挂载文件系统"></a>手动挂载文件系统</h6><p>管理员可使用 mount 命令将设备手动连接到目录位置或挂载点，具体为指定设备和挂载点，以及可能需要的任何选项，从而自定义设备的行为。</p>
+<p>mount /dev/sdb1 /mnt</p>
+<p>mount 还可用于查看当前已挂载的文件系统、挂载点和选项</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531296936475764.png" alt="image.png"></p>
+<p>手动挂载文件系统是验证已经格式化的设备是否可访问或是否按预期方式工作的一种理想方式。但是，当系统重新启动后，尽管文件系统仍然存在并且具有完整的数据，但它不会再次换挂载到目录树中。如果管理员希望永久挂载文件系统，则需要将该文件系统的一个列表添加到 /etc/fstab 。  </p>
+<h6 id="永久挂载文件系统"><a href="#永久挂载文件系统" class="headerlink" title="永久挂载文件系统"></a>永久挂载文件系统</h6><p>通过将设备的列表添加到 /etc/fstab  文件中，管理员可心将设备配置为在系统启动后挂载到挂载点。</p>
+<p>/etc/fstab 是以空格分隔的文件，每行具有六个字段</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531297457952475.png" alt="image.png"></p>
+<p>第一个字段是指定要使用的设备。示例中分别使用了 UUID 和设备文件两种方式来指定设备。UUID 存储在文件系统超级块中，并在文件系统创建时创建。</p>
+<h6 id="tips-1"><a href="#tips-1" class="headerlink" title="tips:"></a>tips:</h6><p>使用 UUID 更为可取，因为块设备标识符在特定情况下可能会发生变化，例如当云提供商更改虚拟机的基础存储层时。块设备的文件可能会变化，但UUID 会在设备的超级块中保持不变。</p>
+<p>blkid 命令可用于扫描连接到计算机的块设备，并报告已分配的 UUID 和文件系统格式等数据。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531297827908462.png" alt="image.png"></p>
+<p>第二个字段是设备应连接到目录层次结构中的挂载点。挂载点应已存在，如果不存在，可以使用 mkdir 创建挂载点。挂载点中最好不要有文件。</p>
+<p>第三个字段是包含已应用于块设备的文件系统类型。</p>
+<p>第四个字段是挂载时应该应用于设备以便自定义行为的选项列表。此字段是必须的，且有一组称为 defaults 的常用选项。其它选项记录在 mount man page 中。</p>
+<p>最后两个字段是转储标志和 fsck 顺序。转储标志与dump 命令配合使用，用于生成设备内容的备份。fsck 顺序字段确定在文件系统未完全卸载的情况下，是否应在启动时运行 fsck 。fsck 顺序的值指示当有多个文件系统需要检查时，应对这些文件系统运行 fsck 的顺序 。</p>
+<h6 id="tips-2"><a href="#tips-2" class="headerlink" title="tips :"></a>tips :</h6><p>/etc/fstab 中存在错误的条目可能会导致计算机无法启动。为避免这种情况，管理员应卸载新文件系统，然后使用 mount -a （该命令将读取 /etc/fstab ）将该文件系统重新挂载到原位，以验证条目是否有效。如果 mount -a 命令返回错误，则应在重新启动计算机之前纠正错误。</p>
+<h6 id="管理交换空间"><a href="#管理交换空间" class="headerlink" title="管理交换空间"></a>管理交换空间</h6><p>交换空间是可与Linux  内核内存管理子系统配合使用的磁盘区域。交换空间用于通过保存不活动的内存页来补充系统RAM 。系统 RAM与交换空间组合在一起称为虚拟内存。</p>
+<p>当系统上的内存使用量超过定义的限制时，内核将梳理 RAM ，寻找已分配给进程但空闲的内存页。内核将空闲的内存页写入到交换区，并且重新分配 RAM 页面以代其他进程使用。如果某个程序需要访问已写入到磁盘的页面，则内核会找到另一个空闲的内存页，将其写入到磁盘，然后从交换区重新调用所需的页面。</p>
+<p>由于交换区位于磁盘上，所以与 RAM相经交换非常慢。尽管交换空间用于扩充系统 RAM ，但应仅可能将交换空间的使用保持在最低限度。</p>
+<p>创建交换空间，管理员需要执行三项任务：</p>
+<ul>
+<li><p>创建分区</p>
+</li>
+<li><p>将分区的类型设置为 82 Linux swap </p>
+</li>
+<li><p>对设备进行签名格式化</p>
+</li>
+</ul>
+<p>创建分区，使用工具 fdisk 创建所需大小的分区。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531359731927864.png" alt="image.png"></p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531359756116868.png" alt="image.png"></p>
+<h6 id="分配分区类型"><a href="#分配分区类型" class="headerlink" title="分配分区类型"></a>分配分区类型</h6><p>交换分区创建后，建议为做法是将分区类型可系统 ID 更改为 82 Linux swap 。在过去，工具会根据分配类型来确定是否应激活设备，但现在情况已不再如此。即使实用程序不再使用分区类型，设备分区类型也可以全管理员快速确定该分区的用途。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531359953672134.png" alt="image.png"></p>
+<p>格式化设备， mkswap 命令向设备应用交换签名。与其他格式化工具不同， mkswap 在设备开关写入单个数据块，而将设备的其余部分保留为未格式化，从而使其可用于存储内存页。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531359975493820.png" alt="image.png"></p>
+<h6 id="激活交换空间"><a href="#激活交换空间" class="headerlink" title="激活交换空间"></a>激活交换空间</h6><p>管理员可以使用  swapon 命令激活已格式化交换空间。可以在设备上调用 swapon  ，否则 swapon -a 就将激活 /etc/fstab 文件中列出的所有交换空间。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531360582174595.png" alt="image.png"></p>
+<h6 id="永久激活交换空间"><a href="#永久激活交换空间" class="headerlink" title="永久激活交换空间"></a>永久激活交换空间</h6><p>交换空间很可能需要在每次计算机启动时自动激活。为使计算机在每次启动时都激活交换空间，必需在 /etc/fstab 文件中进行配置。</p>
+<p>如果需要，管理员可以使用 swapoff 命令停用交换空间。只有当任何交换的数据都可以写入到其他活动的交换空间或写回内存中时， swapoff 才会成功。如果数据无法写入到其他位置，则 swapoff 会失败，并显示错误，而交换空间将仍保持活动。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531360808313305.png" alt="image.png"></p>
+<p>该示例使用UUID 作为第一个字段。 UUID 存储在设备上存储的交换签名中，并且是 mkswap 输出的一部份。如果 mkswap 输出已丢失，则可以使用 blkid 命令扫描系统并报告所有已连接的块设备。如果管理员不希望使用 UUID ，则第一个字段也可以使用原始设备名称。</p>
+<p>第二个字段通常为 mount point 保留。但是，由于交换设备无法通过目录结构访问，此字段是占位符值 swap </p>
+<p>第三个字段是文件系统类型。交换空间的文件系统类型为 swap </p>
+<p>第四个字段是选项，在上例中，使用了选项 defaults 。defaults 包括 挂载选项 auto, 即用于设备交换空间在启动时自动激活的选项。</p>
+<p>最后两个字段 是转储标志和 fsck 顺序。交换空间不需要备份，也不需要文件系统检查 。</p>
+<h6 id="注意：-1"><a href="#注意：-1" class="headerlink" title="注意："></a>注意：</h6><p>默认情况下会按顺序使用交换空间，即先使用第一个已激活交换空间，直到其空间已满，然后内核将开始使用第十个交换空间。使用 swapon -s 可显示交换空间的优先级。并可使用 pri= 挂载选项设备这些优先级。如果交换空间具有相同的优先级，则内核将循环写入到这些空间，而非写入单个交换空间直到其容量已满。</p>
+<p><img src="/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/1531365704503638.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/12/rh134-e7-ac-ac-e4-b9-9d-e7-ab-a0-e5-90-91linux-e7-b3-bb-e7-bb-9f-e6-b7-bb-e5-8a-a0-e7-a3-81-e7-9b-98-e3-80-81-e5-88-86-e5-8c-ba-e5-92-8c-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/" data-id="cjqikv04i001rzjkjjrc2i705" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/" class="article-date">
+  <time datetime="2018-07-06T10:00:19.000Z" itemprop="datePublished">2018-07-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/">RH134 第八章 连接到网络定义的用户和组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="使用身份管理服务"><a href="#使用身份管理服务" class="headerlink" title="使用身份管理服务"></a>使用身份管理服务</h3><p>用户信息和身份验证服务</p>
+<p>集中式身份管理系统至少需要提供两项服务：</p>
+<p>1、账户信息：包括用户名、主目录位置、UID 和 GID 、组成员身份等信息。常用的解决方案包括 LDAP （轻量级目录访问协议，用于 Active Directory 和 IPA 服务器等多个产品中）以及网络信息服务（NIS）。</p>
+<p>2、身份验证信息：系统验证用户身份的一种方法。这可以通过两种方式完成：向客户端系统提供加密密码哈希，或向服务器发送（加密）密码并接收响应。 LDAP 服务器不仅提供账号信息，也提供身份验证信息。 Kerberos 仅提供 sso 身份验证服务，通常与 LDAP 用户信息一起使用。 Kerberos 可用于 IPA 服务器和 Active Directory。</p>
+<p>在 RHEL7 系统上，本地用户信息由 /etc/passwd 提供，而身份验证信息（采用哈希密码的形式）由 /etc/shadow 提供。</p>
+<p>将系统连接到集中式 LDAP 服务器和 Kerberos 服务器</p>
+<h6 id="Authconfig"><a href="#Authconfig" class="headerlink" title="Authconfig"></a>Authconfig</h6><p>将 RHEL 7 系统配置为使用集中式身份管理服务器需要编辑各种文件，以及配置某些守护进程。为连接到中央 LDAP 服务器和 Kerberos 服务器，至少需要更新以下文件：</p>
+<p>/etc/ldap.conf：关于中央 LDAP 服务器及其设置的信息</p>
+<p>/etc/krb5.conf：关于中央 Kerberos 基础架构的信息</p>
+<p>/etc/sssd/sssd.conf：用于配置系统安全服务守护进程（sssd），即负责检索和缓存用户信息和身份验证信息的守护进程</p>
+<p>/etc/nsswitch.conf：为系统指明应使用哪些用户信息和身份验证服务</p>
+<p>/etc/pam.d/*：配置应如何处理各种服务的身份验证</p>
+<p>/etc/openldap/cacerts：用于存储根证书颁发机构（CA），这些证书颁发机构可以验证用来识别 LDAP 服务器的 SSL 证书。</p>
+<p>sssd 守护进程需要先启用并启动，然后才能供系统使用  </p>
+<p>配置如此多的文件和服务很容易出错 ， RHEL 7 随附了一套工具，可以自动完成这些配置：authconfig. authconfig 包含三个全部可以执行相同操作的相关工具：</p>
+<p>authconfig：命令行工具。此工具可用于在多个系统间自动进程配置。与 authconfig 配置使用的命令往往都较长，其中会传递多个选项。此工具使用 authconfig 软件包安装。</p>
+<p>authconfig-tui: authconfig 的交互式版本。使用菜单驱动的文本界面。可通过 ssh 使用。此工具使用 authconfig 软件包安装</p>
+<p>authconfig-gtk：此版本将启动图形界面，它也可以作为 system-config-authentication 启动。此工具使用 authconfig-gtk 软件安装。</p>
+<h6 id="必需的LDAP-参数"><a href="#必需的LDAP-参数" class="headerlink" title="必需的LDAP 参数"></a>必需的LDAP 参数</h6><p>要连接到中央LDAP服务以获取用户信息，authconfig 需要一些设置：</p>
+<p>LDAP 服务器的主机名称</p>
+<ul>
+<li><p>系统应在其中查找用户的LDAP树部分的base DN(区分名称)。这通常类似于 dc=example,dc=com 或 ou=People,o=PonyCorp. 此信息将由 LDAP 服务器管理员提供。</p>
+</li>
+<li><p>如果使用SSL/TLS 为与 LDAP 服务器的通信加密，那么 LDAP 服务器将提供可验证证书的根CA证书。</p>
+</li>
+</ul>
+<p>重要信息：系统还需要安装一些额外的软件包来提供LDAP 客户端功能。安装 sssd 将提供所有必需的依赖关系。</p>
+<h6 id="必需的-Kerberos-参数"><a href="#必需的-Kerberos-参数" class="headerlink" title="必需的 Kerberos 参数"></a>必需的 Kerberos 参数</h6><p>要将系统配置为使用集中工 Kerberos 系统进程用户身份验证，authconfig 需要以下设置：</p>
+<ul>
+<li><p>要使用 Kerberos 域的名称， Kerberos 域是全部使用一组共同的 Kerberos 服务器和用户进行身份验证的计算机组成的域。</p>
+</li>
+<li><p>一个或多个关键分发中心（KDC）。这是Kerberos 服务器的主机名称。</p>
+</li>
+<li><p>一个或多个管理服务器主机名称。这是客户端在希望更改密码或执行其他修改时将联系的计算机。它通常与主KDC 相同，但也可以是不同的计算机。</p>
+</li>
+</ul>
+<p>此外，管理员可以指定是否应使用 DNS 来查找要为特定主机名称使用的域，以及自动查找 KDC 服务器和管理服务器。可以安装一个额外的软件包 krb5-workstation ,以便帮助对 Kerberos 问题进行调试，以及从命令行处理 Kerberos 票据。</p>
+<h6 id="使用authconfig-gtk"><a href="#使用authconfig-gtk" class="headerlink" title="使用authconfig-gtk"></a>使用authconfig-gtk</h6><p>要使用authconfig-gtk 配置系统以采用 LDAP + Kerberos 请执行以下步骤：</p>
+<p>1、安装必需的软件包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install authconfig-gtk sssd krb5-workstation pam_krb5(必须)</span><br></pre></td></tr></table></figure></p>
+<p>2、启动authconfig-gtk   </p>
+<p>3、填写相关信息，如图</p>
+<p><img src="/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/1530842356574303.png" alt="image.png"></p>
+<p>4、如果支持 TLS ，请选中使用 TLS 加密连接，然后下载 CA 证书  </p>
+<p>5、从身份验证方法下载菜单选择 Kerberos 密码，然后填写域，KDC 和管理服务器字段。如果选中使用 DNS 查找域的 KDC 选项，则最后两个字段不可用。</p>
+<p>6、如果中央目录不可用，用户可以通过选项高级选项上的在首次登录时创建的主目录框，在首次登录时创建目录</p>
+<p>7、单击应用按钮以保存并激活更改。这将写入所有相关配置文件，并（重新）启动 sssd 服务。</p>
+<h6 id="测试配置"><a href="#测试配置" class="headerlink" title="测试配置"></a>测试配置</h6><p>要测试 LDAP + Kerberos 配置，管理员只需要尝试使用某个网络用户的凭据登录系统（通过ssh ），此外，getent 命令可用于检索有关某个网络用户的信息，格式为 getent passwd <username>  </username></p>
+<p>TIPS ： 在默认配置中，当没有为 getent  命令指定用户名时， sssd 不会列举网络用户，这是为保持图形登录 屏幕的整洁以及节省宝贵的网络资源和时间。</p>
+<h6 id="将系统连接到-IPA-服务器"><a href="#将系统连接到-IPA-服务器" class="headerlink" title="将系统连接到 IPA 服务器"></a>将系统连接到 IPA 服务器</h6><p>红帽提供了一种配置 LDAP 和 Kerberos 的集成解决方案：IPA (身份、策略和审核)服务器。 IPA 服务器提供 LDAP 和 Kerberos ,还有一套基于命令行和基于Web 的管理工具。除用户和身份验证信息以外， IPA 服务器还可以将 sudo 规则、ssh 公钥、SSH 主机密钥、TLS 证书、自动挂载器映射以及更多功能集中化。</p>
+<p>使用 ipa-client </p>
+<p>可以通过 authconfig 这套工具将 RHEL7 系统配置为使用 IPA 服务器，但还有一种专用的工具：ipa-client-install  。此命令可从ipa-client 包安装，该软件包将引入所有依赖关系（如 sssd）</p>
+<p>使用 ipa-client-install 的优势之一是，它可以从DNS 检索到几乎所有的必要信息（当由IPA服务器配置或由管理员手动配置时），并能够在 IPA服务器上创建主机条目和更多信息。这就使 IPA 服务器管理员可以为该主机设置访问策略、创建服务主体（例如，对于 NFSv4 导出）等等</p>
+<p>当不带任何参数运行 ipa-client-install 时，它将首次尝试从 DNS 检索有关为其DNS 域配置的 IPA 服务器信息，如果失败，它将提示管理员输入必要信息，例如IPA 服务器的域名和要使用的域。需要提供的其他信息是允许在 IPA 服务器上创建新计算机条目的账户的用户名和密码。除非已为此目的创建了另一个账户，否则默认 IPA 服务器管理员账户（admin） 可以用于此目的。</p>
+<p>DNS 驱动配置参考：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipa-client-install --domain=server0.example.com --no-ntp --mkhomedir</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/1530861460111883.png" alt="image.png"></p>
+<p>可以将所有必需信息作为命令行参数指定，从而使无人值守设置作为系统初始配置的一部分完成：例如通过kickstart 指定这些信息。  </p>
+<p>使系统加入 Active Directory   </p>
+<p>RHEL 7 提供多种方法可使系统加入 Active Directory 。管理员可以选择安装 samba-winbind 软件包，然后通过authconfig 系统工具配置winbind;，也可以安装 sssd 和 realmd 软件包，然后使用 sssd 和 realm 命令。</p>
+<p>注意：rcalm 命令也可以用于加入 Kerberos 域或 IPA 服务器域，但最终配置略有不同。例如，用户的用户名将加上@domain .ipa-client-install 是加入 IPA 域的首选方法。</p>
+<p>例：假定 Active Directory 域名为 domain.example.com<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、yum -y install realmd        <span class="comment">#安装必要的软件包 realmd </span></span><br><span class="line">2、sudo realm discover domain.example.com        <span class="comment">#发现domain域的设置</span></span><br><span class="line">3、sudo realm join domain.example.com             <span class="comment">#加入域并配置 sssd、pam、 /etc/nsswitch.conf .此命令尝试使用 Administrator 账户使本地系统加入 Active directory ，系统提示时输入此账户密码。要使用其它账户，请使用 --user 参数。</span></span><br><span class="line">4、<span class="comment">#Active Directory 账户现在本地可用，但使用 Active Directory 登录仍处理禁用状态。要启用登录，请使用以下命令：</span></span><br><span class="line">sudo realm permit --realm domain.example.com --all</span><br><span class="line"><span class="comment">#要仅允许特定用户登录，请将 --all 替换为这些用户的列表。例如：</span></span><br><span class="line">sudo realm permit --realm domain.example.com DOMAIN\\\Itchy DOMAIN\\\Scratchy.</span><br></pre></td></tr></table></figure></p>
+<h6 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h6><p>默认情况下，域用户必须使用其完全限定名称登录；例如</p>
+<p><a href="mailto:ipauser@ipa.example.com" target="_blank" rel="noopener">ipauser@ipa.example.com</a>(IPA 用户) 或 DOMAIN\Picard (Active Directory)。要禁用此功能，请将 /etc/sssd/sssd.conf 中相应域块中的 use_fully_qualified_names 设置更改为False ，或将其完全删除，然后重新启动 sssd 服务。</p>
+<p>authconfig{ , -{ ,-gtk , -tui}}  可用于将系统配置为使用集中式身份管理服务  </p>
+<p>sssd 配置为后台检索、验证缓存身份验证和用户信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/06/rh134-e7-ac-ac-e5-85-ab-e7-ab-a0-e8-bf-9e-e6-8e-a5-e5-88-b0-e7-bd-91-e7-bb-9c-e5-ae-9a-e4-b9-89-e7-9a-84-e7-94-a8-e6-88-b7-e5-92-8c-e7-bb-84/" data-id="cjqikv04k001tzjkj3nyp9kmc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/" class="article-date">
+  <time datetime="2018-05-21T09:41:40.000Z" itemprop="datePublished">2018-05-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL134/">RHEL134</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/">RH134 第七章 管理 SELINUX 安全性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="SElinux-安全的基本概念"><a href="#SElinux-安全的基本概念" class="headerlink" title="SElinux 安全的基本概念"></a>SElinux 安全的基本概念</h3><p>Security Enhanced Linux（SELinux）是一个额外的系统安全层。SELinux 的主要目标是防止已遭泄露的系统服务访问用户数据。大多数Linux管理员都熟悉标准的用户/组/其他权限安全模型。这种基于用户和组的模型称为自由决定的访问控制。SELinux 提供另一层安全，它基于对象并由更加复杂的规则控制，称为强制访问控制。</p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526607016211181.png" alt="blob.png"></p>
+<p>要允许远程匿名访问Web服务器，必须打开防火墙端口。然而，恶意人员却有机会通过安全漏洞侵入系统，而且如果他们破坏web 服务器进程，还会取得其权限，即apache 用户和apache 组的权限。该用户/组具有对文档根目录（/var/www/html）等项目的读取权限，以及对 /tmp 、/var/tmp 和所有人均可编写的任何其他文件/目录的写入权限  </p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526867174600183.png" alt="image.png"></p>
+<p>SELinux 是用于确定哪个进程可以访问哪些文件、目录和端口的一组安全规则。每个文件文件、进程和端口都具有特别的安全标签，称为SELinux 上下文。上下文是一个名称，SELinux 策略使用它来确定某个进程能否访问文件、目录或端口。除非显式规则授予访问权限，否则，在默认情况下，策略不允许任何交互。如果没有允许规则，则不允许访问。  </p>
+<p>SELinux 标签具有多种上下文：用户、角色、类型和敏感度。目标策略（即 RHEL 中启用的默认策略）会根据类型上下文来制定自己规则。类型上下文名称通常以 _t 结尾。</p>
+<p>Web 服务器的类型上下文是 httpd_t 。</p>
+<p>通常位于 /var/www/html 中的文件和目录的类型上下文是 httpd_sys_content_t 。 </p>
+<p>通常位于 /tmp 和 /var/tmp 中的文件和目录的类型上下文是 tmp_t 。</p>
+<p>Web 服务器端口的类型上下文是 http_port_t .</p>
+<p>存在某个策略规则 ，其允许 Apache （作为httpd_t 运行的Web 服务器进程）访问上下文通常位于 /var/www/html 及其他 Web 服务器目录 （httpd_sys_content_t） 中的文件和目录。对于通常位于 /tmp 和 /var/tmp 中的文件，策略中没有允许 规则 ，因此不允许进程访问。有了 SELinux ，恶意用户就无法访问 /tmp 目录。SELinux 还有适用于 NFS 和 CIFS 等远程文件系统的规则，尽管这些文件系统上的所有文件都使用相同的上下文标签。  </p>
+<p>许多处理文件的命令具有一个用于显示或设置 SELinux 的上下文选项（通常是 -Z ）.例如，ps、ls、cp 和 mkdir 全都使用 -Z 选项来显示或设置 SELinux 上下文。</p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526868364153324.png" alt="image.png"></p>
+<h6 id="SELinux-模式"><a href="#SELinux-模式" class="headerlink" title="SELinux 模式"></a>SELinux 模式</h6><p>若出于故障排除目的，可使用 SELinux 模式暂时禁用 SELinux 保护</p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526868454617069.png" alt="image.png">  </p>
+<p>在强制（Enforcing）模式中，SELinux 主动拒绝访问尝试读取类型上下文 tmp_t 的文件的Web 服务器。在强制模式中，SELinux 不仅记录而且提供保护。  </p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526868484423514.png" alt="image.png"></p>
+<p>许可（Permissive ）模式通常用于对问题进程故障排除，在许可模式中，即使没有显式规则， SELinux 也会允许所有交互，而且会记录它在强制模式中拒绝的那些交互。可使用此模式来暂时允许访问 SELinux 正在限制的内容。无需重新启动即可在强制模式和许可模式之间相互转换。</p>
+<p>第三种模式是禁用（Disabled）模式，会完全禁用SELinux 。需要重新启动系统才能彻底禁用SELinux ，或是从禁用模式转为强制模式或许可模式。</p>
+<h6 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS:"></a>TIPS:</h6><p>最好使用许可模式，而不是彻底关闭 SELinux 。原因之一在于即使在许可模式中，内核也将根据需要自动维护 SELinux 文件系统标签，从而避免为了启用 SELinux 而重启系统，重新标记文件系统所带来的昂贵费用。</p>
+<p>要显示当前使用的有效 SELinux 模式，使用 getenforce 命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># getenforce </span></span><br><span class="line">Enforcing</span><br></pre></td></tr></table></figure></p>
+<h6 id="SELinux-布尔值"><a href="#SELinux-布尔值" class="headerlink" title="SELinux 布尔值"></a>SELinux 布尔值</h6><p>SELinux 布尔值的更改 SELinux 策略行为的开关。 SELinux  布尔值是可以启用或禁用的规则，安全管理可以使用 SELinux 布尔值来有选择地调整策略。</p>
+<p>getsebool  命令用于显示 SELinux 布尔值及其当前值。 -a 选项可列出所有布尔值<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># getsebool -a</span></span><br><span class="line">abrt_anon_write --&gt; off</span><br><span class="line">abrt_handle_event --&gt; off</span><br><span class="line">abrt_upload_watch_anon_write --&gt; on</span><br><span class="line">antivirus_can_scan_system --&gt; off</span><br><span class="line">………………</span><br></pre></td></tr></table></figure></p>
+<h6 id="更改-SELinux-模式"><a href="#更改-SELinux-模式" class="headerlink" title="更改 SELinux 模式"></a>更改 SELinux 模式</h6><p>setenforce 命令修改当前的 SELinux 模式。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># setenforce </span></span><br><span class="line">usage:  setenforce [ Enforcing | Permissive | 1 | 0 ]</span><br></pre></td></tr></table></figure></p>
+<p>暂时性设置 SELinux 模式的另一种做法是在启动时将参数传递给内核。传递内核参数 enforcing=0 会使系统在启动时进入许可模式。值 1 将指定强制模式。可在指定 selinux=0 参数时禁用 SELinux 。值 1 将启用 SELinux 。  </p>
+<h6 id="设置默认-SELinux"><a href="#设置默认-SELinux" class="headerlink" title="设置默认 SELinux"></a>设置默认 SELinux</h6><p>确定在启动时使用哪种 SELinux 模式的配置文件是 /etc/selinux/config .配置文件中包含有用的注释信息</p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526871627344712.png" alt="image.png"></p>
+<p>使用 /etc/selinux/config 更改启动时的默认 SELinux 模式。在上述示例中，它被设置为强制模式。  </p>
+<p>传递 selinux= 和/或 enforcing= 内核参数会覆盖在 /etc/selinux/config 中指定的任何默认值。</p>
+<h6 id="更改-SELinux-上下文"><a href="#更改-SELinux-上下文" class="headerlink" title="更改 SELinux 上下文"></a>更改 SELinux 上下文</h6><p>初始 SELinux 上下文</p>
+<p>通常文件父目录的 SELinux 上下文决定该文件的初始 SELinux 上下文。父目录的上下文会分配给新建文件。这适用于 vim、cp、和touch等命令。但是，如果文件是在其他位置创建并且权限得以保留，（如使用 mv 或 cp -a），那么原始 SELinux 上下文将不会发生更改。</p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526872601651338.png" alt="image.png">  </p>
+<p>更改文件的 SELinux 上下文。可使用两个命令来更改文件 SELinux 上下文： chcon 和restorecon 。chcon 命令将文件的上下文更改成已指定为该命令参数的上下文。 -t 选项经常只用于指定上下文的类型。</p>
+<p>restorecon 命令是更改文件或目录的 SELinux 上下文的首选方法。不同于 chcon ，在使用此命令时，不会明确指定上下文，它使用 SELinux 策略中的规则来确定应该是哪种文件上下文。</p>
+<h6 id="TIPS："><a href="#TIPS：" class="headerlink" title="TIPS："></a>TIPS：</h6><p>不应使用 chcon 来更改文件的 SELinux 上下文。在明确指定上下文时，可能会出错。如果在系统启动时重新标记了其它文件系统，文件上下文将会还原为默认上下文。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># mkdir /virtual</span></span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Zd /virtual/</span></span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:default_t:s0 /virtual/</span><br><span class="line">[root@server0 ~]<span class="comment"># chcon -t httpd\_sys\_content_t /virtual/</span></span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Zd /virtual/</span></span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:httpd_sys_content_t:s0 /virtual/</span><br><span class="line">[root@server0 ~]<span class="comment"># restorecon -v /virtual/</span></span><br><span class="line">restorecon reset /virtual context unconfined_u:object_r:httpd_sys_content_t:s0-&gt;unconfined_u:object_r:default_t:s0</span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Zd /virtual/</span></span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:default_t:s0 /virtual/</span><br></pre></td></tr></table></figure></p>
+<h6 id="定义-SELinux-默认文件上下文规则"><a href="#定义-SELinux-默认文件上下文规则" class="headerlink" title="定义 SELinux 默认文件上下文规则"></a>定义 SELinux 默认文件上下文规则</h6><p>semanage fcontext 命令可用于显示或修改 restorecon 命令用来设置默认文件上下文的规则。它使用扩展正则表达式来指定路径和文件名。fcontext 规则中最常用的扩展正则表达式是 (/.*)?，这意味着：“（可选）匹配 / 后跟任意的字符”。它将会匹配在表达式前面列出的目录并递归地匹配该目录中的所有内容。</p>
+<p>restorecon 命令是 policycoreutil 软件包的一部分； semanage 是 policycoreutil-python 软件包的一部分。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># touch /tmp/file1 /tmp/file2</span></span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Z /tmp/file*</span></span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:user_tmp_t:s0 /tmp/file1</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:user_tmp_t:s0 /tmp/file2</span><br><span class="line">[root@server0 ~]<span class="comment"># mv /tmp/file1 /var/www/html/</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cp /tmp/file2 /var/www/html/</span></span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Z /var/www/html/</span></span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:user_tmp_t:s0 file1</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:httpd_sys_content_t:s0 file2</span><br><span class="line">[root@server0 ~]<span class="comment"># semanage fcontext -l</span></span><br><span class="line">………………</span><br><span class="line">/var/www(/.*)?                                     all files          system_u:object_r:httpd_sys_content_t:s0 </span><br><span class="line">………………</span><br><span class="line">[root@server0 ~]<span class="comment"># restorecon -Rv /var/www/</span></span><br><span class="line">restorecon reset /var/www/html/file1 context unconfined_u:object_r:user_tmp_t:s0-&gt;unconfined_u:object_r:httpd_sys_content_t:s0</span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Z /var/www/html/file</span></span><br><span class="line">ls: cannot access /var/www/html/file: No such file or directory</span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Z /var/www/html</span></span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:httpd_sys_content_t:s0 file1</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:httpd_sys_content_t:s0 file2</span><br></pre></td></tr></table></figure></p>
+<p>以下示例显示了如何使用semanage 为新目录添加上下文。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># touch /virtual/index.html</span></span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Zd /virtual/</span></span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:default_t:s0 /virtual/</span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Z /virtual/</span></span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:default_t:s0 index.html</span><br><span class="line">[root@server0 ~]<span class="comment"># semanage fcontext -a -t httpd\_sys\_content_t '/virtual(/.*)?'</span></span><br><span class="line">[root@server0 ~]<span class="comment"># restorecon -RFvv /virtual/</span></span><br><span class="line">restorecon reset /virtual context unconfined_u:object_r:default_t:s0-&gt;system_u:object_r:httpd_sys_content_t:s0</span><br><span class="line">restorecon reset /virtual/index.html context unconfined_u:object_r:default_t:s0-&gt;system_u:object_r:httpd_sys_content_t:s0</span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Zd /virtual/</span></span><br><span class="line">drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /virtual/</span><br><span class="line">[root@server0 ~]<span class="comment"># ls -Z /virtual/</span></span><br><span class="line">-rw-r--r--. root root system_u:object_r:httpd_sys_content_t:s0 index.html</span><br><span class="line"></span><br><span class="line"><span class="comment">#实验</span></span><br><span class="line">[root@server0 ~]<span class="comment"># mkdir /custom</span></span><br><span class="line">[root@server0 ~]<span class="comment"># echo "This is server0" &gt;/custom/index.html</span></span><br><span class="line">[root@server0 ~]<span class="comment"># vim /etc/httpd/conf/httpd.conf </span></span><br><span class="line">[root@server0 ~]<span class="comment"># grep custom /etc/httpd/conf/httpd.conf </span></span><br><span class="line">DocumentRoot <span class="string">"/custom"</span></span><br><span class="line">&lt;Directory <span class="string">"/custom"</span>&gt;</span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl start httpd</span></span><br><span class="line">[root@server0 ~]<span class="comment"># semanage fcontext -a -t httpd\_sys\_content_t '/custom(/.*)?'</span></span><br><span class="line">[root@server0 ~]<span class="comment"># restorecon -Rv /custom/</span></span><br><span class="line">restorecon reset /custom context unconfined_u:object_r:default_t:s0-&gt;unconfined_u:object_r:httpd_sys_content_t:s0</span><br><span class="line">restorecon reset /custom/index.html context unconfined_u:object_r:default_t:s0-&gt;unconfined_u:object_r:httpd_sys_content_t:s0</span><br></pre></td></tr></table></figure></p>
+<h6 id="更改-SELinux-布尔值"><a href="#更改-SELinux-布尔值" class="headerlink" title="更改 SELinux 布尔值"></a>更改 SELinux 布尔值</h6><p>SELinux 布尔值是更改 SELinux 策略行为的开关。 SELinux 布尔值是可以启用或禁用的规则。安全管理员可以使用 SELlinux 布尔值来有选择地调整策略。</p>
+<p>selinux-policy-devel 软件包提供多个手册页（即 *_selinux(8)），可用于解释不同服务的布尔值的含义。如果已经安装此软件包，则 man -k ‘_selinux’ 命令会列出这些文档。</p>
+<p>getsebool 命令用于显示SELinux 布尔值；setsebool 用于修改 SELinux 布尔值。setsebool -P 修改 SELinux 策略，并使修改永久保留。 semanage boolean -l 将显示布尔值是否为永久值，并提供该布尔值的简短描述。</p>
+<p>getsebool -a     #查看所有boolean 值<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getsebool httpd_enable_homedirs    <span class="comment">#查看指定内容布尔值</span></span><br><span class="line">setsbool httpd_enable_homedirs [ on | off | 0 | 1 ]     <span class="comment">#设置布尔值，1=on,0=off</span></span><br><span class="line">semanage boolean -l | grep httpd_eable_homedirs    <span class="comment"># 查看布尔值是否为永久值（当前，永久）</span></span><br><span class="line">setsebool -P httpd_enable_homedirs [ on | off | 0 | 1 ]     <span class="comment">#设置永久布尔值</span></span><br><span class="line">semanage boolean -l  -C    <span class="comment">#仅列出本地修改的 SELinux 布尔值状态（与策略中默认值不同的任何设置）</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="对-SELinux-进行故障的排除"><a href="#对-SELinux-进行故障的排除" class="headerlink" title="对 SELinux 进行故障的排除"></a>对 SELinux 进行故障的排除</h6><p>1、在考试做任何调整之前，应了解到SELinux 禁止意图访问的这一做法也许非常正确。当Web 服务器尝试访问 /home 中的文件时，如果用户并未发布 Web 内容，则可能表明服务器遭入侵。如果已授权访问权限，则需要采取其他步骤来解决此问题。</p>
+<p>2、最常见的 SELinux 问题是使用不正确的文件上下文，此问题会在以下情况中发生：即，使用一个文件上下文在某个位置创建了文件，而该文件又被移至预期会使用其他上下文的地方。在大多数情况下，运行 restorecon 将会更正此问题。以这种方式更正问题对系统剩余部分的安全性有非常小的影响。</p>
+<p>3、对于严苛限制性访问的另一个补救措施可以通过调整布尔值。例如：ftpd_anon_write 布尔值控制匿名 FTP 用户能否上传文件。如果希望允许匿名 FTP 用户上传文件到服务器，则必须启用此布尔值。调整布尔值需格外谨慎，因为布尔值会对系统的安全性造成广泛影响。</p>
+<p>4、SELinux 策略可能存在阻止合法访问的漏洞。由于 SELinux 技术已经成熟，这种情况极少发生。</p>
+<h6 id="监控-SELinux-冲突"><a href="#监控-SELinux-冲突" class="headerlink" title="监控 SELinux 冲突"></a>监控 SELinux 冲突</h6><p>必须安装setroubleshoot-server 包，以便将 SELinux 消息发送到 /var/log/messages 。setroubleshoot-server 侦听 /var/log/audit/audit.log 中的审核消息，并发送简短摘要到 /var/log/messages 。该摘要包括 SELinux 冲突的唯一标识符 （ UUID ），可用于收集更多信息。 sealert -l UUID  可用于生成特定事件的报告。 sealert -a /var/log/audit/audit.log 用于生成该文件中的所有事件报告。</p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526892834926496.png" alt="image.png"></p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526892877639896.png" alt="image.png"></p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526892917350022.png" alt="image.png"></p>
+<p><img src="/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/1526892939342968.png" alt="image.png"></p>
+<h6 id="TIPS：-1"><a href="#TIPS：-1" class="headerlink" title="TIPS："></a>TIPS：</h6><p>“Raw Audit Messages”部分显示，目标文件 /var/www/html/file3 正是问题所在，同样，目标上下文 tcontext 似乎并不属于Web 服务器。使用 restorecon /var/www/html/file3 命令修复此文件上下文。如果还需要调整其它文件，restorecon 可递归地重置上下文：restorecon -R /var/www/</p>
+<p>1、查看 tail -f /var/log/messages  查看有sealert 的内容，确定事件 UUID </p>
+<p>2、运行给出的 sealert -l UUID 查看解决办法</p>
+<p>3、运行 2 中的命令给出信息的头部是建议解决方案</p>
+<p>4、查看 “Raw Audit Messages” 确定问题文件，给结合步骤 3 给出解决方案。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/21/rh134-e7-ac-ac-e4-b8-83-e7-ab-a0-e7-ae-a1-e7-90-86-selinux-e5-ae-89-e5-85-a8-e6-80-a7/" data-id="cjqikv04g001nzjkjd3bqyage" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL124/">RHEL124</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL134/">RHEL134</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/pxe/">pxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/">samba</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/pxe/" style="font-size: 10px;">pxe</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 change<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

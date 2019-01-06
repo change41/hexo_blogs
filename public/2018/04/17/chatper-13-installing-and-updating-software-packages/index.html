@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Chatper 13. Installing and updating software packages | rhel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="红帽提供软件更新服务工具（收费）需要购买服务，并利用注册工具（subscription-manager-gui）进行注册软件管理服务器. Register 用户和红帽账号绑定1.在命令行command 输入 subscription-manager-gui,或者在GNOME界面Application--&amp;gt;Other--&amp;gt;Red Hat Subscription Manager 进入，输">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chatper 13. Installing and updating software packages">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/chatper-13-installing-and-updating-software-packages/index.html">
+<meta property="og:site_name" content="rhel">
+<meta property="og:description" content="红帽提供软件更新服务工具（收费）需要购买服务，并利用注册工具（subscription-manager-gui）进行注册软件管理服务器. Register 用户和红帽账号绑定1.在命令行command 输入 subscription-manager-gui,或者在GNOME界面Application--&amp;gt;Other--&amp;gt;Red Hat Subscription Manager 进入，输">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/chatper-13-installing-and-updating-software-packages/1523863565421240.png">
+<meta property="og:updated_time" content="2019-01-06T15:48:49.203Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chatper 13. Installing and updating software packages">
+<meta name="twitter:description" content="红帽提供软件更新服务工具（收费）需要购买服务，并利用注册工具（subscription-manager-gui）进行注册软件管理服务器. Register 用户和红帽账号绑定1.在命令行command 输入 subscription-manager-gui,或者在GNOME界面Application--&amp;gt;Other--&amp;gt;Red Hat Subscription Manager 进入，输">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/17/chatper-13-installing-and-updating-software-packages/1523863565421240.png">
+  
+    <link rel="alternate" href="/atom.xml" title="rhel" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rhel</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">growing study</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-chatper-13-installing-and-updating-software-packages" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/17/chatper-13-installing-and-updating-software-packages/" class="article-date">
+  <time datetime="2018-04-17T00:49:48.000Z" itemprop="datePublished">2018-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RHEL124/">RHEL124</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chatper 13. Installing and updating software packages
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>红帽提供软件更新服务工具（收费）需要购买服务，并利用注册工具（subscription-manager-gui）进行注册软件管理服务器.</p>
+<h4 id="Register-用户和红帽账号绑定"><a href="#Register-用户和红帽账号绑定" class="headerlink" title="Register 用户和红帽账号绑定"></a>Register 用户和红帽账号绑定</h4><pre><code>1.在命令行command 输入 subscription-manager-gui,或者在GNOME界面Application--&gt;Other--&gt;Red Hat Subscription Manager 进入，输入对应的root 密码就可以进入图形操作，进入图形后点击右上角的Register会进入一个新的对话窗，subsription 默认服务器地址：subscription.rhn.redhat.com.Next后会要求输入RedHat的账号密码，默认会自动检查相应的订阅，也可以自己手动检查。最后点击Register完成注册。完成后就可以检查更新了。
+
+2.使用命令行完成自动注册
+</code></pre><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    subscription-manager register --username=yourname --password=yourpassword  <span class="comment">#订阅</span></span><br><span class="line">    subscription-manager list --available | less    <span class="comment">#查看有效的订阅</span></span><br><span class="line">    subscription-manager attach --auto    <span class="comment">#自动检查订阅</span></span><br><span class="line">    subscription-manager list --consumed    <span class="comment">#查看consumed（消费） 订阅</span></span><br><span class="line">    subscription-manager unregister    <span class="comment">#取消订阅</span></span><br></pre></td></tr></table></figure>
+<h5 id="Subscribe-订阅授权给指定的产品，选择-删除需要授权的产品"><a href="#Subscribe-订阅授权给指定的产品，选择-删除需要授权的产品" class="headerlink" title="Subscribe 订阅授权给指定的产品，选择/删除需要授权的产品"></a>Subscribe 订阅授权给指定的产品，选择/删除需要授权的产品</h5><p>Enable repositories 启用软件包的存储库（理解成yum 源库），每个订阅默认会开启多个存储库，可以根据需要关闭不需要的，如源代码、更新</p>
+<p>Review and track  查看和审查自己的订阅信息，可以在本地和红帽网站上查询</p>
+<h6 id="订阅的授权证书存放在-etc-pki-及其子目录中"><a href="#订阅的授权证书存放在-etc-pki-及其子目录中" class="headerlink" title="订阅的授权证书存放在/etc/pki 及其子目录中"></a>订阅的授权证书存放在/etc/pki 及其子目录中</h6><p>/etc/pki/product    #安装在Red Hat中的产品证书<br>/etc/pki/consumer    #存储在这个系统中的RedHat的账号的证书<br>/etc/pki/entitlement    #包含了订阅了哪个许可的证书</p>
+<p>可以使用rct程序检查证书，相比下subscription-manager程序读取证书更加友好  </p>
+<hr>
+<p>rpm and yum</p>
+<p>rpm =red hat packet manager</p>
+<p>rpm 包的文件格式：</p>
+<p>name-version-release.architectrue</p>
+<p>httpd-tools.2.4.6.7-7.e17.x86_64.rpm  </p>
+<p>httpd-tools=name    名字</p>
+<p>2.4.6.7=version    版本</p>
+<p>7.el7=release    基于版本的发行号</p>
+<p>x86_64=arch    架构</p>
+<p>默认安装时只需要使用RPM包的名字，如果有多个版本存在默认安装版本最高的</p>
+<h6 id="每个RPM包包含以下三个组成部份："><a href="#每个RPM包包含以下三个组成部份：" class="headerlink" title="每个RPM包包含以下三个组成部份："></a>每个RPM包包含以下三个组成部份：</h6><p>软件安装的文件、</p>
+<p>与软件包（元数据）有关的信息，摘要，描述、是否要求安装其它软件，授权许可、更改日志、以及其它详细信息</p>
+<p>在安装、更新或删除此软件包时可能运行的脚本、或此过程中可能触发的脚本。  </p>
+<p>如果软件构建为不冲突的文件名，则可以安装多个版本。例如kernel 否则只能安装一个版本。</p>
+<h6 id="yum———软件包管理器"><a href="#yum———软件包管理器" class="headerlink" title="yum———软件包管理器"></a>yum———软件包管理器</h6><p>PackageKit 和yum 等工具是rpm的前端应用，可以用于安装单个软件包或软件包集合，并解决RPM无法解决的依赖关系。</p>
+<p>yum 的主要配置文件为：/etc/yum.conf,其它存储库配置文件位于在/etc/yum.repos.d目录中。  </p>
+<p>存储库配置文件至少包含一个存储库ID （在方括号中）、一个名称以及软件包存储库的URL位置。URL可以指向本地目录（文件）或远程网络共享(http和ftp等)。如果将该URL粘贴到浏览器中，则显示的内容应该有RPM软件包（可能位于一个或多个子目录中）。以及包含可用软件包相关信息的repodata目录。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#yum 命令用于列出存储库、软件包和软件包组</span></span><br><span class="line">yum repolist </span><br><span class="line">yum list yum*    <span class="comment">#显示已安装和可用的软件包</span></span><br><span class="line">yum grouplist</span><br><span class="line">yum search apache    <span class="comment">#在名字和摘要字段搜索关键字列出的软件包</span></span><br><span class="line">yum search all <span class="string">'web server'</span>    <span class="comment">#搜索名字、摘要、描述等字段中包含'web server'的软件包</span></span><br><span class="line">yum info PACKAGENAME    <span class="comment">#提供与指定软件包相关的详细信息，包括安装所需的磁盘空间。</span></span><br><span class="line">yum provides /var/www/html    <span class="comment">#显示与指定的路径名（通常包含通配符）匹配的软件包</span></span><br><span class="line">yum install PACKAGENAME    <span class="comment">#获取并安装软件包，包括依赖项</span></span><br><span class="line">yum update PACKAGENAME    <span class="comment">#获取并安装更新版本的软件包，包括所有依赖项。通常该进程尝试适当保留配置文件，但是在某些情况下，如果打包商认为旧文件在更新后将无法使用，则可能对其进行重命名，如果未指定软件包名称，它将安装所有相关更新</span></span><br><span class="line">yum remove PACKAGENAME    <span class="comment">#删除已安装的软件包、包括所有支持软件包。有可能会导致意外删除软件包，因此删除前要仔细检查要删除的软件包列表。</span></span><br><span class="line">yum <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">uname -r     <span class="comment">#仅显示内核 的版本和发行版本</span></span><br><span class="line">uname -a     <span class="comment">#将显示内核发行版和其它信息</span></span><br></pre></td></tr></table></figure></p>
+<p>yum 有两种类型的组：常规组是软件包集合，环境组是其他组的集全。这些组包含自己的软件包。</p>
+<p>与yum list 相似，yum group list (或 yum grouplist ) 将列出已安装和可用的组名称，有些组通过环境安装，默认为隐藏，这些隐藏组也可以通过yum group list hidden 命令列出。如果添加ids 选项，则会显示组ID。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum grout list hidden    <span class="comment">#显示隐藏组</span></span><br><span class="line">yum group list = yum grouplist    <span class="comment">#显示已经安装和可选安装的软件包组。</span></span><br><span class="line">yum group info = yum groupinfo    <span class="comment">#它将列出改必选、默认和可选软件包名称或组ID。</span></span><br></pre></td></tr></table></figure></p>
+<p>#软件包名称或组前面可能标有标记。如下图：  </p>
+<p><img src="/2018/04/17/chatper-13-installing-and-updating-software-packages/1523863565421240.png" alt="图片.png"><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">yum group install = yum groupinstall     <span class="comment">#组安装</span></span><br><span class="line">yum group remove = yum groupremove    <span class="comment">#组删除</span></span><br><span class="line">yum group mark install GROUPNAME    <span class="comment">#标记为已安装，下次更新时将安装缺少的软件包和其依赖项。RHEL7 以后增加的命令</span></span><br><span class="line">tail -5 /var/<span class="built_in">log</span>/yum.log    <span class="comment">#查看事务历史记录</span></span><br><span class="line">yum <span class="built_in">history</span>     <span class="comment">#查看安装和删除事务的摘要</span></span><br><span class="line">yum <span class="built_in">history</span> undo 6    <span class="comment">#撤销事务</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">yum repolist all    <span class="comment">#查看所有可用的存储库</span></span><br><span class="line">yum-config-manager     <span class="comment">#启用和禁用存储库，这将更改/etc/yum.repos.d/redhat.repo 文件中的enabled 参数</span></span><br><span class="line">yum-config-manager  --<span class="built_in">enable</span> rhel-7-public-bate-debug-rpms      <span class="comment">#案例</span></span><br></pre></td></tr></table></figure></p>
+<p>第三方存储库：网站、ftp服务器、本地文件系统。将文件放到/etc/yum.repos.d/ 目录中以启用对第三方内容库的支持。内容库配置必须以.repo 结尾。</p>
+<p>存储库定义包含存储的URL和名称、也定义是否使用GPG检查 软件包签名；如果是，则还检查URL是否指向受信任的GPG密钥。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo=<span class="string">"http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/"</span>    <span class="comment">#增加epel的源，</span></span><br></pre></td></tr></table></figure></p>
+<p>执行完修改/etc/yum.repos.d/下生成的配置文件，提供自定义名称和GPG密钥位置。管理员应将该密钥下载到本地文件，而不是让yum从外部来源检索该密钥。</p>
+<p>安装Red Hat Enterprise Linux 7 EPEL存储库软件包:(默认提供配置文件、GPG公钥做为软件安装包的一部分)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm --import http://dl.fedoraproject.org/pub/epep/RPM-KEY-EPEL-7   </span><br><span class="line">``` </span><br><span class="line"><span class="comment">#如果不先安装GPG密钥安装软件时会报错，可以通过--nogpgcheck 忽略检查，不推荐这样操作。</span></span><br><span class="line">```sh</span><br><span class="line">yum install http://dl.fedoraproject.org/pub/epep/beta/7/x86_64/epel-release-7-0.1.noarch.rpm</span><br></pre></td></tr></table></figure></p>
+<p>配置文件通常在一个文件中列举多个存储库引用。每一存储库引用的开头为包含在方括号里的单一词语名称。可以通过“enabled=0 ”参数来关闭不需要使用的存储库。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager <span class="comment">#永久的启用或禁用存储库</span></span><br><span class="line">yum --enablerepo=PATTERN </span><br><span class="line">yum --disablerepo=PATTERN </span><br><span class="line">yum-config-manager --<span class="built_in">disable</span> content.example.com\_rhel7.0\_x86\_64\_rht    </span><br><span class="line"><span class="comment">#content.example.com\_rhel7.0\_x86\_64\_rht 通过yum repolist 查看</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">rpm -q PACKAGENAME    <span class="comment">#查看指定安装的软件名称，列出软件包的名称和版本，与yum list 类似</span></span><br><span class="line">rpm -qa         <span class="comment">#查看所有安装的软件</span></span><br><span class="line">rpm -q -p PACKAGENAME.rpm     <span class="comment">#-p 指定安装软件包文件</span></span><br><span class="line">rpm -q -f filename     <span class="comment">#查看哪个软件包提示了这个文件或文件夹</span></span><br><span class="line">rpm -q -i :软件包信息与yum info 类似</span><br><span class="line">rpm -q -l :    rpm -q -l yum-rhn-plugin    <span class="comment">#列出指定软件安装产生的文件</span></span><br><span class="line">rpm -q -c：    rpm -q -c yum-rhn-plugin    <span class="comment">#仅列出配置文件。</span></span><br><span class="line">rpm -q -d:    rpm -q -d yum-rhn-plugin    <span class="comment">#仅列出文档文件</span></span><br><span class="line">rpm -q --scripts :    rpm -q --scripts openssh-server    <span class="comment">#列出可能在安装或删除软件之前或之后运行的shell脚本</span></span><br><span class="line">rpm -q --changelog :    rpm -q --changlog audit    <span class="comment">#列出软件包的更改信息</span></span><br></pre></td></tr></table></figure>
+<p>cpio 从rpm包提示文件而不安装该软件包。rpm2cpio PACKAGERFILE.rpm 传送到cpio -id ，它会提取RPM中存储的所有文件。需要时会创建子目录树，也可以指定目录。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm2cpio wonderwidgets-1.0-4.x86_64.rpm | cpio -id <span class="string">"*.txt"</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/17/chatper-13-installing-and-updating-software-packages/" data-id="cjqikv04f001mzjkjgehbjau4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/17/chapter-14-accessing-linux-file-system/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Chapter 14. Accessing Linux File System
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/12/chapter-12-archiving-and-copying-files/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Chapter 12. Archiving and copying Files</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL124/">RHEL124</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL134/">RHEL134</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/pxe/">pxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/">samba</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/pxe/" style="font-size: 10px;">pxe</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/18/rh134-e7-ac-ac-e5-8d-81-e4-ba-94-e7-ab-a0-e7-b3-bb-e7-bb-9f-e7-ae-a1-e7-90-86-e4-ba-8c-e6-80-bb-e5-a4-8d-e4-b9-a0/">RH134 第十五章 系统管理二总复习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/17/rh134-e7-ac-ac-e5-8d-81-e5-9b-9b-e7-ab-a0-e4-bd-bf-e7-94-a8-firewalld-e9-99-90-e5-88-b6-e7-bd-91-e7-bb-9c-e9-80-9a-e4-bf-a1/">RH134 第十四章 使用 FIREWALLD 限制网络通信</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/rh134-e7-ac-ac-e5-8d-81-e4-b8-89-e7-ab-a0-e5-af-b9-red-hat-enterprise-linux-e5-90-af-e5-8a-a8-e8-bf-87-e7-a8-8b-e8-bf-9b-e7-a8-8b-e6-8e-a7-e5-88-b6-e6-95-85-e9-9a-9c-e6-8e-92-e9-99-a4/">RH134 第十三章 对 RED HAT ENTERPRISE LINUX 启动过程进程控制故障排除</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/12/autofs-e8-87-aa-e5-8a-a8-e6-8c-82-e8-bd-bd/">autofs 自动挂载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/11/rh134-e7-ac-ac-e5-8d-81-e4-ba-8c-e7-ab-a0-e8-ae-bf-e9-97-ae-e5-85-b7-e6-9c-89smb-e7-9a-84-e7-bd-91-e7-bb-9c-e5-ad-98-e5-82-a8/">RH134 第十二章 访问具有SMB的网络存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 change<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
