@@ -8,7 +8,7 @@ subtitle: growing study
 description:
 keywords:
 author: change
-language: zh-CN
+language: zh-Hans
 timezone:
 
 # URL
@@ -73,13 +73,12 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-#theme: landscape
-theme: next
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
- type: git
+- type: git
   repo: root@one-city.tk:blogs.git
 - type: git
   repo: git@github.com:change41/change41.github.io.git
